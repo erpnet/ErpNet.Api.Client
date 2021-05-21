@@ -1,4 +1,4 @@
-# Wellcome to ErpNet.Api.Client Project
+# Welcome to ErpNet.Api.Client Project
 
 A Dot Net client for ERP.net APIs
 
