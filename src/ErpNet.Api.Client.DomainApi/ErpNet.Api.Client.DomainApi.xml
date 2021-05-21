@@ -1,0 +1,1302 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ErpNet.Api.Client.DomainApi</name>
+    </assembly>
+    <members>
+        <member name="T:ErpNet.Api.Client.DomainApi.ApiResource">
+            <summary>
+            A base class for all typed Domain Api model classes - entities or complex types.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ApiResource.data">
+            <summary>
+            The internal data of the resource. The values must be of type bool, double, string, dictionary or list.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.#ctor">
+            <summary>
+            Creates an empty <see cref="T:ErpNet.Api.Client.DomainApi.ApiResource"/>
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.ApiResource"/> with provided raw data.
+            </summary>
+            <param name="rawData">The inner dictionary that contains the resource properties</param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.TryGetTypeByEntitySet(System.String)">
+            <summary>
+            Searches the corresponding type for the provided entity set name.
+            </summary>
+            <param name="entitySetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.CreateEntityIdentifier(System.Type,System.Guid)">
+            <summary>
+            Creates an <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/> for the given entity type and id.
+            </summary>
+            <param name="type"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.CreateIdObj(System.Type,System.Guid)">
+            <summary>
+            Creates an entity resource that only contains properties @odata.id and Id.
+            </summary>
+            <param name="type"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.CreateEntityIdentifier``1(System.Guid)">
+            <summary>
+            Creates an <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/> for the given entity type and id.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.CreateIdObj``1(System.Guid)">
+            <summary>
+            Creates an entity resource instance containing only Id.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Create``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates typed entity resource providing raw data.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Create(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates typed entity resource for the specified entity set.
+            </summary>
+            <param name="entitySetName"></param>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Create(System.Type,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates typed entity resource with initial data.
+            </summary>
+            <param name="resourceType">The resource type</param>
+            <param name="rawData">The initial values</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Convert``1(System.Object)">
+            <summary>
+            Converts the specified object to entity resource. The object is used as a raw data.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.RawData">
+            <summary>
+            Gets the internal dictionary with resource properties.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetRawChanges">
+            <summary>
+            Gets a dictionary with only the changed properties.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.IsModified">
+            <summary>
+            Gets a value indicating whether the resouce object is modified.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.SetModified(System.String)">
+            <summary>
+            Sets the specified property as modified.
+            </summary>
+            <param name="propertyName"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.OnModified(System.String)">
+            <summary>
+            Occurs when a property is modified through <see cref="M:ErpNet.Api.Client.DomainApi.ApiResource.SetPropertyValue(System.String,System.Object,System.Type)"/> method.
+            </summary>
+            <param name="propertyName"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.ClearChanges(System.String[])">
+            <summary>
+            Marks the specified properties as not changed. If no property is specified all properties are marked as not changed.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetEntitySetName(System.Type)">
+            <summary>
+            Returns the name of the entity set for the specified model type. If the type is not marked with <see cref="T:ErpNet.Api.Client.DomainApi.EntityAttribute"/> an exception is thrown.
+            </summary>
+            <param name="entityType">The entity resource type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.ToString">
+            <summary>
+            Returns a JSON string representing the current resource.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.ToJson(System.Boolean)">
+            <summary>
+            Gets the json string representation of the resource.
+            </summary>
+            <param name="indent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetEntitySetName">
+            <summary>
+            Gets the entity set name or null if the current type is not marked with <see cref="T:ErpNet.Api.Client.DomainApi.EntityAttribute"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Update(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Updates the current resource with property values provided as dictionary. Changes are not tracked.
+            </summary>
+            <param name="values">The property values to update</param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.ConvertFromRaw(System.Object,System.Type)">
+            <summary>
+            Converts the specified raw value to the provided type.
+            </summary>
+            <param name="rawValue">The raw value from JSON result</param>
+            <param name="type">The target object type</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetPropertyValue(System.String,System.Type)">
+            <summary>
+            Gets a property value converted to the specified property type.
+            </summary>
+            <param name="propertyName">The property name</param>
+            <param name="propertyType">The property type</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetPropertyValue``1(System.String)">
+            <summary>
+            Gets a property value converted to the specified property type.
+            </summary>
+            <typeparam name="T">The property type</typeparam>
+            <param name="propertyName">The property name</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetPropertyValue(System.String)">
+            <summary>
+            If the resource type defines property with the specified name the returned object is of the property type. Otherwise the raw value is returned.
+            </summary>
+            <param name="propertyName">The name of the property</param>
+            <returns></returns>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ApiResource.Item(System.String)">
+            <summary>
+            Gets or sets a property value.
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.SetPropertyValue``1(System.String,``0)">
+            <summary>
+            Sets a property value with the specified type.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="propertyName"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.SetPropertyValue(System.String,System.Object)">
+            <summary>
+            Sets a property value with the type inferred from a declared property.
+            </summary>
+            <param name="propertyName">The name of the property</param>
+            <param name="value"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.SetPropertyValue(System.String,System.Object,System.Type)">
+            <summary>
+            Sets a property value with the specified type.
+            </summary>
+            <param name="propertyName"></param>
+            <param name="value"></param>
+            <param name="propertyType"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetCollection``1(System.String)">
+            <summary>
+            Gets a typed resource collection from the specified property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.SetCollection``1(System.String,System.Collections.IEnumerable)">
+            <summary>
+            Sets a typed resource collection to the specified property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="propertyName"></param>
+            <param name="array">The raw items from json response</param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.GetEntityType(System.String)">
+            <summary>
+            Gets the type of the entity by odata entity name.
+            </summary>
+            <param name="entityName">Name of the odata entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.Values">
+            <summary>
+            Enumerates the property values of the resource.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ApiResource.ContainsProperty(System.String)">
+            <summary>
+            Returns a value indicating if this resource instance contains the specified property
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ComplexTypeResource">
+            <summary>
+            A base class for complex type resources.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ComplexTypeResource.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.ComplexTypeResource"/> providing dictionary data.
+            </summary>
+            <param name="rawData"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ComplexTypeResource.Owner">
+            <summary>
+            The owner of the comlpex object. If not null when this instance is modifed the owner porperty is marked as modified too.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ComplexTypeResource.OwnerPropertyName">
+            <summary>
+            The name of the owner property. 
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ComplexTypeResource.OnModified(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue">
+            <summary>
+            Represents a custom property value.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.#ctor">
+            
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.op_Equality(ErpNet.Api.Client.DomainApi.General.CustomPropertyValue,System.String)">
+            <summary>
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Value"/> with the specified string value.
+            </summary>
+            <param name="pv"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.op_Inequality(ErpNet.Api.Client.DomainApi.General.CustomPropertyValue,System.String)">
+            <summary>
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Value"/> with the specified string value.
+            </summary>
+            <param name="pv"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.DomainApiService">
+            <summary>
+            Represents a ERP.net DomainApi service client.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiService.#ctor(System.String,System.Func{System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.DomainApiService"/>
+            </summary>
+            <param name="odataServiceRootUri"></param>
+            <param name="getAccessTokenAsync"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiService.BeginTransactionAsync(ErpNet.Api.Client.DomainApi.DomainModel,System.Boolean)">
+            <summary>
+            Opens an API transaction on the server side.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiService.ResetModelAsync">
+            <summary>
+            Refreshes the Entity Data Model of the Domain Api. If custom property is created this method must be called to appear the custom property in the api. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.DomainApiTransaction">
+            <summary>
+            Represents a Domain API transaction.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.#ctor(System.String,System.Func{System.Threading.Tasks.Task{System.String}},System.String,ErpNet.Api.Client.DomainApi.DomainModel,System.Boolean)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.DomainApiTransaction"/>
+            </summary>
+            <param name="odataServiceRootUri">the odata service root</param>
+            <param name="getAccessTokenAsync">a function that returns the authentication access token</param>
+            <param name="transactionId">the transaction identifier</param>
+            <param name="model">domain model - 'common' or 'front-end'</param>
+            <param name="trackChanges">specifies whether to enable track chanegs or not</param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.DomainApiTransaction.TransactionId">
+            <summary>
+            Gets the transaction identifier.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.DomainApiTransaction.Model">
+            <summary>
+            Indicates the domain model used for this transaction - common or front-end
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.DomainApiTransaction.TrackChanges">
+            <summary>
+            Indicates whether track changes is enabled for this transaction.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.CreateRequestMessage(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.EndTransactionAsync(System.Boolean)">
+            <summary>
+            Ends the API transaction.
+            </summary>
+            <param name="commit">if set to <c>true</c> [commit].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.GetChangesAsync">
+            <summary>
+            Executes the /GetChanges action which returns the changes sinse the last call to /GetChanges.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.DomainModel">
+            <summary>
+            Represents a domain model. Different domain models use different sets of business rules.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.DomainModel.Common">
+            <summary>
+            The common model. Front-end business rules are not executed.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.DomainModel.FrontEnd">
+            <summary>
+            The front-end model. Front-end business rules are executed on data attribute change.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.EntityAttribute">
+            <summary>
+            Marks a typed <see cref="T:ErpNet.Api.Client.DomainApi.EntityResource"/> as entity providing EntitSetName and EntityName.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityAttribute.TableName">
+            <summary>
+            Gets or sets the name of the entity. This is the table name.
+            </summary>
+            <value>
+            The name of the entity.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityAttribute.EntitySet">
+            <summary>
+            Gets or sets the name of the odata entity set.
+            </summary>
+            <value>
+            The name of the entity set.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityAttribute.EntityType">
+            <summary>
+            Gets or sets the name of the odata entity type.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.EntityCommand`2">
+            <summary>
+            Represents a command for the specified resource in the first type argument.
+            </summary>
+            <typeparam name="TEntity">The type of the command resource</typeparam>
+            <typeparam name="TResult">The type of the command result. Can be different from the resource type if $select clause is used.</typeparam>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.#ctor(ErpNet.Api.Client.DomainApi.DomainApiService)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/>
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityCommand`2.Service">
+            <summary>
+            The service.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Id(System.Guid)">
+            <summary>
+            Sets the entity id for this command.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Filter(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Sets the $filter clause. Can be used several times in one command for composing long filters.
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Select``1(System.Func{`0,``0})">
+            <summary>
+            Creates new command for the provided TSelectResult.
+            </summary>
+            <typeparam name="TSelectResult"></typeparam>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Expand(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Sets an $expand clause for this query command.
+            </summary>
+            <param name="expandExpressions">A function expression array with the properties to expand</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Top(System.Int32)">
+            <summary>
+            Sets a $top clause for this query command.
+            </summary>
+            <param name="top">The top rows to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.Skip(System.Int32)">
+            <summary>
+            Sets a $skip clause for this query command.
+            </summary>
+            <param name="skip">The $skip row count to skip</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.OrderBy">
+            <summary>
+            Sets a $orderby clause for this query command.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommand`2.LoadAsync">
+            <summary>
+            Executes the command and returns the result.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.EntityCommandResult`2">
+            <summary>
+            A result from a <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/> command.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TResult"></typeparam>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommandResult`2.#ctor(System.Collections.Generic.IEnumerable{`0},System.Func{`0,`1})">
+            <summary>
+            Creates an instance
+            </summary>
+            <param name="resources"></param>
+            <param name="selector"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityCommandResult`2.Empty">
+            <summary>
+            Represents an empty result.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityCommandResult`2.Resources">
+            <summary>
+            The typed collection of entities. Note that only properties included in $select clause are present in the entity resource instance.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityCommandResult`2.Result">
+            <summary>
+            The collection of {TResult} instances. 
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityCommandResult`2.GetEnumerator">
+            <summary>
+            Gets the result enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.EntityIdentifier">
+            <summary>
+            Represents Id of an ODATA entity object.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.#ctor(System.String,System.Guid)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/>
+            </summary>
+            <param name="entitySet"></param>
+            <param name="id"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/>
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityIdentifier.Id">
+            <summary>
+            Gets the entity Id.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityIdentifier.EntitySet">
+            <summary>
+            Gets the name of the entity set.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityIdentifier.RawValue">
+            <summary>
+            Gets the raw string value in format "{EntitySet}({Id})"
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityIdentifier.IsEmpty">
+            <summary>
+            Gets a value indicating if this is an empty <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/> instance.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.Create``1(System.Guid)">
+            <summary>
+            Creates an entity identifier for the given type and Id.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.ToString">
+            <summary>
+            Gets the raw string value in format "{EntitySet}({Id})"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.op_Implicit(ErpNet.Api.Client.DomainApi.EntityIdentifier)~System.String">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.op_Implicit(ErpNet.Api.Client.DomainApi.EntityResource)~System.Nullable{ErpNet.Api.Client.DomainApi.EntityIdentifier}">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityIdentifier.op_Explicit(System.String)~ErpNet.Api.Client.DomainApi.EntityIdentifier">
+            <inheritdoc/>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.EntityResource">
+            <summary>
+            Represents an entity object.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates an instace of <see cref="T:ErpNet.Api.Client.DomainApi.EntityResource"/>
+            </summary>
+            <param name="rawData">the initial values</param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityResource.Id">
+            <summary>
+            The entity Id.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.EntityResource.ODataId">
+            <summary>
+            Gets the ODATA Id of the entity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.IsExpanded">
+            <summary>
+            Returns a value indicating if the entity contains properies or contains only Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.Equals(System.Object)">
+            <summary>
+            Compares the odata id-s of the objects.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.op_Equality(ErpNet.Api.Client.DomainApi.EntityResource,ErpNet.Api.Client.DomainApi.EntityResource)">
+            <summary>
+            Compares the resources for equality.
+            </summary>
+            <param name="res1"></param>
+            <param name="res2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.op_Inequality(ErpNet.Api.Client.DomainApi.EntityResource,ErpNet.Api.Client.DomainApi.EntityResource)">
+            <summary>
+            Compares the resources for non equality.
+            </summary>
+            <param name="res1"></param>
+            <param name="res2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.op_Equality(ErpNet.Api.Client.DomainApi.EntityResource,System.Nullable{ErpNet.Api.Client.DomainApi.EntityIdentifier})">
+            <summary>
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.EntityResource.ODataId"/> with the specified entity identifier
+            </summary>
+            <param name="res1"></param>
+            <param name="oid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.op_Inequality(ErpNet.Api.Client.DomainApi.EntityResource,System.Nullable{ErpNet.Api.Client.DomainApi.EntityIdentifier})">
+            <summary>
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.EntityResource.ODataId"/> with the specified entity identifier
+            </summary>
+            <param name="res1"></param>
+            <param name="oid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.GetODataId(System.String)">
+            <summary>
+            Gets a <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/> from a reference property.
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.EntityResource.SetODataId(System.String,System.Nullable{ErpNet.Api.Client.DomainApi.EntityIdentifier})">
+            <summary>
+            Sets a <see cref="T:ErpNet.Api.Client.DomainApi.EntityIdentifier"/> to a reference property.
+            </summary>
+            <param name="propertyName"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ErpNetServiceClientExtensions">
+            <summary>
+            Defines extension methods for <see cref="T:ErpNet.Api.Client.ErpNetServiceClient" />
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ErpNetServiceClientExtensions.GetDomainApiODataServiceRootAsync(ErpNet.Api.Client.ErpNetServiceClient)">
+            <summary>
+            Returns the first found Domain Api service root url for the database of the <see cref="T:ErpNet.Api.Client.ErpNetServiceClient"/>
+            </summary>
+            <param name="client">The service client</param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ExpandNode">
+            <summary>
+            A helper class used to parse $expand and $select odata clauses.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ExpandNode.#ctor(System.String)">
+            <summary>
+            Creates an instance.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ExpandNode.Name">
+            <summary>
+            The expanded property name.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ExpandNode.Select">
+            <summary>
+            List of selected properties.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ExpandNode.Expand">
+            <summary>
+            List of expanded properties.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ExpandNode.GetOrAdd(System.String)">
+            <summary>
+            Gets or creates a sub-node.
+            </summary>
+            <param name="prop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ExpandNode.GetOrAdd(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets or adds a list of expanded nodes.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ExpandNode.ExpandClause">
+            <summary>
+            The string representation of the $expand clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ExpandNode.SelectClause">
+            <summary>
+            The string representation of the $select clause.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ExpandNode.ToString">
+            <summary>
+            The string representation of the node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ExpandNode.Parse(System.String,System.String)">
+            <summary>
+            Parses an expand and select clause into an <see cref="T:ErpNet.Api.Client.DomainApi.ExpandNode"/>
+            </summary>
+            <param name="expandClause"></param>
+            <param name="selectClause"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.MultilanguageString">
+            <summary>
+            Represents a container of texts in different languages.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.MultilanguageString.#ctor">
+            
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.MultilanguageString.#ctor(System.String[])">
+            
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.MultilanguageString.CurrentString">
+            <summary>
+            Gets the string for the language of the current UI culture.
+            </summary>
+            <value>
+            The current string.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.MultilanguageString.CurrentLanguage">
+            <summary>
+            Gets the two letter code of the current thread language.
+            </summary>
+            <value>
+            The current language.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.MultilanguageString.AnyString">
+            <summary>
+            Gets any language string, that has a value. 
+            The method checks the current string first, but if it is empty, returns any string.
+            </summary>
+            <value>
+            Any language string with a value or null if there are no language strings with value.
+            </value>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.MultilanguageString.ValidateAndFormatLanguageKey(System.String)">
+            <summary>
+            Validates the and formats the specified language key.
+            </summary>
+            <param name="languageKey">The language key to validate.</param>
+            <returns>The uniformly formatted language key.</returns>
+            <exception cref="T:System.ArgumentNullException">When Language Key is null.</exception>
+            <exception cref="T:System.ArgumentException">Language Key should be exactly 2 characters.</exception>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.MultilanguageString.Contains(System.String)">
+            <summary>
+            Returns true if the specified value is contained in any of the languages present in this multi-language instance.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.OpenObject">
+            <summary>
+            A generic object with dynamic properties that can be returned by the Domain Api from various methods.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.OpenObject.#ctor">
+            <summary>
+            Creantes an instance
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.GetChangesResult">
+            <summary>
+            Represents a result from the <see cref="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.GetChangesAsync"/> method.
+            Contains changed properties and their values.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.GetChangesResult.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates an instance.
+            </summary>
+            <param name="dict"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.GetChangesResult.GetChangedItems(ErpNet.Api.Client.DomainApi.ChangeType)">
+            <summary>
+            Returns all changed items for the specified <see cref="T:ErpNet.Api.Client.DomainApi.ChangeType"/>
+            </summary>
+            <param name="changeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.GetChangesResult.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:ErpNet.Api.Client.DomainApi.ChangedItem"/> enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.GetChangesResult.ToString">
+            <summary>
+            The JSON representation of this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ChangedItem">
+            <summary>
+            Represents an item returned by <see cref="M:ErpNet.Api.Client.DomainApi.DomainApiTransaction.GetChangesAsync"/>
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ChangedItem.#ctor(System.String,ErpNet.Api.Client.DomainApi.ChangeType,System.Guid,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ChangedItem.EntityName">
+            <summary>
+            The resource name of the changed item. 
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ChangedItem.Type">
+            <summary>
+            The type of the change.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ChangedItem.Id">
+            <summary>
+            The id of the changed entity object.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.ChangedItem.Values">
+            <summary>
+            The changed property values.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ChangeType">
+            <summary>
+            Represents a CRUD change type.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ChangeType.Insert">
+            <summary>
+            The entity object is created
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ChangeType.Update">
+            <summary>
+            The entity object is updated
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.DomainApi.ChangeType.Delete">
+            <summary>
+            The entity object is deleted
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.FilterMethods">
+            <summary>
+            Provides extension methods that are implemented as a custom URI functions in ERP.net Domain Api.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.FilterMethods.In(System.Object,System.Object[])">
+            <summary>
+            Returns true if an object value is contained in the provided collection.
+            </summary>
+            <param name="value">The object value</param>
+            <param name="items">The collection</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.FilterMethods.In(System.Object,System.Collections.IEnumerable)">
+            <summary>
+            Returns true if an object value is contained in the provided collection.
+            </summary>
+            <param name="value">The object value</param>
+            <param name="items">The collection</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.FilterMethods.EqualNull(System.Object,System.Object)">
+            <summary>
+            Returns true if value1 is equal to the value2 or value1 is null.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.FilterMethods.GreaterEqualNull(System.Object,System.Object)">
+            <summary>
+            Returns true if value1 is greather than or equal to the value2 or value1 is null.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.FilterMethods.LessEqualNull(System.Object,System.Object)">
+            <summary>
+            Returns true if value1 is less than or equal to the value2 or value1 is null.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ModelExtensions">
+            <summary>
+            Provides methods to
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.Command``1(ErpNet.Api.Client.DomainApi.DomainApiService)">
+            <summary>
+            Creates a <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/> for the specified resource.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.FirstOrDefaultAsync``2(ErpNet.Api.Client.DomainApi.EntityCommand{``0,``1})">
+            <summary>
+            Executes the provided query command and gets only the first result. If there are no results the return value is null.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.CountAsync``2(ErpNet.Api.Client.DomainApi.EntityCommand{``0,``1})">
+            <summary>
+            Returns the count of the entity objects matching the command filter.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.InsertAsync``1(ErpNet.Api.Client.DomainApi.DomainApiService,``0)">
+            <summary>
+            Inserts the specified entity into odata service.
+            </summary>
+            <param name="service"></param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.UpdateAsync``1(ErpNet.Api.Client.DomainApi.DomainApiService,``0)">
+            <summary>
+            Updates the odata service with the changes in the specified entity. 
+            Afther the update the entity instance is not refreshed. 
+            The odata server may change some properties and therefore it is good to refresh the local data by calling <see cref="M:ErpNet.Api.Client.DomainApi.ModelExtensions.ReloadAsync``1(ErpNet.Api.Client.DomainApi.DomainApiService,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])"/>.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="service"></param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.ReloadAsync``1(ErpNet.Api.Client.DomainApi.DomainApiService,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+            <summary>
+            Refreshes the values of the specified entity by getting the data from the odata service.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="service"></param>
+            <param name="entity"></param>
+            <param name="expandExpressions">A function expression array with the properties to expand</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.ReloadAsync``1(ErpNet.Api.Client.DomainApi.DomainApiService,System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+            <summary>
+            Refreshes the values of the specified entities by getting the data from the odata service.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="service"></param>
+            <param name="entities"></param>
+            <param name="expandExpressions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.DeleteAsync(ErpNet.Api.Client.DomainApi.DomainApiService,ErpNet.Api.Client.DomainApi.EntityIdentifier)">
+            <summary>
+            Deletes the entity specified by it's odata id.
+            </summary>
+            <param name="service">the odata service</param>
+            <param name="entityIdentifier">the odata id of the entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.InvokeActionAsync``1(``0,ErpNet.Api.Client.DomainApi.DomainApiService,System.String,ErpNet.Api.Client.DomainApi.OperationParameter[])">
+            <summary>
+            Invokes an entity action.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+            <param name="service"></param>
+            <param name="actionName"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.InvokeFunctionAsync``1(``0,ErpNet.Api.Client.DomainApi.DomainApiService,System.String,ErpNet.Api.Client.DomainApi.OperationParameter[])">
+            <summary>
+            Invokes an entity function.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+            <param name="service"></param>
+            <param name="actionName"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.Subset``2(``0,System.Func{``0,``1})">
+            <summary>
+            Transforms the provided object to a different object representing a sub-set of the original properties.
+            </summary>
+            <typeparam name="T">The type of object to transform</typeparam>
+            <typeparam name="S">The type of transformed object</typeparam>
+            <param name="obj">The object to transform</param>
+            <param name="transformer">The transformer function</param>
+            <returns>The transformed object</returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.Expand``2(``0,System.Func{``0,``1})">
+            <summary>
+            Used to provide typed $expand clause by <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="I"></typeparam>
+            <param name="resource"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.ExpandCollection``2(``0,System.Func{``0,System.Collections.Generic.IEnumerable{``1}})">
+            <summary>
+            Used to provide typed $expand clause by <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="I"></typeparam>
+            <param name="resource"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.ExpandItems``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Used to provide typed $expand clause by <see cref="T:ErpNet.Api.Client.DomainApi.EntityCommand`2"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="I"></typeparam>
+            <param name="items"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.ModelExtensions.DeepMerge(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Merges the source dictionary to the target dictionary.
+            </summary>
+            <param name="target">the target dictionary</param>
+            <param name="source">the source dictionary</param>
+            <returns>true if there are any modifications</returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.ODataPropertyAttribute">
+            <summary>
+            Marks a class property as OData property.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.OperationParameter">
+            <summary>
+            A helper class used to build odata actions or functions.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.OperationParameter.#ctor(System.String,System.Type,System.Object)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.DomainApi.OperationParameter"/>
+            </summary>
+            <param name="name"></param>
+            <param name="type"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.OperationParameter.Name">
+            <summary>
+            Parameter name.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.OperationParameter.Type">
+            <summary>
+            Parameter type.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.DomainApi.OperationParameter.Value">
+            <summary>
+            Parameter value.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.Param`1">
+            <summary>
+            Generic class descendant of <see cref="T:ErpNet.Api.Client.DomainApi.OperationParameter"/>
+            </summary>
+            <typeparam name="T">The parameter type</typeparam>
+        </member>
+        <member name="M:ErpNet.Api.Client.DomainApi.Param`1.#ctor(System.String,`0)">
+            
+        </member>
+        <member name="T:ErpNet.Api.Client.DomainApi.OwnerAttribute">
+            <summary>
+            Indicates that the referenced object is an owner of the current object.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="T:ErpNet.Api.Client.ConversionRatio">
+            <summary>
+            Represents a conversion ratio used to convert currency amounts or quantities to different units.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.#ctor(System.Decimal,System.Decimal)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.ConversionRatio"/>
+            </summary>
+            <param name="m"></param>
+            <param name="d"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.ConversionRatio.Multiplier">
+            <summary>
+            The ratio multiplier
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.ConversionRatio.Divisor">
+            <summary>
+            The ration divisor
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.ConversionRatio.Zero">
+            <summary>
+            A zero <see cref="T:ErpNet.Api.Client.ConversionRatio"/>
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.GetRatioThroughBaseOrDefault``1(System.Func{``0,System.Threading.Tasks.Task{ErpNet.Api.Client.ConversionRatio}},``0,``0)">
+            <summary>
+            Gets the conversion ratio from the source to the destination unit. The ratio is calculated through the base unit.
+            If the ratio is not available, <see cref="F:ErpNet.Api.Client.ConversionRatio.Zero"/> is returned.
+            </summary>
+            <typeparam name="TUnit"></typeparam>
+            <param name="getRatioToBaseOrDefault"></param>
+            <param name="sourceUnit"></param>
+            <param name="destinationUnit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.CombineThroughBase(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)">
+            <summary>
+            Combines two <see cref="T:ErpNet.Api.Client.ConversionRatio"/> instances, which are conversion ratios against a single base unit of measure.
+            </summary>
+            <param name="sourceToBase">The <see cref="T:ErpNet.Api.Client.ConversionRatio"/> from the source unit of measure to the base unit of measure.</param>
+            <param name="destinationToBase">The <see cref="T:ErpNet.Api.Client.ConversionRatio"/> from the destination unit of measure to the base unit of measure.</param>
+            <returns>The combined <see cref="T:ErpNet.Api.Client.ConversionRatio"/>.</returns>
+            <remarks>
+            <para>
+            <see cref="M:ErpNet.Api.Client.ConversionRatio.CombineThroughBase(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)"/> combines two <see cref="T:ErpNet.Api.Client.ConversionRatio"/> instances in a single instance. 
+            The two instances should represent respectively the conversion ratio from the source 
+            and the destination unit of measure to the base unit of measure. 
+            </para>
+            <para>
+            The method is usefull to combine two conversions in one, without loosing precision.
+            </para>
+            </remarks>
+            <example>
+            //pieces is used as the base measurement unit
+            ConversionRatio boxesToPieces = new ConversionRatio(12, 1); //12 pieces in a box
+            ConversionRatio kilogramsToPieces = new ConversionRatio(1, 2); //Each piece is 2 kg.
+            
+            //combine the two conversion ratios, using the pieces as the base unit of measure
+            ConversionRatio boxesToKilograms = ConversionRatio.CombineThroughBase(boxesToPieces, kilogramsToPieces);
+            </example>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.op_Equality(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.op_Inequality(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.op_Multiply(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)">
+            <summary>
+            Implements the operator *. This multiplies the multipliers and the divisors.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.Multiply(ErpNet.Api.Client.ConversionRatio,ErpNet.Api.Client.ConversionRatio)">
+            <summary>
+            Multiplies the specified ratios multipliers and the divisors.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.op_Multiply(ErpNet.Api.Client.ConversionRatio,System.Decimal)">
+            <summary>
+            Implements the operator *. This multiplies the multipliers and the divisors.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.Multiply(ErpNet.Api.Client.ConversionRatio,System.Decimal)">
+            <summary>
+            Multiplies the specified ratios multipliers and the divisors.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.op_Division(ErpNet.Api.Client.ConversionRatio,System.Decimal)">
+            <summary>
+            Implements the operator *. This multiplies the multipliers and the divisors.
+            </summary>
+            <param name="one">The one.</param>
+            <param name="other">The other.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.Divide(ErpNet.Api.Client.ConversionRatio,System.Decimal)">
+            <summary>
+            Divides the specified ratio by the specified divisor.
+            </summary>
+            <param name="ratio">The ratio to divide.</param>
+            <param name="divisor">The divisor.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ConversionRatio.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client", "ErpNet.Api.Client\ErpNet.Api.Client.csproj", "{31643597-46D1-4BCB-957E-7F2B9FA72D2E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client.DomainApi", "ErpNet.Api.Client.DomainApi\ErpNet.Api.Client.DomainApi.csproj", "{B56DCF7B-2342-48B0-B207-31737BD08952}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client.DomainApi.Generator", "ErpNet.Api.Client.DomainApi.Generator\ErpNet.Api.Client.DomainApi.Generator.csproj", "{F25026CC-075D-446F-9A1A-32DF78B2A203}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client.DomainApi.Test", "ErpNet.Api.Client.DomainApi.Test\ErpNet.Api.Client.DomainApi.Test.csproj", "{29205BBC-3B8E-42A2-9474-75197D31AA3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31643597-46D1-4BCB-957E-7F2B9FA72D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31643597-46D1-4BCB-957E-7F2B9FA72D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31643597-46D1-4BCB-957E-7F2B9FA72D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31643597-46D1-4BCB-957E-7F2B9FA72D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56DCF7B-2342-48B0-B207-31737BD08952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56DCF7B-2342-48B0-B207-31737BD08952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56DCF7B-2342-48B0-B207-31737BD08952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56DCF7B-2342-48B0-B207-31737BD08952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25026CC-075D-446F-9A1A-32DF78B2A203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25026CC-075D-446F-9A1A-32DF78B2A203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25026CC-075D-446F-9A1A-32DF78B2A203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25026CC-075D-446F-9A1A-32DF78B2A203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29205BBC-3B8E-42A2-9474-75197D31AA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29205BBC-3B8E-42A2-9474-75197D31AA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29205BBC-3B8E-42A2-9474-75197D31AA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29205BBC-3B8E-42A2-9474-75197D31AA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C8F41A8-EAB9-4912-A50A-B77DA15890AE}
+	EndGlobalSection
+EndGlobal

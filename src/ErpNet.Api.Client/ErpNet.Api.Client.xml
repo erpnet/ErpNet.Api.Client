@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ErpNet.Api.Client</name>
+    </assembly>
+    <members>
+        <member name="T:ErpNet.Api.Client.ErpNetServiceClient">
+            <summary>
+            Represents a ERP.net client that uses client credentials authorization flow.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.ErpNetServiceClient.#ctor(System.String,System.String,System.String,System.String,ErpNet.Api.Client.IAccessTokenStore)">
+            <summary>
+            Creates an instance.
+            </summary>
+            <param name="databaseUri">the ERP.net database url</param>
+            <param name="clientApplicationId">The unique identifier of the trusted application</param>
+            <param name="clientApplicationSecret">The secret of the trusted application</param>
+            <param name="clientApplicationScope">The required scopes of the trusted application delimited by space</param>
+            <param name="accessTokenStore">The access token storage. If null the default <see cref="T:ErpNet.Api.Client.FileAccessTokenStore"/> with file name './access_tokens.json' is used</param>
+        </member>
+        <member name="P:ErpNet.Api.Client.ErpNetServiceClient.DatabaseUri">
+            <summary>
+            Gets the database uri.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.ErpNetServiceClient.GetAutoDiscoveryAsync">
+            <summary>
+            Gets the result of a dbhost/sys/auto-discovery endpoint.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ErpNetServiceClient.GetAccessTokenAsync">
+            <summary>
+            Uses a previously stored access_token or requests a new service access_token from ERP.net identity server.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.ErpNetServiceClient.RequestServiceTokenAsync">
+            <summary>
+            Requests a service access_token from ERP.net identity server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.IAccessTokenStore">
+            <summary>
+            Represents a secret storage of access token. When an access token is obtained it must be persisted for later usage.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.IAccessTokenStore.TryGetAccessToken(System.String,System.String@)">
+            <summary>
+            Tries to get the stored access token for a given database.
+            </summary>
+            <param name="databaseUrl"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.IAccessTokenStore.SetAccessToken(System.String,System.String)">
+            <summary>
+            Stores the access token for a given database.
+            </summary>
+            <param name="databaseUrl"></param>
+            <param name="token"></param>
+        </member>
+        <member name="T:ErpNet.Api.Client.FileAccessTokenStore">
+            <summary>
+            Represents a <see cref="T:ErpNet.Api.Client.IAccessTokenStore"/> that stores the access token in text file as a plain text.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.FileAccessTokenStore.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.FileAccessTokenStore"/>
+            </summary>
+            <param name="fileName">the file path</param>
+        </member>
+        <member name="P:ErpNet.Api.Client.FileAccessTokenStore.FileName">
+            <summary>
+            The file path.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.FileAccessTokenStore.SetAccessToken(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.FileAccessTokenStore.TryGetAccessToken(System.String,System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ErpNet.Api.Client.JsonHelper">
+            <summary>
+            Provides methods to read a JSON stream into dictionary or list.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.ReadODataQueryResult(System.IO.Stream,System.Action{System.Collections.Generic.IDictionary{System.String,System.Object}})">
+            <summary>
+            Reads an odata query response stream. For each item in the response the specified action is called.
+            </summary>
+            <param name="stream"></param>
+            <param name="readItem"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.TryReadJsonObject(System.IO.Stream,System.Object@)">
+            <summary>
+            Reads a JSON stream and returns, List{object?} for arrays, Dictionary{string,object?} for objects and double, string, null, true or false for primitives.
+            </summary>
+            <param name="stream">The stream</param>
+            <param name="obj">The result object</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.Parse(System.String)">
+            <summary>
+            Parses the JSON string into an object. For JSON arrays a List{object?} is returned; for JSON objects a Dictionary{string,object?}; or else false, true, string, double or null.
+            </summary>
+            <param name="jsonString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.Member(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Gets the value for a multipart identifier. Example dictionary.Member("Customer.Party.PartyName").
+            </summary>
+            <param name="dict"></param>
+            <param name="dataMember"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.Member``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Gets the value for a multipart identifier. Example dictionary.Member("Customer.Party.PartyName").
+            </summary>
+            <param name="dict"></param>
+            <param name="dataMember"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.ReadJsonObject(System.IO.Stream)">
+            <summary>
+            Reads an object from JSON stream. 
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.ToJson(System.Object,System.Boolean)">
+            <summary>
+            Serializes the provided object to JSON.
+            </summary>
+            <param name="resource"></param>
+            <param name="writeIndented"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.JsonHelper.ToJson(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Boolean})">
+            <summary>
+            Returns the JSON string representation of the dictionary.
+            </summary>
+            <param name="dict">The dictionary</param>
+            <param name="writeIndented">If null only dictionaries with more than 4 entries are written indented.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.Api.Client.OData.ODataCommand">
+            <summary>
+            Represents a ODATA API command.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.#ctor(System.String)">
+            
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.SelectClause">
+            <summary>
+            Gets or sets the odata $select clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.ExpandClause">
+            <summary>
+            Gets or sets the odata $expand clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.FilterClause">
+            <summary>
+            Gets or sets the odata $filter clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.TopClause">
+            <summary>
+            Gets or sets the odata $top clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.SkipClause">
+            <summary>
+            Gets or sets the odata $skip clause.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.Key">
+            <summary>
+            The entity id of the command in case <see cref="P:ErpNet.Api.Client.OData.ODataCommand.ResourceName"/> is an entity.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.Operation">
+            <summary>
+            Gets or sets the bound operation name - action or function.
+            </summary>
+            <value>
+            The operation.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.Type">
+            <summary>
+            Gets or sets the type of the command.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.ResourceName">
+            <summary>
+            Gets or sets the name of the resource. Can be entity set, function or action.
+            </summary>
+            <value>
+            The name of the resource.
+            </value>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.Payload">
+            <summary>
+            The payload of the command in case of POST or PATCH command.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataCommand.Options">
+            <summary>
+            Additional options for the command provided as url parameters.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.CopyFrom(ErpNet.Api.Client.OData.ODataCommand)">
+            <summary>
+            Assigns the properties of the provided command to this command.
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.GetUriString">
+            <summary>
+            Returns the uri of the command. Used to build a HTTP request.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.ToString">
+            <summary>
+            Returns the string representation of the command.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.GetOption(System.String)">
+            <summary>
+            Gets a URI option.
+            </summary>
+            <param name="name">option name</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataCommand.SetOption(System.String,System.String)">
+            <summary>
+            Sets a URI option.
+            </summary>
+            <param name="name">option name</param>
+            <param name="value">option value</param>
+        </member>
+        <member name="T:ErpNet.Api.Client.OData.ErpCommandType">
+            <summary>
+            Represents an odata command type.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Query">
+            <summary>
+            The command is executed as GET HTTP request and returns many objects.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.SingleEntity">
+            <summary>
+            The command is executed as GET HTTP request and returns single object.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Update">
+            <summary>
+            The command is executed as PATCH HTTP request and returns no object.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Insert">
+            <summary>
+            The command is for inserting an entity, is executed as POST HTTP request and returns single entity object.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Delete">
+            <summary>
+            The command is executed as DELETE HTTP request and returns no object.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Action">
+            <summary>
+            The command is executed as POST HTTP request and returns the action result. The <see cref="P:ErpNet.Api.Client.OData.ODataCommand.Operation"/> should be provided.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Function">
+            <summary>
+            The command is executed as GET HTTP request and returns the function result. The <see cref="P:ErpNet.Api.Client.OData.ODataCommand.Operation"/> should be provided.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ErpCommandType.Count">
+            <summary>
+            The command is executed as GET HTTP request and returns only the row count for the specified query filter.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.OData.ODataException">
+            <summary>
+            Represents an error returned by ERP.net odata service.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataException.#ctor(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.OData.ODataException"/>
+            </summary>
+            <param name="type"></param>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="info"></param>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataException.Code">
+            <summary>
+            The code of the server exception. 
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataException.Type">
+            <summary>
+            The server type of the error.
+            </summary>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataException.Info">
+            <summary>
+            Typically the error stack trace.
+            </summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.OData.ODataService">
+            <summary>
+            Represents a connection to ERP.net ODATA API such as DOMAIN API or TABLE API.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.OData.ODataService.getAccessTokenAsync">
+            <summary>
+            A function used to get the authentication acesss token.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.#ctor(System.String,System.Func{System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Creates an instance of <see cref="T:ErpNet.Api.Client.OData.ODataService"/>
+            </summary>
+            <param name="odataServiceRootUri">The root address of the ODATA service</param>
+            <param name="getAccessTokenAsync">User function that provides the access token used to access the API.</param>
+        </member>
+        <member name="P:ErpNet.Api.Client.OData.ODataService.ODataServiceRootUri">
+            <summary>
+            The odata service root uri.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.GetMetadataStreamAsync">
+            <summary>
+            Gets the metadata XML stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.ExecuteStreamAsync(ErpNet.Api.Client.OData.ODataCommand)">
+            <summary>
+            Executes the command and returns the response stream.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.ExecuteStringAsync(ErpNet.Api.Client.OData.ODataCommand)">
+            <summary>
+            Executes the command and returns the response as plain string.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.ExecuteObjectAsync(ErpNet.Api.Client.OData.ODataCommand)">
+            <summary>
+            Executes the command and returns an object result or null.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.ExecuteDictionaryAsync(ErpNet.Api.Client.OData.ODataCommand)">
+            <summary>
+            Executes the command and returns a IDictionary{string,object} result or throws exception.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.HandleErrorAsync(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Handles a http error response.
+            </summary>
+            <param name="responseMsg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.CreateRequestMessage(System.String)">
+            <summary>
+            Creates http request message.
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.GetAsync(System.String)">
+            <summary>
+            Executes HTTP GET.
+            </summary>
+            <param name="requestUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ErpNet.Api.Client.OData.ODataService.PostAsync(System.String,System.Net.Http.HttpContent)">
+            <summary>
+            Executes HTTP POST.
+            </summary>
+            <param name="requestUri"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ErpNet.ServerModel.AutoDiscovery">
+            <summary>
+            A model class for {dbhost}/sys/auto-discovery endpoint.
+            </summary>
+        </member>
+        <member name="P:ErpNet.ServerModel.AutoDiscovery.WebSites">
+            <summary>
+            A collection of web sites for the destination database.
+            </summary>
+        </member>
+        <member name="T:ErpNet.ServerModel.AutoDiscoveryWebSite">
+            <summary>
+            A model class for {dbhost}/sys/auto-discovery endpoint.
+            </summary>
+        </member>
+        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Type">
+            <summary>
+            The type of web site.
+            </summary>
+        </member>
+        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Status">
+            <summary>
+            Working status.
+            </summary>
+        </member>
+        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Url">
+            <summary>
+            Url of the web ite.
+            </summary>
+        </member>
+        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.AdditionalProperties">
+            <summary>
+            Additional properties specific for the web site.
+            </summary>
+        </member>
+        <member name="T:ErpNet.ServerModel.WebsiteType">
+            <summary>
+            Type of web site. This enum must be euivalent to WebSitesRepository.WebSiteType enum.
+            </summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.API">
+            <summary>API value. Stored as 'API'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.ClientCenter">
+            <summary>ClientCenter value. Stored as 'CC'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.ID">
+            <summary>ID value. Stored as 'ID'. Open ID Provider. </summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.ECommerce">
+            <summary>ECommerce value. Stored as 'EC'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.LEGALBG">
+            <summary>LEGALBG value. Stored as 'LEG'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.SocialInteractions">
+            <summary>SocialInteractions value. Stored as 'SI'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.DigitalMarketplace">
+            <summary>DigitalMarketplace value. Stored as 'DM'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.UserProfile">
+            <summary>UserProfile value. Stored as 'PROFILE'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.WebClientApplication">
+            <summary>WebClientApplication value. Stored as 'APP'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.TableAPI">
+            <summary>Table API value. Stored as 'TAP'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.DataAccessAPI">
+            <summary>Data Access API value. Stored as 'DAP'.</summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteType.WMSMobileApp">
+            <summary>ERP.net WMS Mobile App. Stored as 'WMS'.</summary>
+        </member>
+        <member name="T:ErpNet.ServerModel.WebsiteStatus">
+            <summary>
+            Information about the web site
+            </summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteStatus.Unknown">
+            <summary>
+            We haven't been able to determine the status yet
+            </summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteStatus.Working">
+            <summary>
+            Process is working and we are able to ping the web site
+            </summary>
+        </member>
+        <member name="F:ErpNet.ServerModel.WebsiteStatus.NotWorking">
+            <summary>
+            Site is down, the process is unresponsive, or we can't ping the web site
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DocumentationFile>ErpNet.Api.Client.xml</DocumentationFile>
+    <Authors>ERP.net</Authors>
+    <Company>ERP.net</Company>
+    <Description>Client library for making generic/untyped requests and consuming payloads from ERP.net Table API and Domain API.</Description>
+    <Version>1.0.1</Version>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="*" />
+    <PackageReference Include="IdentityModel" Version="*" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="*" />
+  </ItemGroup>
+
+</Project>
