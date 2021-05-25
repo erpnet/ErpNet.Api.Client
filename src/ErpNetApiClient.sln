@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client.DomainApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpNet.Api.Client.DomainApi.Test", "ErpNet.Api.Client.DomainApi.Test\ErpNet.Api.Client.DomainApi.Test.csproj", "{29205BBC-3B8E-42A2-9474-75197D31AA3B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5723832-21F7-4576-A33D-748E90E7CF78}"
+	ProjectSection(SolutionItems) = preProject
+		NugetPack.bat = NugetPack.bat
+		NugetPush.bat = NugetPush.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
