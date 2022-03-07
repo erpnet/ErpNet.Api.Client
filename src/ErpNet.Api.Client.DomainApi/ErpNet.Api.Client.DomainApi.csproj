@@ -7,7 +7,7 @@
     <DocumentationFile>ErpNet.Api.Client.DomainApi.xml</DocumentationFile>
     <Authors>ERP.net</Authors>
     <Description>Provides typed entity objects for ERP.net Domain API and type safe methods for building API requests.</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
