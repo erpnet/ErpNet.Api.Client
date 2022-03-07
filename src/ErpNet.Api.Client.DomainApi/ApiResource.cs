@@ -14,7 +14,8 @@ namespace ErpNet.Api.Client.DomainApi
     public abstract class ApiResource
     {
         const string ODataNamespace = "Erp.";
-        const string DefaultDateTimeFormat = "yyyy-mm-ddThh:mm:ss.fffffffZ";
+        // ISO 8061 compliance
+        const string DefaultDateTimeFormat = "o";
         const string DefaultTimeSpanFormat = "hh:mm:ss.fffffff";
 
         /// <summary>
