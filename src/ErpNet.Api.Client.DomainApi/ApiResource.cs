@@ -16,7 +16,8 @@ namespace ErpNet.Api.Client.DomainApi
         const string ODataNamespace = "Erp.";
         // ISO 8061 compliance
         const string DefaultDateTimeFormat = "o";
-        const string DefaultTimeSpanFormat = "hh:mm:ss.fffffff";
+        // The Constant("c") Format Specifier
+        const string DefaultTimeSpanFormat = "c";
 
         /// <summary>
         /// The internal data of the resource. The values must be of type bool, double, string, dictionary or list.
