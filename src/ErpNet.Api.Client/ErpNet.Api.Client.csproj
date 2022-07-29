@@ -8,7 +8,7 @@
     <Authors>ERP.net</Authors>
     <Company>ERP.net</Company>
     <Description>Client library for making generic/untyped requests and consuming payloads from ERP.net Table API and Domain API.</Description>
-    <Version>1.0.2</Version>
+    <Version>22.1.0</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
