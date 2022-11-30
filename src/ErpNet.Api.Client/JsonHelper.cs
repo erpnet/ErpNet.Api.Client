@@ -377,40 +377,45 @@ namespace ErpNet.Api.Client
 
             public bool Read()
             {
-                int errorsCount = 0;
-                int num = 0;
-                // prevent endless cicle
-                while (num < 100)
+                const int jsonTokenSizeLimit = 20971520; // 20MB
+
+                var errorsCount = 0;
+                var totalBytesRead = 0;
+                
+                while (totalBytesRead < jsonTokenSizeLimit)
                 {
-                    num++;
                     bool isError = false;
                     _bytesConsumed = (int)_reader.BytesConsumed;
                     _lastValidState = _reader.CurrentState;
                     try
                     {
+                        // Return when a whole token is read.
                         if (_reader.Read())
                             return true;
                     }
-                    catch (System.Text.Json.JsonException)
+                    catch (JsonException)
                     {
                         if (errorsCount > 3)
                             throw;
                         isError = true;
                         errorsCount++;
                     }
+
                     if (!isError)
                     {
                         _bytesConsumed = (int)_reader.BytesConsumed;
                         _lastValidState = _reader.CurrentState;
                     }
+
                     //GetMoreBytesFromStream
                     {
                         int bytesRead;
                         if (_bytesConsumed < _readerBuffer.Length)
                         {
-                            ReadOnlySpan<byte> leftover;
-                            leftover = _buffer.AsSpan(_bytesConsumed, _readerBuffer.Length - _bytesConsumed);
-                           
+                            ReadOnlySpan<byte> leftover = _buffer.AsSpan(
+                                _bytesConsumed, 
+                                _readerBuffer.Length - _bytesConsumed);
+
                             // Extend buffer to fit the large token
                             if (leftover.Length == _buffer.Length)
                             {
@@ -427,13 +432,16 @@ namespace ErpNet.Api.Client
                             bytesRead = _stream.Read(_buffer, 0, _buffer.Length);
                             _readerBuffer = _buffer.AsSpan(0, bytesRead);
                         }
+
+                        totalBytesRead += bytesRead;
+
                         //Console.WriteLine($"String in buffer is: {Encoding.UTF8.GetString(buffer)}");
                         _reader = new Utf8JsonReader(_readerBuffer, isFinalBlock: bytesRead == 0, _lastValidState);
                     }
                 }
-                return false;
-            }
 
+                throw new Exception("JSON token exceeds the maximum allowed size of 20MB.");
+            }
         }
 
        
