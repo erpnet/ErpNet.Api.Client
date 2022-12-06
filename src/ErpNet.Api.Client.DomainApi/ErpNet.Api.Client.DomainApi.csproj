@@ -3,18 +3,14 @@
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <DocumentationFile>ErpNet.Api.Client.DomainApi.xml</DocumentationFile>
     <Authors>ERP.net</Authors>
     <Description>Provides typed entity objects for ERP.net Domain API and type safe methods for building API requests.</Description>
-    <Version>22.1.1</Version>
+    <Version>23.1.0</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ErpNet.Api.Client\ErpNet.Api.Client.csproj" />
-  </ItemGroup>
 
 </Project>

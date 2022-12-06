@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Text.Unicode;
-using System.Threading;
 
 namespace ErpNet.Api.Client
 {
@@ -458,4 +456,30 @@ namespace ErpNet.Api.Client
             return JsonSerializer.Serialize(dict, options);
         }
     }
+
+    /// <summary>
+    /// Converts a <see cref="WebsiteType"/> enum value to or from JSON.
+    /// </summary>
+    public class WebsiteTypeJsonConverter : JsonConverter<WebsiteType>
+    {
+        /// <inheritdoc/>
+        public override WebsiteType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (!Enum.TryParse<WebsiteType>(reader.GetString(), out var websiteType))
+                websiteType = WebsiteType.Unknown;
+            
+            return websiteType;
+        }
+
+        /// <summary>
+        /// Not implemented. Currently there are no use-cases when a <see cref="WebsiteType"/> should be JSON serialized.
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public override void Write(Utf8JsonWriter writer, WebsiteType value, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 }
