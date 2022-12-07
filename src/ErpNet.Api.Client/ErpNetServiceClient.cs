@@ -1,5 +1,4 @@
-﻿using ErpNet.ServerModel;
-using IdentityModel.Client;
+﻿using IdentityModel.Client;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,7 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization.Converters;
+using System.Globalization;
 
 namespace ErpNet.Api.Client
 {
@@ -73,9 +76,10 @@ namespace ErpNet.Api.Client
 
             var res = await commonHttpClient.GetAsync(DatabaseUri.TrimEnd('/') + "/sys/auto-discovery");
             var json = await res.Content.ReadAsStringAsync();
-            var options = new System.Text.Json.JsonSerializerOptions();
-            options.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-            disco = System.Text.Json.JsonSerializer.Deserialize<AutoDiscovery>(json, options);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonStringEnumConverter());
+            options.Converters.Add(new WebsiteTypeJsonConverter());
+            disco = JsonSerializer.Deserialize<AutoDiscovery>(json, options);
 
             discoveryResult = disco;
 
@@ -110,7 +114,6 @@ namespace ErpNet.Api.Client
                 return tokenResponse.AccessToken;
             }
         }
-
 
         string? GetStoredAccessToken()
         {

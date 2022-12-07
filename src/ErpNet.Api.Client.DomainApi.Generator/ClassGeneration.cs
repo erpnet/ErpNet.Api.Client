@@ -95,7 +95,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                     propertyType += "?";
 
                     type.Members.Add("[ODataProperty]");
-                    type.Members.Add($"public {propertyType} {propertyName} {{ get => {nameof(ApiResource.GetPropertyValue)}<{propertyType}>(\"{propertyName}\");"
+                    type.Members.Add($"public {propertyType} {propertyName}{(type.Name.Equals(propertyName) ? "1" : "")} {{ get => {nameof(ApiResource.GetPropertyValue)}<{propertyType}>(\"{propertyName}\");"
                         + $" set => {nameof(ApiResource.SetPropertyValue)}<{propertyType}>(\"{propertyName}\", value); }}");
                 }
                 //add navigation properties
@@ -201,12 +201,12 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                         else
                             body = $"await this.InvokeFunctionAsync(service, \"{methodName}\"{parametersUsage})";
 
-                        var returnType = "Task";
+                        var returnType = "System.Threading.Tasks.Task";
                         if (edmReturnType != null)
                         {
                             returnType = GetTypeFromEdmType(allTypes, mainNamespace, edmReturnType);
                             body = $"return ({returnType}?)({body})";
-                            returnType = $"Task<{returnType}?>";
+                            returnType = $"System.Threading.Tasks.Task<{returnType}?>";
                         }
 
                         type.Members.Add($"public async {returnType} {methodName}Async({parametersDeclaration}) {{ {body}; }}");
@@ -371,13 +371,26 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                     isComplexType = t.Kind == NodeKind.ComplexType;
 
             }
+
             switch (propertyType)
             {
-                case "Time": propertyType = "TimeSpan"; break;
-                case "TimeOfDay": propertyType = "TimeSpan"; break;
-                case "DateTimeOffset": propertyType = "DateTime"; break;
-                case "Binary": propertyType = "Byte[]"; break;
+                case "Time": 
+                    propertyType = "TimeSpan"; 
+                    break;
+                case "TimeOfDay": 
+                    propertyType = "TimeSpan"; 
+                    break;
+                case "DateTimeOffset": 
+                    propertyType = "DateTime"; 
+                    break;
+                case "Binary": 
+                    propertyType = "Byte[]"; 
+                    break;
+                case "EntityType":
+                    propertyType = "EntityResource";
+                    break;
             }
+
             return propertyType;
         }
 

@@ -150,6 +150,20 @@
             <param name="writeIndented">If null only dictionaries with more than 4 entries are written indented.</param>
             <returns></returns>
         </member>
+        <member name="T:ErpNet.Api.Client.WebsiteTypeJsonConverter">
+            <summary>
+            Converts a <see cref="T:ErpNet.Api.Client.WebsiteType"/> enum value to or from JSON.
+            </summary>
+        </member>
+        <member name="M:ErpNet.Api.Client.WebsiteTypeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ErpNet.Api.Client.WebsiteTypeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,ErpNet.Api.Client.WebsiteType,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Not implemented. Currently there are no use-cases when a <see cref="T:ErpNet.Api.Client.WebsiteType"/> should be JSON serialized.
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:ErpNet.Api.Client.OData.ODataCommand">
             <summary>
             Represents a ODATA API command.
@@ -410,98 +424,109 @@
             <param name="content"></param>
             <returns></returns>
         </member>
-        <member name="T:ErpNet.ServerModel.AutoDiscovery">
+        <member name="T:ErpNet.Api.Client.AutoDiscovery">
             <summary>
             A model class for {dbhost}/sys/auto-discovery endpoint.
             </summary>
         </member>
-        <member name="P:ErpNet.ServerModel.AutoDiscovery.WebSites">
+        <member name="P:ErpNet.Api.Client.AutoDiscovery.WebSites">
             <summary>
             A collection of web sites for the destination database.
             </summary>
         </member>
-        <member name="T:ErpNet.ServerModel.AutoDiscoveryWebSite">
+        <member name="T:ErpNet.Api.Client.AutoDiscoveryWebSite">
             <summary>
             A model class for {dbhost}/sys/auto-discovery endpoint.
             </summary>
         </member>
-        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Type">
+        <member name="P:ErpNet.Api.Client.AutoDiscoveryWebSite.Type">
             <summary>
             The type of web site.
             </summary>
         </member>
-        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Status">
+        <member name="P:ErpNet.Api.Client.AutoDiscoveryWebSite.Status">
             <summary>
             Working status.
             </summary>
         </member>
-        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.Url">
+        <member name="P:ErpNet.Api.Client.AutoDiscoveryWebSite.Url">
             <summary>
             Url of the web ite.
             </summary>
         </member>
-        <member name="P:ErpNet.ServerModel.AutoDiscoveryWebSite.AdditionalProperties">
+        <member name="P:ErpNet.Api.Client.AutoDiscoveryWebSite.AdditionalProperties">
             <summary>
             Additional properties specific for the web site.
             </summary>
         </member>
-        <member name="T:ErpNet.ServerModel.WebsiteType">
+        <member name="T:ErpNet.Api.Client.WebsiteType">
             <summary>
             Type of web site. This enum must be euivalent to WebSitesRepository.WebSiteType enum.
             </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.API">
-            <summary>API value. Stored as 'API'.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.Unknown">
+            <summary>
+            An unknown website type. Often these are new ones.
+            </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.ClientCenter">
-            <summary>ClientCenter value. Stored as 'CC'.</summary>
-        </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.ID">
+        <member name="F:ErpNet.Api.Client.WebsiteType.ID">
             <summary>ID value. Stored as 'ID'. Open ID Provider. </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.ECommerce">
-            <summary>ECommerce value. Stored as 'EC'.</summary>
-        </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.LEGALBG">
-            <summary>LEGALBG value. Stored as 'LEG'.</summary>
-        </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.SocialInteractions">
-            <summary>SocialInteractions value. Stored as 'SI'.</summary>
-        </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.DigitalMarketplace">
-            <summary>DigitalMarketplace value. Stored as 'DM'.</summary>
-        </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.UserProfile">
+        <member name="F:ErpNet.Api.Client.WebsiteType.UserProfile">
             <summary>UserProfile value. Stored as 'PROFILE'.</summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.WebClientApplication">
-            <summary>WebClientApplication value. Stored as 'APP'.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.InstanceManager">
+            <summary>Instance manager system type.</summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.TableAPI">
-            <summary>Table API value. Stored as 'TAP'.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.API">
+            <summary>Allows external applications to access the ERP resources using REST API.. Stored as &apos;API&apos;.</summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.DataAccessAPI">
-            <summary>Data Access API value. Stored as 'DAP'.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.ClientCenter">
+            <summary>Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;.</summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteType.WMSMobileApp">
-            <summary>ERP.net WMS Mobile App. Stored as 'WMS'.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.ECommerce">
+            <summary>ECommerce value. Stored as &apos;EC&apos;.</summary>
         </member>
-        <member name="T:ErpNet.ServerModel.WebsiteStatus">
+        <member name="F:ErpNet.Api.Client.WebsiteType.LEGALBG">
+            <summary>LEGALBG value. Stored as &apos;LEG&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.SocialInteractions">
+            <summary>SocialInteractions value. Stored as &apos;SI&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.DigitalMarketplace">
+            <summary>DigitalMarketplace value. Stored as &apos;DM&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.WebClientApplication">
+            <summary>WebClientApplication value. Stored as &apos;APP&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.TableAPI">
+            <summary>TableAPI value. Stored as &apos;TAP&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.DataAccessAPI">
+            <summary>DataAccessAPI value. Stored as &apos;DAP&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.LEGALUK">
+            <summary>LEGALUK value. Stored as &apos;LUK&apos;.</summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.OLAP">
+            <summary>OLAP value. Stored as &apos;OLP&apos;.</summary>
+        </member>
+        <member name="T:ErpNet.Api.Client.WebsiteStatus">
             <summary>
             Information about the web site
             </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteStatus.Unknown">
+        <member name="F:ErpNet.Api.Client.WebsiteStatus.Unknown">
             <summary>
             We haven't been able to determine the status yet
             </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteStatus.Working">
+        <member name="F:ErpNet.Api.Client.WebsiteStatus.Working">
             <summary>
             Process is working and we are able to ping the web site
             </summary>
         </member>
-        <member name="F:ErpNet.ServerModel.WebsiteStatus.NotWorking">
+        <member name="F:ErpNet.Api.Client.WebsiteStatus.NotWorking">
             <summary>
             Site is down, the process is unresponsive, or we can't ping the web site
             </summary>

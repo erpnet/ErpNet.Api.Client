@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.Text.Json.Serialization;
 
-namespace ErpNet.ServerModel
+namespace ErpNet.Api.Client
 {
     /// <summary>
     /// A model class for {dbhost}/sys/auto-discovery endpoint.
@@ -25,11 +24,14 @@ namespace ErpNet.ServerModel
         /// <summary>
         /// The type of web site.
         /// </summary>
-        public WebsiteType Type { get; set; }
+        [JsonConverter(typeof(WebsiteTypeJsonConverter))]
+        public WebsiteType Type { get; set; } = WebsiteType.Unknown;
+
         /// <summary>
         /// Working status.
         /// </summary>
         public WebsiteStatus Status { get; set; }
+
         /// <summary>
         /// Url of the web ite.
         /// </summary>
@@ -46,30 +48,52 @@ namespace ErpNet.ServerModel
     /// </summary>
     public enum WebsiteType
     {
-        /// <summary>API value. Stored as 'API'.</summary>
-        API,
-        /// <summary>ClientCenter value. Stored as 'CC'.</summary>
-        ClientCenter,
+        /// <summary>
+        /// An unknown website type. Often these are new ones.
+        /// </summary>
+        Unknown,
+
         /// <summary>ID value. Stored as 'ID'. Open ID Provider. </summary>
         ID,
-        /// <summary>ECommerce value. Stored as 'EC'.</summary>
-        ECommerce,
-        /// <summary>LEGALBG value. Stored as 'LEG'.</summary>
-        LEGALBG,
-        /// <summary>SocialInteractions value. Stored as 'SI'.</summary>
-        SocialInteractions,
-        /// <summary>DigitalMarketplace value. Stored as 'DM'.</summary>
-        DigitalMarketplace,
+
         /// <summary>UserProfile value. Stored as 'PROFILE'.</summary>
         UserProfile,
-        /// <summary>WebClientApplication value. Stored as 'APP'.</summary>
+        
+        /// <summary>Instance manager system type.</summary>
+        InstanceManager,
+
+        /// <summary>Allows external applications to access the ERP resources using REST API.. Stored as &apos;API&apos;.</summary>
+        API,
+
+        /// <summary>Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;.</summary>
+        ClientCenter,
+        
+        /// <summary>ECommerce value. Stored as &apos;EC&apos;.</summary>
+        ECommerce,
+        
+        /// <summary>LEGALBG value. Stored as &apos;LEG&apos;.</summary>
+        LEGALBG,
+        
+        /// <summary>SocialInteractions value. Stored as &apos;SI&apos;.</summary>
+        SocialInteractions,
+        
+        /// <summary>DigitalMarketplace value. Stored as &apos;DM&apos;.</summary>
+        DigitalMarketplace,
+        
+        /// <summary>WebClientApplication value. Stored as &apos;APP&apos;.</summary>
         WebClientApplication,
-        /// <summary>Table API value. Stored as 'TAP'.</summary>
+        
+        /// <summary>TableAPI value. Stored as &apos;TAP&apos;.</summary>
         TableAPI,
-        /// <summary>Data Access API value. Stored as 'DAP'.</summary>
+        
+        /// <summary>DataAccessAPI value. Stored as &apos;DAP&apos;.</summary>
         DataAccessAPI,
-        /// <summary>ERP.net WMS Mobile App. Stored as 'WMS'.</summary>
-        WMSMobileApp
+        
+        /// <summary>LEGALUK value. Stored as &apos;LUK&apos;.</summary>
+        LEGALUK,
+        
+        /// <summary>OLAP value. Stored as &apos;OLP&apos;.</summary>
+        OLAP
     }
 
     /// <summary>
