@@ -13,4 +13,8 @@
     <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ErpNet.Api.Client\ErpNet.Api.Client.csproj" />
+  </ItemGroup>
+
 </Project>
