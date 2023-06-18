@@ -101,8 +101,10 @@ namespace ErpNet.Api.Client
                 if (jwt.ValidTo < DateTime.UtcNow)
                 {
                     var tokenResponse = await RequestServiceTokenAsync();
-                    StoreAccessToken(tokenResponse.AccessToken);
-                    return tokenResponse.AccessToken;
+                    var accessToken = tokenResponse.AccessToken ?? string.Empty;
+                    StoreAccessToken(accessToken);
+
+                    return accessToken;
                 }
 
                 return tok;
@@ -110,8 +112,10 @@ namespace ErpNet.Api.Client
             else
             {
                 var tokenResponse = await RequestServiceTokenAsync();
-                StoreAccessToken(tokenResponse.AccessToken);
-                return tokenResponse.AccessToken;
+                var accessToken = tokenResponse.AccessToken ?? string.Empty;
+                StoreAccessToken(accessToken);
+
+                return accessToken;
             }
         }
 
