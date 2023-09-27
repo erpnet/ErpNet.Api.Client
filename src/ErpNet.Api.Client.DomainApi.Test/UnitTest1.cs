@@ -1,5 +1,5 @@
-
 using ErpNet.Api.Client.DomainApi.Crm.Sales;
+using ErpNet.Api.Client.DomainApi.General.Products;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -64,6 +64,27 @@ namespace ErpNet.Api.Client.DomainApi.Test
         {
             var node = ExpandNode.Parse("Lines", null);
             Assert.Equal("Lines", node.ExpandClause);
+        }
+
+        [Fact]
+        public void SetProductPicture()
+        {
+            var product = new Product();
+
+            var imageData = new byte[1000];
+            new Random().NextBytes(imageData);
+
+            var productPicture = new ProductPicture
+            {
+                Product = product,
+                Picture = imageData
+            };
+
+            Assert.Equal(imageData, productPicture.Picture);
+
+            new Random().NextBytes(imageData);
+            productPicture.Picture = imageData;
+            Assert.Equal(imageData, productPicture.Picture);
         }
     }
 }

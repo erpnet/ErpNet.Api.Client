@@ -537,28 +537,32 @@ namespace ErpNet.Api.Client.DomainApi
 
             if (value is string str)
                 return str;
-            else if (value is DateTime dt)
+            if (value is DateTime dt)
                 return dt.ToString(DefaultDateTimeFormat);
-            else if (value is TimeSpan ts)
+            if (value is TimeSpan ts)
                 return ts.ToString(DefaultTimeSpanFormat);
-            else if (value is Guid guid)
+            if (value is Guid guid)
                 return guid.ToString("D");
             if (value is Enum)
                 return Enum.GetName(value.GetType(), value);
-            else if (value is ApiResource res)
+            if (value is ApiResource res)
                 return res.data;
+            if (value is byte[] byteArray)
+                return System.Convert.ToBase64String(byteArray);
+
             if (value is IEnumerable array)
             {
-                List<object?> list = new List<object?>();
-                foreach (object? item in array)
+                var list = new List<object?>();
+                foreach (var item in array)
                 {
                     var rawItem = ConvertToRaw(item);
                     list.Add(rawItem);
                 }
+
                 return list;
             }
-            else
-                return value;
+
+            return value;
         }
 
         /// <summary>
