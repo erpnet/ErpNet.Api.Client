@@ -174,14 +174,14 @@ namespace ErpNet.Api.Client.DomainApi
         /// Executes the command and returns the result.
         /// </summary>
         /// <returns></returns>
-        public async Task<EntityCommandResult<TEntity, TResult>> LoadAsync()
+        public async Task<EntityCommandResult<TEntity, TResult?>> LoadAsync()
         {
-            EntityCommandResult<TEntity, TResult> result;
+            EntityCommandResult<TEntity, TResult?> result;
             var json = await Service.ExecuteDictionaryAsync(this);
             if (json == null)
-                return EntityCommandResult<TEntity, TResult>.Empty;
+                return EntityCommandResult<TEntity, TResult?>.Empty;
 
-            result = new EntityCommandResult<TEntity, TResult>(
+            result = new EntityCommandResult<TEntity, TResult?>(
                     GetResources(json),
                     selector);
 
@@ -279,11 +279,11 @@ namespace ErpNet.Api.Client.DomainApi
         /// <summary>
         /// Represents an empty result.
         /// </summary>
-        public static EntityCommandResult<TEntity, TResult> Empty
+        public static EntityCommandResult<TEntity, TResult?> Empty
         {
             get
             {
-                return new EntityCommandResult<TEntity, TResult>(Enumerable.Empty<TEntity>(), (r) => (TResult)(object)r);
+                return new EntityCommandResult<TEntity, TResult?>(Enumerable.Empty<TEntity>(), (r) => (TResult?)(object?)r);
             }
         }
 

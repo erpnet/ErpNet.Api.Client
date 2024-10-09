@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ErpNet.Api.Client.DomainApi.General
+﻿namespace ErpNet.Api.Client.DomainApi.Systems.Bpm
 {
     /// <summary>
     /// Represents a custom property value.
@@ -20,7 +16,7 @@ namespace ErpNet.Api.Client.DomainApi.General
         /// <returns></returns>
         public static bool operator ==(CustomPropertyValue? pv, string? value)
         {
-            return pv?.Value == value;
+            return pv?. Value == value;
         }
 
         /// <summary>

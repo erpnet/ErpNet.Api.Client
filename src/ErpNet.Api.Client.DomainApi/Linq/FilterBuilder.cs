@@ -229,7 +229,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
             }
         }
 
-        protected override ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
+        protected override ReadOnlyCollection<Expression?> VisitExpressionList(ReadOnlyCollection<Expression?> original)
         {
             bool first = true;
             foreach (var exp in original)

@@ -31,7 +31,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                 .ToDictionary(g => g.Key.Split('.').Last());
 
 
-            void AppendClass(XElement typeElement, string? entitySet)
+            void AppendClass(XElement typeElement, string entitySet)
             {
                 var edmType = typeElement.Attribute("Name").Value;
                 var fullName = edmType.Replace("_", ".");
@@ -48,7 +48,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                         .Descendants(schema.Name.Namespace + "Annotation")
                         .FirstOrDefault(n => n.Attribute("Term").Value == mainNamespace + ".EntityName");
                     string args = $"EntitySet = \"{entitySet}\"";
-                    string? tableName = null;
+                    string tableName = null;
                     if (entityNameNode != null)
                     {
                         tableName = entityNameNode.Attribute("String").Value;
@@ -142,7 +142,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                         {
                             var paramType = GetTypeFromEdmType(allTypes, mainNamespace, p.Attribute("Type").Value);
                             var paramName = p.Attribute("Name").Value;
-                            string? defaultValue = null;
+                            string defaultValue = null;
                             var op = p.Elements().FirstOrDefault(e => e.Name.LocalName == "Annotation" && e.Attribute("Term")?.Value?.EndsWith("OptionalParameter") == true);
                             if (op != null)
                             {
@@ -209,7 +209,14 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                             returnType = $"System.Threading.Tasks.Task<{returnType}?>";
                         }
 
-                        type.Members.Add($"public async {returnType} {methodName}Async({parametersDeclaration}) {{ {body}; }}");
+                        if (type.BaseType == nameof(EntityResource))
+                        {
+                            type.Members.Add($"public async {returnType} {methodName}Async({parametersDeclaration}) {{ {body}; }}");
+                        }
+                        else
+                        {
+                            type.Members.Add($"public new async {returnType} {methodName}Async({parametersDeclaration}) {{ {body}; }}");
+                        }
                     }
 
                 //end class
@@ -261,7 +268,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
             foreach (var type in allTypes.Values.OrderBy(t => t.FullName))
             {
                 // create namespaces
-                TypeNode? parentNode = null;
+                TypeNode parentNode = null;
                 if (!nodes.TryGetValue(type.Parent, out parentNode))
                 {
                     Stack<TypeNode> parentsStack = new Stack<TypeNode>();
@@ -440,7 +447,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
 
         class Parameter
         {
-            public Parameter(string name, string type, string? defaultValue)
+            public Parameter(string name, string type, string defaultValue)
             {
                 Name = name;
                 Type = type;
@@ -448,7 +455,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
             }
             public string Name { get; }
             public string Type { get; }
-            public string? DefaultValue { get; }
+            public string DefaultValue { get; }
 
             public override string ToString()
             {
@@ -477,7 +484,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                 return $"{Kind} {FullName}";
             }
 
-            public string? BaseType;
+            public string BaseType;
             public NodeKind Kind;
 
             public List<string> Attributes { get; } = new List<string>();

@@ -12,7 +12,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
         {
         }
 
-        protected virtual Expression Visit(Expression exp)
+        protected virtual Expression? Visit(Expression? exp)
         {
             if (exp == null)
                 return exp;
@@ -116,7 +116,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
         {
-            ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments);
+            var arguments = this.VisitExpressionList(initializer.Arguments);
             if (arguments != initializer.Arguments)
                 return Expression.ElementInit(initializer.AddMethod, arguments);
             return initializer;
@@ -124,7 +124,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitUnary(UnaryExpression u)
         {
-            Expression operand = this.Visit(u.Operand);
+            var operand = this.Visit(u.Operand);
             if (operand != u.Operand)
                 return Expression.MakeUnary(u.NodeType, operand, u.Type, u.Method);
             return u;
@@ -132,9 +132,9 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitBinary(BinaryExpression b)
         {
-            Expression left = this.Visit(b.Left);
-            Expression right = this.Visit(b.Right);
-            Expression conversion = this.Visit(b.Conversion);
+            var left = this.Visit(b.Left);
+            var right = this.Visit(b.Right);
+            var conversion = this.Visit(b.Conversion);
             if (left != b.Left || right != b.Right || conversion != b.Conversion)
             {
                 if (b.NodeType == ExpressionType.Coalesce && b.Conversion != null)
@@ -147,7 +147,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
         {
-            Expression expr = this.Visit(b.Expression);
+            var expr = this.Visit(b.Expression);
             if (expr != b.Expression)
                 return Expression.TypeIs(expr, b.TypeOperand);
             return b;
@@ -160,9 +160,9 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitConditional(ConditionalExpression c)
         {
-            Expression test = this.Visit(c.Test);
-            Expression ifTrue = this.Visit(c.IfTrue);
-            Expression ifFalse = this.Visit(c.IfFalse);
+            var test = this.Visit(c.Test);
+            var ifTrue = this.Visit(c.IfTrue);
+            var ifFalse = this.Visit(c.IfFalse);
 
             if (test != c.Test || ifTrue != c.IfTrue || ifFalse != c.IfFalse)
             {
@@ -178,7 +178,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitMemberAccess(MemberExpression m)
         {
-            Expression exp = this.Visit(m.Expression);
+            var exp = this.Visit(m.Expression);
             if (exp != m.Expression)
                 return Expression.MakeMemberAccess(exp, m.Member);
             return m;
@@ -186,8 +186,8 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitMethodCall(MethodCallExpression m)
         {
-            Expression obj = this.Visit(m.Object);
-            IEnumerable<Expression> args = this.VisitExpressionList(m.Arguments);
+            var obj = this.Visit(m.Object);
+            var args = this.VisitExpressionList(m.Arguments);
 
             if (obj != m.Object || args != m.Arguments)
                 return Expression.Call(obj, m.Method, args);
@@ -195,13 +195,13 @@ namespace ErpNet.Api.Client.DomainApi.Linq
             return m;
         }
 
-        protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
+        protected virtual ReadOnlyCollection<Expression?> VisitExpressionList(ReadOnlyCollection<Expression?> original)
         {
-            List<Expression>? list = null;
+            List<Expression?>? list = null;
 
             for (int i = 0, n = original.Count; i < n; i++)
             {
-                Expression p = this.Visit(original[i]);
+                var p = this.Visit(original[i]);
 
                 if (list != null)
                 {
@@ -209,7 +209,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
                 }
                 else if (p != original[i])
                 {
-                    list = new List<Expression>(n);
+                    list = new List<Expression?>(n);
 
                     for (int j = 0; j < i; j++)
                     {
@@ -220,14 +220,14 @@ namespace ErpNet.Api.Client.DomainApi.Linq
             }
 
             if (list != null)
-                return new ReadOnlyCollection<Expression>(list);
+                return new ReadOnlyCollection<Expression?>(list);
 
             return original;
         }
 
         protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
         {
-            Expression e = this.Visit(assignment.Expression);
+            var e = this.Visit(assignment.Expression);
 
             if (e != assignment.Expression)
                 return Expression.Bind(assignment.Member, e);
@@ -321,7 +321,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitLambda(LambdaExpression lambda)
         {
-            Expression body = this.Visit(lambda.Body);
+            var body = this.Visit(lambda.Body);
 
             if (body != lambda.Body)
                 return Expression.Lambda(lambda.Type, body, lambda.Parameters);
@@ -331,7 +331,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual NewExpression VisitNew(NewExpression nex)
         {
-            IEnumerable<Expression> args = this.VisitExpressionList(nex.Arguments);
+            var args = this.VisitExpressionList(nex.Arguments);
 
             if (args != nex.Arguments)
             {
@@ -372,7 +372,7 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitNewArray(NewArrayExpression na)
         {
-            IEnumerable<Expression> exprs = this.VisitExpressionList(na.Expressions);
+            var exprs = this.VisitExpressionList(na.Expressions);
 
             if (exprs != na.Expressions)
             {
@@ -387,8 +387,8 @@ namespace ErpNet.Api.Client.DomainApi.Linq
 
         protected virtual Expression VisitInvocation(InvocationExpression iv)
         {
-            IEnumerable<Expression> args = this.VisitExpressionList(iv.Arguments);
-            Expression expr = this.Visit(iv.Expression);
+            var args = this.VisitExpressionList(iv.Arguments);
+            var expr = this.Visit(iv.Expression);
 
             if (args != iv.Arguments || expr != iv.Expression)
                 return Expression.Invoke(expr, args);

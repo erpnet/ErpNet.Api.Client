@@ -284,34 +284,34 @@
         <member name="M:ErpNet.Api.Client.DomainApi.ComplexTypeResource.OnModified(System.String)">
             <inheritdoc/>
         </member>
-        <member name="T:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue">
+        <member name="T:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue">
             <summary>
             Represents a custom property value.
             </summary>
         </member>
-        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.#ctor">
+        <member name="M:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.#ctor">
             
         </member>
-        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.op_Equality(ErpNet.Api.Client.DomainApi.General.CustomPropertyValue,System.String)">
+        <member name="M:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.op_Equality(ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue,System.String)">
             <summary>
-            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Value"/> with the specified string value.
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.Value"/> with the specified string value.
             </summary>
             <param name="pv"></param>
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.op_Inequality(ErpNet.Api.Client.DomainApi.General.CustomPropertyValue,System.String)">
+        <member name="M:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.op_Inequality(ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue,System.String)">
             <summary>
-            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Value"/> with the specified string value.
+            Compares the <see cref="P:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.Value"/> with the specified string value.
             </summary>
             <param name="pv"></param>
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.GetHashCode">
+        <member name="M:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.GetHashCode">
             <inheritdoc/>
         </member>
-        <member name="M:ErpNet.Api.Client.DomainApi.General.CustomPropertyValue.Equals(System.Object)">
+        <member name="M:ErpNet.Api.Client.DomainApi.Systems.Bpm.CustomPropertyValue.Equals(System.Object)">
             <inheritdoc/>
         </member>
         <member name="T:ErpNet.Api.Client.DomainApi.DomainApiService">

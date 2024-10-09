@@ -5,8 +5,8 @@ namespace ErpNet.Api.Client.DomainApi.Generator
 {
     class Program
     {
-        //const string ErpNetDatabaseUri = "https://demodb.my.erp.net";
-        const string ErpNetDatabaseUri = "https://testdb.my.erp.net";
+        const string ErpNetDatabaseUri = "https://demodb.my.erp.net";
+        //const string ErpNetDatabaseUri = "https://testdb.my.erp.net";
         //const string ErpNetDatabaseUri = "https://internal-nstable.my.erp.net";
         //const string ErpNetDatabaseUri = "https://e1-nstable.local";
         //const string ErpNetDatabaseUri = "https://e1-nbeta.local";

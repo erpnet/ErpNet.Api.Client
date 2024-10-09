@@ -131,6 +131,9 @@ namespace ErpNet.Api.Client.DomainApi
 
             foreach (var e in result)
             {
+                if (e is null)
+                    continue;
+
                 var id = e.Id.GetValueOrDefault();
                 if (dict.TryGetValue(id, out var old))
                     old.Update(e.RawData());
