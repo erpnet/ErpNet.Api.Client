@@ -32,15 +32,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.AssetManagement.MaintenanceOrderLine>? Lines { get => GetCollection<Applications.AssetManagement.MaintenanceOrderLine>("Lines"); set => SetCollection<Applications.AssetManagement.MaintenanceOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_AssetManagement_MaintenanceOrderLines", TableName = "Eam_Maintenance_Order_Lines")]
             public partial class MaintenanceOrderLine: EntityResource
@@ -817,7 +817,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Applications_Fleet_Trips", TableName = "Fleet_Trips")]
-            public partial class Trip: General.Document
+            public partial class Trip: General.Documents.Document
             {
                 public Trip(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Applications_Fleet_Trips";
@@ -838,15 +838,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Fleet.TripSegment>? Segments { get => GetCollection<Applications.Fleet.TripSegment>("Segments"); set => SetCollection<Applications.Fleet.TripSegment>("Segments", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Fleet_TripSegments", TableName = "Fleet_Trip_Segments")]
             public partial class TripSegment: EntityResource
@@ -955,7 +955,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public IEnumerable<Applications.Fleet.VehicleEquipment>? Equipment { get => GetCollection<Applications.Fleet.VehicleEquipment>("Equipment"); set => SetCollection<Applications.Fleet.VehicleEquipment>("Equipment", value); }
                 [ODataProperty]
-                public IEnumerable<Logistics.Shipment.TransportationVehicle>? TransportationVehicles { get => GetCollection<Logistics.Shipment.TransportationVehicle>("TransportationVehicles"); set => SetCollection<Logistics.Shipment.TransportationVehicle>("TransportationVehicles", value); }
+                public IEnumerable<Logistics.Transportation.TransportationVehicle>? TransportationVehicles { get => GetCollection<Logistics.Transportation.TransportationVehicle>("TransportationVehicles"); set => SetCollection<Logistics.Transportation.TransportationVehicle>("TransportationVehicles", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -1209,6 +1209,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
                 [ODataProperty]
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Boolean? Active { get => GetPropertyValue<Boolean?>("Active"); set => SetPropertyValue<Boolean?>("Active", value); }
                 [ODataProperty]
                 public MultilanguageString? FolderName { get => GetPropertyValue<MultilanguageString?>("FolderName"); set => SetPropertyValue<MultilanguageString?>("FolderName", value); }
                 [ODataProperty]
@@ -1601,7 +1603,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
                 [ODataProperty]
-                public General.Currency? StandardGuaranteeAmountCurrency { get => GetPropertyValue<General.Currency>("StandardGuaranteeAmountCurrency"); set => SetPropertyValue<General.Currency>("StandardGuaranteeAmountCurrency", value); }
+                public General.Currencies.Currency? StandardGuaranteeAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("StandardGuaranteeAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("StandardGuaranteeAmountCurrency", value); }
                 [ODataProperty]
                 public General.Resources.WorkSchedule? WorkSchedule { get => GetPropertyValue<General.Resources.WorkSchedule>("WorkSchedule"); set => SetPropertyValue<General.Resources.WorkSchedule>("WorkSchedule", value); }
                 [ODataProperty]
@@ -1750,7 +1752,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Applications_Rental_LeaseContracts", TableName = "Rent_Lease_Contracts")]
-            public partial class LeaseContract: General.Document
+            public partial class LeaseContract: General.Documents.Document
             {
                 public LeaseContract(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Applications_Rental_LeaseContracts";
@@ -1766,7 +1768,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? StartDate { get => GetPropertyValue<DateTime?>("StartDate"); set => SetPropertyValue<DateTime?>("StartDate", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public Crm.Customer? LesseeCustomer { get => GetPropertyValue<Crm.Customer>("LesseeCustomer"); set => SetPropertyValue<Crm.Customer>("LesseeCustomer", value); }
                 [ODataProperty]
@@ -1775,15 +1777,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Rental.LeaseContractLine>? Lines { get => GetCollection<Applications.Rental.LeaseContractLine>("Lines"); set => SetCollection<Applications.Rental.LeaseContractLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Rental_LeaseContractLines", TableName = "Rent_Lease_Contract_Lines")]
             public partial class LeaseContractLine: EntityResource
@@ -1860,7 +1862,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Applications_Rental_Transactions", TableName = "Rent_Transactions")]
-            public partial class Transaction: General.Document
+            public partial class Transaction: General.Documents.Document
             {
                 public Transaction(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Applications_Rental_Transactions";
@@ -1881,15 +1883,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Rental.TransactionLine>? Lines { get => GetCollection<Applications.Rental.TransactionLine>("Lines"); set => SetCollection<Applications.Rental.TransactionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Rental_TransactionLines", TableName = "Rent_Transaction_Lines")]
             public partial class TransactionLine: EntityResource
@@ -2021,15 +2023,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Service.ServiceActivityService>? Services { get => GetCollection<Applications.Service.ServiceActivityService>("Services"); set => SetCollection<Applications.Service.ServiceActivityService>("Services", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Service_ServiceActivityAgreedMaterials", TableName = "Srv_Service_Activity_Agreed_Materials")]
             public partial class ServiceActivityAgreedMaterial: EntityResource
@@ -2154,7 +2156,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Applications_Service_ServiceAgreements", TableName = "Srv_Service_Agreements")]
-            public partial class ServiceAgreement: General.Document
+            public partial class ServiceAgreement: General.Documents.Document
             {
                 public ServiceAgreement(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Applications_Service_ServiceAgreements";
@@ -2177,15 +2179,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Service.ServiceAgreementService>? Services { get => GetCollection<Applications.Service.ServiceAgreementService>("Services"); set => SetCollection<Applications.Service.ServiceAgreementService>("Services", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Service_ServiceAgreementLines", TableName = "Srv_Service_Agreement_Lines")]
             public partial class ServiceAgreementLine: EntityResource
@@ -2210,7 +2212,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? Quantity { get => GetPropertyValue<Decimal?>("Quantity"); set => SetPropertyValue<Decimal?>("Quantity", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [Owner]
                 [ODataProperty]
                 public Applications.Service.ServiceAgreement? ServiceAgreement { get => GetPropertyValue<Applications.Service.ServiceAgreement>("ServiceAgreement"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("ServiceAgreement", value); }
@@ -2372,7 +2374,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Applications_Service_ServiceOrders", TableName = "Srv_Service_Orders")]
-            public partial class ServiceOrder: General.Document
+            public partial class ServiceOrder: General.Documents.Document
             {
                 public ServiceOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Applications_Service_ServiceOrders";
@@ -2393,15 +2395,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Applications.Service.ServiceOrderLine>? Lines { get => GetCollection<Applications.Service.ServiceOrderLine>("Lines"); set => SetCollection<Applications.Service.ServiceOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Applications_Service_ServiceOrderLines", TableName = "Srv_Service_Order_Lines")]
             public partial class ServiceOrderLine: EntityResource
@@ -2515,6 +2517,8 @@ namespace ErpNet.Api.Client.DomainApi
             public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
             [ODataProperty]
             public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+            [ODataProperty]
+            public String? Anchor { get => GetPropertyValue<String?>("Anchor"); set => SetPropertyValue<String?>("Anchor", value); }
             [ODataProperty]
             public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
             [ODataProperty]
@@ -2821,7 +2825,7 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public Crm.CustomerType? CustomerType { get => GetPropertyValue<Crm.CustomerType>("CustomerType"); set => SetPropertyValue<Crm.CustomerType>("CustomerType", value); }
             [ODataProperty]
-            public General.Currency? DefaultCurrency { get => GetPropertyValue<General.Currency>("DefaultCurrency"); set => SetPropertyValue<General.Currency>("DefaultCurrency", value); }
+            public General.Currencies.Currency? DefaultCurrency { get => GetPropertyValue<General.Currencies.Currency>("DefaultCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DefaultCurrency", value); }
             [ODataProperty]
             public Crm.Marketing.DistributionChannel? DefaultDistributionChannel { get => GetPropertyValue<Crm.Marketing.DistributionChannel>("DefaultDistributionChannel"); set => SetPropertyValue<Crm.Marketing.DistributionChannel>("DefaultDistributionChannel", value); }
             [ODataProperty]
@@ -2899,6 +2903,8 @@ namespace ErpNet.Api.Client.DomainApi
             public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
             [ODataProperty]
             public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+            [ODataProperty]
+            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
             [ODataProperty]
             public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
             public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
@@ -3005,7 +3011,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Crm_Distribution_SalesPersonTargets", TableName = "Crm_Sales_Person_Targets")]
-            public partial class SalesPersonTarget: General.Document
+            public partial class SalesPersonTarget: General.Documents.Document
             {
                 public SalesPersonTarget(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Distribution_SalesPersonTargets";
@@ -3019,20 +3025,20 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.SalesPerson? SalesPerson { get => GetPropertyValue<Crm.SalesPerson>("SalesPerson"); set => SetPropertyValue<Crm.SalesPerson>("SalesPerson", value); }
                 [ODataProperty]
-                public General.Currency? TargetCurrency { get => GetPropertyValue<General.Currency>("TargetCurrency"); set => SetPropertyValue<General.Currency>("TargetCurrency", value); }
+                public General.Currencies.Currency? TargetCurrency { get => GetPropertyValue<General.Currencies.Currency>("TargetCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TargetCurrency", value); }
                 [ODataProperty]
                 public IEnumerable<Crm.Distribution.SalesPersonTargetLine>? Lines { get => GetCollection<Crm.Distribution.SalesPersonTargetLine>("Lines"); set => SetCollection<Crm.Distribution.SalesPersonTargetLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Distribution_SalesPersonTargetLines", TableName = "Crm_Sales_Person_Target_Lines")]
             public partial class SalesPersonTargetLine: EntityResource
@@ -3072,7 +3078,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Distribution.SalesPersonTarget? Document { get => GetPropertyValue<Crm.Distribution.SalesPersonTarget>("Document"); set => SetPropertyValue<Crm.Distribution.SalesPersonTarget>("Document", value); }
                 [ODataProperty]
-                public General.Currency? TargetAmountCurrency { get => GetPropertyValue<General.Currency>("TargetAmountCurrency"); set => SetPropertyValue<General.Currency>("TargetAmountCurrency", value); }
+                public General.Currencies.Currency? TargetAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("TargetAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TargetAmountCurrency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -3112,7 +3118,7 @@ namespace ErpNet.Api.Client.DomainApi
         namespace Invoicing
         {
             [Entity(EntitySet = "Crm_Invoicing_Invoices", TableName = "Crm_Invoices")]
-            public partial class Invoice: General.Document
+            public partial class Invoice: General.Documents.Document
             {
                 public Invoice(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Invoicing_Invoices";
@@ -3156,7 +3162,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Vat.DealType? DealType { get => GetPropertyValue<Finance.Vat.DealType>("DealType"); set => SetPropertyValue<Finance.Vat.DealType>("DealType", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Geography.Country? IntrastatTransportCountry { get => GetPropertyValue<General.Geography.Country>("IntrastatTransportCountry"); set => SetPropertyValue<General.Geography.Country>("IntrastatTransportCountry", value); }
                 [ODataProperty]
@@ -3167,15 +3173,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Invoicing.InvoiceLine>? Lines { get => GetCollection<Crm.Invoicing.InvoiceLine>("Lines"); set => SetCollection<Crm.Invoicing.InvoiceLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Invoicing_InvoiceLines", TableName = "Crm_Invoice_Lines")]
             public partial class InvoiceLine: EntityResource
@@ -3237,7 +3243,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.LineDiscount? LineDiscount { get => GetPropertyValue<Crm.LineDiscount>("LineDiscount"); set => SetPropertyValue<Crm.LineDiscount>("LineDiscount", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public Crm.Sales.SalesOrderLine? ParentSalesOrderLine { get => GetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine"); set => SetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine", value); }
                 [ODataProperty]
@@ -3258,7 +3264,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Crm_Invoicing_InvoiceOrders", TableName = "Crm_Invoice_Orders")]
-            public partial class InvoiceOrder: General.Document
+            public partial class InvoiceOrder: General.Documents.Document
             {
                 public InvoiceOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Invoicing_InvoiceOrders";
@@ -3290,7 +3296,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Vat.DealType? DealType { get => GetPropertyValue<Finance.Vat.DealType>("DealType"); set => SetPropertyValue<Finance.Vat.DealType>("DealType", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentAccount? PaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount", value); }
                 [ODataProperty]
@@ -3301,15 +3307,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Invoicing.InvoiceOrderLine>? Lines { get => GetCollection<Crm.Invoicing.InvoiceOrderLine>("Lines"); set => SetCollection<Crm.Invoicing.InvoiceOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Invoicing_InvoiceOrderLines", TableName = "Crm_Invoice_Order_Lines")]
             public partial class InvoiceOrderLine: EntityResource
@@ -3556,7 +3562,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Marketing.DistributionChannel? ConditionDistributionChannel { get => GetPropertyValue<Crm.Marketing.DistributionChannel>("ConditionDistributionChannel"); set => SetPropertyValue<Crm.Marketing.DistributionChannel>("ConditionDistributionChannel", value); }
                 [ODataProperty]
-                public General.Currency? ConditionDocumentCurrency { get => GetPropertyValue<General.Currency>("ConditionDocumentCurrency"); set => SetPropertyValue<General.Currency>("ConditionDocumentCurrency", value); }
+                public General.Currencies.Currency? ConditionDocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("ConditionDocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("ConditionDocumentCurrency", value); }
                 [ODataProperty]
                 public Crm.PriceList? ConditionPriceList { get => GetPropertyValue<Crm.PriceList>("ConditionPriceList"); set => SetPropertyValue<Crm.PriceList>("ConditionPriceList", value); }
                 [ODataProperty]
@@ -3659,6 +3665,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? FromRevenue { get => GetPropertyValue<Decimal?>("FromRevenue"); set => SetPropertyValue<Decimal?>("FromRevenue", value); }
                 [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
@@ -3667,7 +3675,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? ToRevenue { get => GetPropertyValue<Decimal?>("ToRevenue"); set => SetPropertyValue<Decimal?>("ToRevenue", value); }
                 [ODataProperty]
-                public General.Currency? RevenueCurrency { get => GetPropertyValue<General.Currency>("RevenueCurrency"); set => SetPropertyValue<General.Currency>("RevenueCurrency", value); }
+                public General.Currencies.Currency? RevenueCurrency { get => GetPropertyValue<General.Currencies.Currency>("RevenueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("RevenueCurrency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -3684,9 +3692,15 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
+                public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public DateTime? ToDate { get => GetPropertyValue<DateTime?>("ToDate"); set => SetPropertyValue<DateTime?>("ToDate", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -3762,6 +3776,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? Date { get => GetPropertyValue<DateTime?>("Date"); set => SetPropertyValue<DateTime?>("Date", value); }
                 [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public Quantity? Quantity { get => GetPropertyValue<Quantity?>("Quantity"); set => SetPropertyValue<Quantity?>("Quantity", value); }
                 [ODataProperty]
                 public General.Geography.Country? Country { get => GetPropertyValue<General.Geography.Country>("Country"); set => SetPropertyValue<General.Geography.Country>("Country", value); }
@@ -3793,6 +3809,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
                 [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
@@ -3819,15 +3837,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Marketing.MarketingActivityLine>? Lines { get => GetCollection<Crm.Marketing.MarketingActivityLine>("Lines"); set => SetCollection<Crm.Marketing.MarketingActivityLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Marketing_MarketingActivityLines", TableName = "Crm_Marketing_Activity_Lines")]
             public partial class MarketingActivityLine: EntityResource
@@ -3884,6 +3902,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
                 [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
@@ -3904,6 +3924,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
                 public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
@@ -3961,6 +3983,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
                 public String? Description { get => GetPropertyValue<String?>("Description"); set => SetPropertyValue<String?>("Description", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
                 [ODataProperty]
@@ -4152,7 +4176,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
-                public General.PartyApplicableLegislationsRepository.ApplicableLegislation? ApplicableLegislation { get => GetPropertyValue<General.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation"); set => SetPropertyValue<General.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation", value); }
+                public General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation? ApplicableLegislation { get => GetPropertyValue<General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation"); set => SetPropertyValue<General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
@@ -4194,6 +4218,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Boolean? CanProcessMinusSales { get => GetPropertyValue<Boolean?>("CanProcessMinusSales"); set => SetPropertyValue<Boolean?>("CanProcessMinusSales", value); }
                 [ODataProperty]
                 public Boolean? CanVoidSales { get => GetPropertyValue<Boolean?>("CanVoidSales"); set => SetPropertyValue<Boolean?>("CanVoidSales", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public String? PosRoleCode { get => GetPropertyValue<String?>("PosRoleCode"); set => SetPropertyValue<String?>("PosRoleCode", value); }
                 [ODataProperty]
@@ -4257,7 +4283,7 @@ namespace ErpNet.Api.Client.DomainApi
         namespace Presales
         {
             [Entity(EntitySet = "Crm_Presales_Deals", TableName = "Crm_Deals")]
-            public partial class Deal: General.Document
+            public partial class Deal: General.Documents.Document
             {
                 public Deal(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Presales_Deals";
@@ -4281,7 +4307,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Dealer? Dealer { get => GetPropertyValue<Crm.Dealer>("Dealer"); set => SetPropertyValue<Crm.Dealer>("Dealer", value); }
                 [ODataProperty]
-                public General.Currency? ExpectedRevenueCurrency { get => GetPropertyValue<General.Currency>("ExpectedRevenueCurrency"); set => SetPropertyValue<General.Currency>("ExpectedRevenueCurrency", value); }
+                public General.Currencies.Currency? ExpectedRevenueCurrency { get => GetPropertyValue<General.Currencies.Currency>("ExpectedRevenueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("ExpectedRevenueCurrency", value); }
                 [ODataProperty]
                 public Crm.SalesPerson? LeadingSalesPerson { get => GetPropertyValue<Crm.SalesPerson>("LeadingSalesPerson"); set => SetPropertyValue<Crm.SalesPerson>("LeadingSalesPerson", value); }
                 [ODataProperty]
@@ -4296,15 +4322,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Presales.DealLine>? Lines { get => GetCollection<Crm.Presales.DealLine>("Lines"); set => SetCollection<Crm.Presales.DealLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Presales_DealLines", TableName = "Crm_Deal_Lines")]
             public partial class DealLine: EntityResource
@@ -4451,7 +4477,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Crm_Presales_Offers", TableName = "Crm_Offers")]
-            public partial class Offer: General.Document
+            public partial class Offer: General.Documents.Document
             {
                 public Offer(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Presales_Offers";
@@ -4475,7 +4501,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Presales.Deal? Deal { get => GetPropertyValue<Crm.Presales.Deal>("Deal"); set => SetPropertyValue<Crm.Presales.Deal>("Deal", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? EndCustomerParty { get => GetPropertyValue<General.Contacts.Party>("EndCustomerParty"); set => SetPropertyValue<General.Contacts.Party>("EndCustomerParty", value); }
                 [ODataProperty]
@@ -4494,15 +4520,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Presales.OfferLine>? Lines { get => GetCollection<Crm.Presales.OfferLine>("Lines"); set => SetCollection<Crm.Presales.OfferLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Presales_OfferLines", TableName = "Crm_Offer_Lines")]
             public partial class OfferLine: EntityResource
@@ -4608,6 +4634,8 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
             [ODataProperty]
+            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+            [ODataProperty]
             public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
             [ODataProperty]
             public DateTime? ThruDate { get => GetPropertyValue<DateTime?>("ThruDate"); set => SetPropertyValue<DateTime?>("ThruDate", value); }
@@ -4628,6 +4656,8 @@ namespace ErpNet.Api.Client.DomainApi
             public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
             [ODataProperty]
             public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+            [ODataProperty]
+            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
             [ODataProperty]
             public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
             [ODataProperty]
@@ -4656,9 +4686,11 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? DefaultMarginPercent { get => GetPropertyValue<Decimal?>("DefaultMarginPercent"); set => SetPropertyValue<Decimal?>("DefaultMarginPercent", value); }
                 [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
                 public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public Logistics.Procurement.PurchasePriceList? PurchasePriceList { get => GetPropertyValue<Logistics.Procurement.PurchasePriceList>("PurchasePriceList"); set => SetPropertyValue<Logistics.Procurement.PurchasePriceList>("PurchasePriceList", value); }
                 [ODataProperty]
@@ -4736,6 +4768,8 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
             [ODataProperty]
+            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+            [ODataProperty]
             public Quantity? MaxQuantity { get => GetPropertyValue<Quantity?>("MaxQuantity"); set => SetPropertyValue<Quantity?>("MaxQuantity", value); }
             [ODataProperty]
             public Quantity? MinQuantity { get => GetPropertyValue<Quantity?>("MinQuantity"); set => SetPropertyValue<Quantity?>("MinQuantity", value); }
@@ -4752,7 +4786,7 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public Crm.Marketing.Campaign? Campaign { get => GetPropertyValue<Crm.Marketing.Campaign>("Campaign"); set => SetPropertyValue<Crm.Marketing.Campaign>("Campaign", value); }
             [ODataProperty]
-            public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+            public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
             [ODataProperty]
             public Crm.Customer? Customer { get => GetPropertyValue<Crm.Customer>("Customer"); set => SetPropertyValue<Crm.Customer>("Customer", value); }
             [ODataProperty]
@@ -4855,7 +4889,7 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public Crm.PromotionalPackage? PromotionalPackage { get => GetPropertyValue<Crm.PromotionalPackage>("PromotionalPackage"); set => SetPropertyValue<Crm.PromotionalPackage>("PromotionalPackage", value); }
             [ODataProperty]
-            public General.Currency? UnitPriceCurrency { get => GetPropertyValue<General.Currency>("UnitPriceCurrency"); set => SetPropertyValue<General.Currency>("UnitPriceCurrency", value); }
+            public General.Currencies.Currency? UnitPriceCurrency { get => GetPropertyValue<General.Currencies.Currency>("UnitPriceCurrency"); set => SetPropertyValue<General.Currencies.Currency>("UnitPriceCurrency", value); }
             public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
             public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
             public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -4943,7 +4977,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Amount? DeferredPaymentMinimalAmmount { get => GetPropertyValue<Amount?>("DeferredPaymentMinimalAmmount"); set => SetPropertyValue<Amount?>("DeferredPaymentMinimalAmmount", value); }
                 [ODataProperty]
-                public General.Currency? DeferredPaymentMinimalAmmountCurrency { get => GetPropertyValue<General.Currency>("DeferredPaymentMinimalAmmountCurrency"); set => SetPropertyValue<General.Currency>("DeferredPaymentMinimalAmmountCurrency", value); }
+                public General.Currencies.Currency? DeferredPaymentMinimalAmmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("DeferredPaymentMinimalAmmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DeferredPaymentMinimalAmmountCurrency", value); }
                 [Owner]
                 [ODataProperty]
                 public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
@@ -4955,7 +4989,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Crm_Sales_SalesOrders", TableName = "Crm_Sales_Orders")]
-            public partial class SalesOrder: General.Document
+            public partial class SalesOrder: General.Documents.Document
             {
                 public SalesOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Crm_Sales_SalesOrders";
@@ -5003,7 +5037,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Marketing.DistributionChannel? DistributionChannel { get => GetPropertyValue<Crm.Marketing.DistributionChannel>("DistributionChannel"); set => SetPropertyValue<Crm.Marketing.DistributionChannel>("DistributionChannel", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? EndCustomerParty { get => GetPropertyValue<General.Contacts.Party>("EndCustomerParty"); set => SetPropertyValue<General.Contacts.Party>("EndCustomerParty", value); }
                 [ODataProperty]
@@ -5042,15 +5076,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Crm.Sales.SalesOrderPromotionalPackage>? PromotionalPackages { get => GetCollection<Crm.Sales.SalesOrderPromotionalPackage>("PromotionalPackages"); set => SetCollection<Crm.Sales.SalesOrderPromotionalPackage>("PromotionalPackages", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Crm_Sales_SalesOrderLines", TableName = "Crm_Sales_Order_Lines")]
             public partial class SalesOrderLine: EntityResource
@@ -5139,7 +5173,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.ProductCode? ProductCode { get => GetPropertyValue<General.Products.ProductCode>("ProductCode"); set => SetPropertyValue<General.Products.ProductCode>("ProductCode", value); }
                 [ODataProperty]
@@ -5286,7 +5320,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
                 [ODataProperty]
-                public General.Currency? MinimumAmountCurrency { get => GetPropertyValue<General.Currency>("MinimumAmountCurrency"); set => SetPropertyValue<General.Currency>("MinimumAmountCurrency", value); }
+                public General.Currencies.Currency? MinimumAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("MinimumAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("MinimumAmountCurrency", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentAmountType? VATDeviationDocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("VATDeviationDocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("VATDeviationDocumentAmountType", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
@@ -5345,6 +5379,61 @@ namespace ErpNet.Api.Client.DomainApi
             public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
         }
+        [Entity(EntitySet = "Crm_SalesPersonAssignmentRules", TableName = "Crm_Sales_Person_Assignment_Rules")]
+        public partial class SalesPersonAssignmentRule: EntityResource
+        {
+            public SalesPersonAssignmentRule(IDictionary<string, object?>? rawData = null): base(rawData) {}
+            public const string EntitySetName = "Crm_SalesPersonAssignmentRules";
+            public const string EntityTableName = "Crm_Sales_Person_Assignment_Rules";
+            [ODataProperty]
+            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+            [ODataProperty]
+            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+            [ODataProperty]
+            public Crm.SalesPersonAssignmentRulesRepository.ApplyTo? ApplyTo { get => GetPropertyValue<Crm.SalesPersonAssignmentRulesRepository.ApplyTo?>("ApplyTo"); set => SetPropertyValue<Crm.SalesPersonAssignmentRulesRepository.ApplyTo?>("ApplyTo", value); }
+            [ODataProperty]
+            public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
+            [ODataProperty]
+            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+            [ODataProperty]
+            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+            [ODataProperty]
+            public Crm.SalesPersonAssignmentRulesRepository.Priority? Priority { get => GetPropertyValue<Crm.SalesPersonAssignmentRulesRepository.Priority?>("Priority"); set => SetPropertyValue<Crm.SalesPersonAssignmentRulesRepository.Priority?>("Priority", value); }
+            [ODataProperty]
+            public Int32? RuleNo { get => GetPropertyValue<Int32?>("RuleNo"); set => SetPropertyValue<Int32?>("RuleNo", value); }
+            [ODataProperty]
+            public DateTime? ToDate { get => GetPropertyValue<DateTime?>("ToDate"); set => SetPropertyValue<DateTime?>("ToDate", value); }
+            [ODataProperty]
+            public General.Contacts.CompanyDivision? CompanyDivision { get => GetPropertyValue<General.Contacts.CompanyDivision>("CompanyDivision"); set => SetPropertyValue<General.Contacts.CompanyDivision>("CompanyDivision", value); }
+            [ODataProperty]
+            public Crm.CustomerType? CustomerType { get => GetPropertyValue<Crm.CustomerType>("CustomerType"); set => SetPropertyValue<Crm.CustomerType>("CustomerType", value); }
+            [ODataProperty]
+            public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
+            [ODataProperty]
+            public General.Geography.Area? SalesArea { get => GetPropertyValue<General.Geography.Area>("SalesArea"); set => SetPropertyValue<General.Geography.Area>("SalesArea", value); }
+            [ODataProperty]
+            public Crm.SalesPerson? SalesPerson { get => GetPropertyValue<Crm.SalesPerson>("SalesPerson"); set => SetPropertyValue<Crm.SalesPerson>("SalesPerson", value); }
+            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+        }
+        namespace SalesPersonAssignmentRulesRepository
+        {
+            public enum ApplyTo
+            {
+                Customers = 0,
+                Documents = 1
+            }
+            public enum Priority
+            {
+                Highest = 0,
+                High = 1,
+                Medium = 2,
+                Low = 3,
+                Lowest = 4
+            }
+        }
         namespace Subscriptions
         {
             [Entity(EntitySet = "Crm_Subscriptions_BillingCycles", TableName = "Sm_Billing_Cycles")]
@@ -5359,6 +5448,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
@@ -5462,7 +5553,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Accounting.AccountGroup? AccountGroup { get => GetPropertyValue<Finance.Accounting.AccountGroup>("AccountGroup"); set => SetPropertyValue<Finance.Accounting.AccountGroup>("AccountGroup", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -5500,7 +5591,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Accounting_AccountingVouchers", TableName = "Acc_Vouchers")]
-            public partial class AccountingVoucher: General.Document
+            public partial class AccountingVoucher: General.Documents.Document
             {
                 public AccountingVoucher(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Accounting_AccountingVouchers";
@@ -5512,22 +5603,22 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Boolean? IsSingleExecution { get => GetPropertyValue<Boolean?>("IsSingleExecution"); set => SetPropertyValue<Boolean?>("IsSingleExecution", value); }
                 [ODataProperty]
-                public General.Document? DefaultReferencedDocument { get => GetPropertyValue<General.Document>("DefaultReferencedDocument"); set => SetPropertyValue<General.Document>("DefaultReferencedDocument", value); }
+                public General.Documents.Document? DefaultReferencedDocument { get => GetPropertyValue<General.Documents.Document>("DefaultReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("DefaultReferencedDocument", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Accounting.VoucherCorrespondance>? Correspondances { get => GetCollection<Finance.Accounting.VoucherCorrespondance>("Correspondances"); set => SetCollection<Finance.Accounting.VoucherCorrespondance>("Correspondances", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Accounting.AccountingVoucherLine>? Lines { get => GetCollection<Finance.Accounting.AccountingVoucherLine>("Lines"); set => SetCollection<Finance.Accounting.AccountingVoucherLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Accounting_AccountingVoucherLines", TableName = "Acc_Voucher_Lines")]
             public partial class AccountingVoucherLine: EntityResource
@@ -5564,11 +5655,11 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Accounting.CostCenter? CostCenter { get => GetPropertyValue<Finance.Accounting.CostCenter>("CostCenter"); set => SetPropertyValue<Finance.Accounting.CostCenter>("CostCenter", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public Finance.Accounting.ProfitCenter? ProfitCenter { get => GetPropertyValue<Finance.Accounting.ProfitCenter>("ProfitCenter"); set => SetPropertyValue<Finance.Accounting.ProfitCenter>("ProfitCenter", value); }
                 [ODataProperty]
-                public General.Document? ReferencedDocument { get => GetPropertyValue<General.Document>("ReferencedDocument"); set => SetPropertyValue<General.Document>("ReferencedDocument", value); }
+                public General.Documents.Document? ReferencedDocument { get => GetPropertyValue<General.Documents.Document>("ReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("ReferencedDocument", value); }
                 [Owner]
                 [ODataProperty]
                 public Finance.Accounting.AccountingVoucher? Voucher { get => GetPropertyValue<Finance.Accounting.AccountingVoucher>("Voucher"); set => SetPropertyValue<Finance.Accounting.AccountingVoucher>("Voucher", value); }
@@ -5713,7 +5804,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Accounting_Operations", TableName = "Acc_Operations")]
-            public partial class Operation: General.Document
+            public partial class Operation: General.Documents.Document
             {
                 public Operation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Accounting_Operations";
@@ -5724,15 +5815,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public Boolean? IsSingleExecution { get => GetPropertyValue<Boolean?>("IsSingleExecution"); set => SetPropertyValue<Boolean?>("IsSingleExecution", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Accounting_ProfitCenters", TableName = "Acc_Profit_Centers")]
             public partial class ProfitCenter: EntityResource
@@ -5959,7 +6050,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Assets.ValuationModel? PrimaryValuationModel { get => GetPropertyValue<Finance.Assets.ValuationModel>("PrimaryValuationModel"); set => SetPropertyValue<Finance.Assets.ValuationModel>("PrimaryValuationModel", value); }
                 [ODataProperty]
-                public General.Currency? ValuationCurrency { get => GetPropertyValue<General.Currency>("ValuationCurrency"); set => SetPropertyValue<General.Currency>("ValuationCurrency", value); }
+                public General.Currencies.Currency? ValuationCurrency { get => GetPropertyValue<General.Currencies.Currency>("ValuationCurrency"); set => SetPropertyValue<General.Currencies.Currency>("ValuationCurrency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -6012,7 +6103,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Assets_AssetOrders", TableName = "Ast_Asset_Orders")]
-            public partial class AssetOrder: General.Document
+            public partial class AssetOrder: General.Documents.Document
             {
                 public AssetOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Assets_AssetOrders";
@@ -6027,15 +6118,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Assets.AssetOrderLine>? Lines { get => GetCollection<Finance.Assets.AssetOrderLine>("Lines"); set => SetCollection<Finance.Assets.AssetOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Assets_AssetOrderLines", TableName = "Ast_Asset_Order_Lines")]
             public partial class AssetOrderLine: EntityResource
@@ -6061,9 +6152,9 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Assets.AssetOrder? Document { get => GetPropertyValue<Finance.Assets.AssetOrder>("Document"); set => SetPropertyValue<Finance.Assets.AssetOrder>("Document", value); }
                 [ODataProperty]
-                public General.Currency? AssetValueCurrency { get => GetPropertyValue<General.Currency>("AssetValueCurrency"); set => SetPropertyValue<General.Currency>("AssetValueCurrency", value); }
+                public General.Currencies.Currency? AssetValueCurrency { get => GetPropertyValue<General.Currencies.Currency>("AssetValueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("AssetValueCurrency", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -6078,7 +6169,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Assets_AssetTransactions", TableName = "Ast_Asset_Transactions")]
-            public partial class AssetTransaction: General.Document
+            public partial class AssetTransaction: General.Documents.Document
             {
                 public AssetTransaction(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Assets_AssetTransactions";
@@ -6093,15 +6184,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Assets.AssetTransactionLine>? Lines { get => GetCollection<Finance.Assets.AssetTransactionLine>("Lines"); set => SetCollection<Finance.Assets.AssetTransactionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Assets_AssetTransactionLines", TableName = "Ast_Asset_Transaction_Lines")]
             public partial class AssetTransactionLine: EntityResource
@@ -6159,7 +6250,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Assets_Depreciations", TableName = "Ast_Depreciations")]
-            public partial class Depreciation: General.Document
+            public partial class Depreciation: General.Documents.Document
             {
                 public Depreciation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Assets_Depreciations";
@@ -6178,15 +6269,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Assets.DepreciationAsset>? Assets { get => GetCollection<Finance.Assets.DepreciationAsset>("Assets"); set => SetCollection<Finance.Assets.DepreciationAsset>("Assets", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Assets_DepreciationAssets", TableName = "Ast_Depreciation_Assets")]
             public partial class DepreciationAsset: EntityResource
@@ -6254,7 +6345,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Assets_DepreciationPlans", TableName = "Ast_Depreciation_Plans")]
-            public partial class DepreciationPlan: General.Document
+            public partial class DepreciationPlan: General.Documents.Document
             {
                 public DepreciationPlan(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Assets_DepreciationPlans";
@@ -6267,15 +6358,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Assets.DepreciationPlanLine>? Lines { get => GetCollection<Finance.Assets.DepreciationPlanLine>("Lines"); set => SetCollection<Finance.Assets.DepreciationPlanLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Assets_DepreciationPlanLines", TableName = "Ast_Depreciation_Plan_Lines")]
             public partial class DepreciationPlanLine: EntityResource
@@ -6406,14 +6497,14 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? CostAllocationModelName { get => GetPropertyValue<String?>("CostAllocationModelName"); set => SetPropertyValue<String?>("CostAllocationModelName", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Cost_Calculations", TableName = "Cost_Calculations")]
-            public partial class Calculation: General.Document
+            public partial class Calculation: General.Documents.Document
             {
                 public Calculation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Cost_Calculations";
@@ -6436,15 +6527,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Cost.CalculationResult>? Results { get => GetCollection<Finance.Cost.CalculationResult>("Results"); set => SetCollection<Finance.Cost.CalculationResult>("Results", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Cost_CalculationCosts", TableName = "Cost_Calculation_Costs")]
             public partial class CalculationCost: EntityResource
@@ -6578,7 +6669,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Cost_Distributions", TableName = "Cost_Distributions")]
-            public partial class Distribution: General.Document
+            public partial class Distribution: General.Documents.Document
             {
                 public Distribution(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Cost_Distributions";
@@ -6597,15 +6688,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Cost.DistributionResult>? Results { get => GetCollection<Finance.Cost.DistributionResult>("Results"); set => SetCollection<Finance.Cost.DistributionResult>("Results", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Cost_DistributionCosts", TableName = "Cost_Distribution_Costs")]
             public partial class DistributionCost: EntityResource
@@ -6696,7 +6787,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? CostTemplateName { get => GetPropertyValue<String?>("CostTemplateName"); set => SetPropertyValue<String?>("CostTemplateName", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Cost.TemplateCostType>? CostTypes { get => GetCollection<Finance.Cost.TemplateCostType>("CostTypes"); set => SetCollection<Finance.Cost.TemplateCostType>("CostTypes", value); }
                 [ODataProperty]
@@ -6754,7 +6845,7 @@ namespace ErpNet.Api.Client.DomainApi
         namespace Excise
         {
             [Entity(EntitySet = "Finance_Excise_ExciseAdministrativeDocuments", TableName = "Exc_Excise_Administrative_Documents")]
-            public partial class ExciseAdministrativeDocument: General.Document
+            public partial class ExciseAdministrativeDocument: General.Documents.Document
             {
                 public ExciseAdministrativeDocument(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Excise_ExciseAdministrativeDocuments";
@@ -6778,20 +6869,20 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.Carrier? TransportationCarrier { get => GetPropertyValue<Logistics.Shipment.Carrier>("TransportationCarrier"); set => SetPropertyValue<Logistics.Shipment.Carrier>("TransportationCarrier", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationVehicle? TransportationVehicle { get => GetPropertyValue<Logistics.Shipment.TransportationVehicle>("TransportationVehicle"); set => SetPropertyValue<Logistics.Shipment.TransportationVehicle>("TransportationVehicle", value); }
+                public Logistics.Transportation.TransportationVehicle? TransportationVehicle { get => GetPropertyValue<Logistics.Transportation.TransportationVehicle>("TransportationVehicle"); set => SetPropertyValue<Logistics.Transportation.TransportationVehicle>("TransportationVehicle", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Excise.ExciseAdministrativeDocumentLine>? Lines { get => GetCollection<Finance.Excise.ExciseAdministrativeDocumentLine>("Lines"); set => SetCollection<Finance.Excise.ExciseAdministrativeDocumentLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Excise_ExciseAdministrativeDocumentLines", TableName = "Exc_Excise_Administrative_Document_Lines")]
             public partial class ExciseAdministrativeDocumentLine: EntityResource
@@ -6843,7 +6934,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Excise.MeasuringTransaction? MeasuringTransaction { get => GetPropertyValue<Finance.Excise.MeasuringTransaction>("MeasuringTransaction"); set => SetPropertyValue<Finance.Excise.MeasuringTransaction>("MeasuringTransaction", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 [ODataProperty]
@@ -6854,7 +6945,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Excise_ExciseDeclarations", TableName = "Exc_Excise_Declarations")]
-            public partial class ExciseDeclaration: General.Document
+            public partial class ExciseDeclaration: General.Documents.Document
             {
                 public ExciseDeclaration(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Excise_ExciseDeclarations";
@@ -6869,15 +6960,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Excise.TaxWarehouse? TaxWarehouse { get => GetPropertyValue<Finance.Excise.TaxWarehouse>("TaxWarehouse"); set => SetPropertyValue<Finance.Excise.TaxWarehouse>("TaxWarehouse", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Excise_ExciseDutyRates", TableName = "Exc_Excise_Duty_Rates")]
             public partial class ExciseDutyRate: EntityResource
@@ -7078,7 +7169,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Excise_ExciseStampOperations", TableName = "Exc_Excise_Stamp_Operations")]
-            public partial class ExciseStampOperation: General.Document
+            public partial class ExciseStampOperation: General.Documents.Document
             {
                 public ExciseStampOperation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Excise_ExciseStampOperations";
@@ -7091,15 +7182,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Excise.ExciseStampOperationLine>? Lines { get => GetCollection<Finance.Excise.ExciseStampOperationLine>("Lines"); set => SetCollection<Finance.Excise.ExciseStampOperationLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Excise_ExciseStampOperationLines", TableName = "Exc_Excise_Stamp_Operation_Lines")]
             public partial class ExciseStampOperationLine: EntityResource
@@ -7133,7 +7224,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Excise.ExciseStampOperation? Document { get => GetPropertyValue<Finance.Excise.ExciseStampOperation>("Document"); set => SetPropertyValue<Finance.Excise.ExciseStampOperation>("Document", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
@@ -7285,7 +7376,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Intrastat_Declarations", TableName = "Its_Declarations")]
-            public partial class Declaration: General.Document
+            public partial class Declaration: General.Documents.Document
             {
                 public Declaration(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Intrastat_Declarations";
@@ -7314,15 +7405,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Intrastat.DeclarationLine>? Lines { get => GetCollection<Finance.Intrastat.DeclarationLine>("Lines"); set => SetCollection<Finance.Intrastat.DeclarationLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Intrastat_DeclarationLines", TableName = "Its_Declaration_Lines")]
             public partial class DeclarationLine: EntityResource
@@ -7486,7 +7577,7 @@ namespace ErpNet.Api.Client.DomainApi
         namespace Payments
         {
             [Entity(EntitySet = "Finance_Payments_BulkPaymentOrders", TableName = "Cash_Bulk_Payment_Orders")]
-            public partial class BulkPaymentOrder: General.Document
+            public partial class BulkPaymentOrder: General.Documents.Document
             {
                 public BulkPaymentOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_BulkPaymentOrders";
@@ -7499,15 +7590,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Payments.BulkPaymentOrderLine>? Lines { get => GetCollection<Finance.Payments.BulkPaymentOrderLine>("Lines"); set => SetCollection<Finance.Payments.BulkPaymentOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Payments_BulkPaymentOrderLines", TableName = "Cash_Bulk_Payment_Order_Lines")]
             public partial class BulkPaymentOrderLine: EntityResource
@@ -7549,7 +7640,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Payments.BulkPaymentOrder? BulkPaymentOrder { get => GetPropertyValue<Finance.Payments.BulkPaymentOrder>("BulkPaymentOrder"); set => SetPropertyValue<Finance.Payments.BulkPaymentOrder>("BulkPaymentOrder", value); }
                 [ODataProperty]
-                public General.Currency? InvoiceAmountCurrency { get => GetPropertyValue<General.Currency>("InvoiceAmountCurrency"); set => SetPropertyValue<General.Currency>("InvoiceAmountCurrency", value); }
+                public General.Currencies.Currency? InvoiceAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("InvoiceAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("InvoiceAmountCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? LocationParty { get => GetPropertyValue<General.Contacts.Party>("LocationParty"); set => SetPropertyValue<General.Contacts.Party>("LocationParty", value); }
                 [ODataProperty]
@@ -7563,7 +7654,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Documents.DocumentType? RefInvoiceDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType", value); }
                 [ODataProperty]
-                public General.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currency>("TotalAmountCurrency", value); }
+                public General.Currencies.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -7583,28 +7674,28 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Payments_InvoiceReconciliations", TableName = "Cash_Invoice_Reconciliations")]
-            public partial class InvoiceReconciliation: General.Document
+            public partial class InvoiceReconciliation: General.Documents.Document
             {
                 public InvoiceReconciliation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_InvoiceReconciliations";
                 public new const string EntityTableName = "Cash_Invoice_Reconciliations";
                 [ODataProperty]
-                public General.Document? DefaultInvoiceDocument { get => GetPropertyValue<General.Document>("DefaultInvoiceDocument"); set => SetPropertyValue<General.Document>("DefaultInvoiceDocument", value); }
+                public General.Documents.Document? DefaultInvoiceDocument { get => GetPropertyValue<General.Documents.Document>("DefaultInvoiceDocument"); set => SetPropertyValue<General.Documents.Document>("DefaultInvoiceDocument", value); }
                 [ODataProperty]
-                public General.Document? DefaultPaymentTransactionDocument { get => GetPropertyValue<General.Document>("DefaultPaymentTransactionDocument"); set => SetPropertyValue<General.Document>("DefaultPaymentTransactionDocument", value); }
+                public General.Documents.Document? DefaultPaymentTransactionDocument { get => GetPropertyValue<General.Documents.Document>("DefaultPaymentTransactionDocument"); set => SetPropertyValue<General.Documents.Document>("DefaultPaymentTransactionDocument", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Payments.InvoiceReconciliationLine>? Lines { get => GetCollection<Finance.Payments.InvoiceReconciliationLine>("Lines"); set => SetCollection<Finance.Payments.InvoiceReconciliationLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Payments_InvoiceReconciliationLines", TableName = "Cash_Invoice_Reconciliation_Lines")]
             public partial class InvoiceReconciliationLine: EntityResource
@@ -7619,12 +7710,12 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? CoveredInvoiceAmount { get => GetPropertyValue<Decimal?>("CoveredInvoiceAmount"); set => SetPropertyValue<Decimal?>("CoveredInvoiceAmount", value); }
                 [ODataProperty]
-                public General.Document? InvoiceDocument { get => GetPropertyValue<General.Document>("InvoiceDocument"); set => SetPropertyValue<General.Document>("InvoiceDocument", value); }
+                public General.Documents.Document? InvoiceDocument { get => GetPropertyValue<General.Documents.Document>("InvoiceDocument"); set => SetPropertyValue<General.Documents.Document>("InvoiceDocument", value); }
                 [Owner]
                 [ODataProperty]
                 public Finance.Payments.InvoiceReconciliation? InvoiceReconciliation { get => GetPropertyValue<Finance.Payments.InvoiceReconciliation>("InvoiceReconciliation"); set => SetPropertyValue<Finance.Payments.InvoiceReconciliation>("InvoiceReconciliation", value); }
                 [ODataProperty]
-                public General.Document? PaymentTransactionDocument { get => GetPropertyValue<General.Document>("PaymentTransactionDocument"); set => SetPropertyValue<General.Document>("PaymentTransactionDocument", value); }
+                public General.Documents.Document? PaymentTransactionDocument { get => GetPropertyValue<General.Documents.Document>("PaymentTransactionDocument"); set => SetPropertyValue<General.Documents.Document>("PaymentTransactionDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -7659,7 +7750,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? RefInvoiceDocumentNo { get => GetPropertyValue<String?>("RefInvoiceDocumentNo"); set => SetPropertyValue<String?>("RefInvoiceDocumentNo", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -7669,11 +7760,11 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Payments.PaymentOrder? PaymentOrder { get => GetPropertyValue<Finance.Payments.PaymentOrder>("PaymentOrder"); set => SetPropertyValue<Finance.Payments.PaymentOrder>("PaymentOrder", value); }
                 [ODataProperty]
-                public General.Document? RefDocument { get => GetPropertyValue<General.Document>("RefDocument"); set => SetPropertyValue<General.Document>("RefDocument", value); }
+                public General.Documents.Document? RefDocument { get => GetPropertyValue<General.Documents.Document>("RefDocument"); set => SetPropertyValue<General.Documents.Document>("RefDocument", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentType? RefDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("RefDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("RefDocumentType", value); }
                 [ODataProperty]
-                public General.Document? RefInvoiceDocument { get => GetPropertyValue<General.Document>("RefInvoiceDocument"); set => SetPropertyValue<General.Document>("RefInvoiceDocument", value); }
+                public General.Documents.Document? RefInvoiceDocument { get => GetPropertyValue<General.Documents.Document>("RefInvoiceDocument"); set => SetPropertyValue<General.Documents.Document>("RefInvoiceDocument", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentType? RefInvoiceDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType", value); }
             }
@@ -7698,7 +7789,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Contacts.PartyBankAccount? BankAccount { get => GetPropertyValue<General.Contacts.PartyBankAccount>("BankAccount"); set => SetPropertyValue<General.Contacts.PartyBankAccount>("BankAccount", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -7711,7 +7802,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentOrders", TableName = "Cash_Payment_Orders")]
-            public partial class PaymentOrder: General.Document
+            public partial class PaymentOrder: General.Documents.Document
             {
                 public PaymentOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_PaymentOrders";
@@ -7753,7 +7844,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Pos.Device? FiscalPrinterPosDevice { get => GetPropertyValue<Crm.Pos.Device>("FiscalPrinterPosDevice"); set => SetPropertyValue<Crm.Pos.Device>("FiscalPrinterPosDevice", value); }
                 [ODataProperty]
-                public General.Currency? InvoiceAmountCurrency { get => GetPropertyValue<General.Currency>("InvoiceAmountCurrency"); set => SetPropertyValue<General.Currency>("InvoiceAmountCurrency", value); }
+                public General.Currencies.Currency? InvoiceAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("InvoiceAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("InvoiceAmountCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? LocationParty { get => GetPropertyValue<General.Contacts.Party>("LocationParty"); set => SetPropertyValue<General.Contacts.Party>("LocationParty", value); }
                 [ODataProperty]
@@ -7763,26 +7854,26 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Payments.PaymentType? PaymentType { get => GetPropertyValue<Finance.Payments.PaymentType>("PaymentType"); set => SetPropertyValue<Finance.Payments.PaymentType>("PaymentType", value); }
                 [ODataProperty]
-                public General.Document? RefDocument { get => GetPropertyValue<General.Document>("RefDocument"); set => SetPropertyValue<General.Document>("RefDocument", value); }
+                public General.Documents.Document? RefDocument { get => GetPropertyValue<General.Documents.Document>("RefDocument"); set => SetPropertyValue<General.Documents.Document>("RefDocument", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentType? RefDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("RefDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("RefDocumentType", value); }
                 [ODataProperty]
-                public General.Document? RefInvoiceDocument { get => GetPropertyValue<General.Document>("RefInvoiceDocument"); set => SetPropertyValue<General.Document>("RefInvoiceDocument", value); }
+                public General.Documents.Document? RefInvoiceDocument { get => GetPropertyValue<General.Documents.Document>("RefInvoiceDocument"); set => SetPropertyValue<General.Documents.Document>("RefInvoiceDocument", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentType? RefInvoiceDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("RefInvoiceDocumentType", value); }
                 [ODataProperty]
-                public General.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currency>("TotalAmountCurrency", value); }
+                public General.Currencies.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             namespace PaymentOrdersRepository
             {
@@ -7819,7 +7910,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentSlips", TableName = "Cash_Payment_Slips")]
-            public partial class PaymentSlip: General.Document
+            public partial class PaymentSlip: General.Documents.Document
             {
                 public PaymentSlip(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_PaymentSlips";
@@ -7831,7 +7922,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? PaymentSlipNo { get => GetPropertyValue<String?>("PaymentSlipNo"); set => SetPropertyValue<String?>("PaymentSlipNo", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentAccount? PaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount", value); }
                 [ODataProperty]
@@ -7840,15 +7931,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Payments.PaymentSlipAmount>? Amounts { get => GetCollection<Finance.Payments.PaymentSlipAmount>("Amounts"); set => SetCollection<Finance.Payments.PaymentSlipAmount>("Amounts", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentSlipAmounts", TableName = "Cash_Payment_Slip_Amounts")]
             public partial class PaymentSlipAmount: EntityResource
@@ -7935,7 +8026,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentTransactions", TableName = "Cash_Payment_Transactions")]
-            public partial class PaymentTransaction: General.Document
+            public partial class PaymentTransaction: General.Documents.Document
             {
                 public PaymentTransaction(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_PaymentTransactions";
@@ -7977,20 +8068,20 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Pos.Operator? PosOperator { get => GetPropertyValue<Crm.Pos.Operator>("PosOperator"); set => SetPropertyValue<Crm.Pos.Operator>("PosOperator", value); }
                 [ODataProperty]
-                public General.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currency>("TotalAmountCurrency", value); }
+                public General.Currencies.Currency? TotalAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TotalAmountCurrency", value); }
                 [ODataProperty]
                 public IEnumerable<Finance.Payments.PaymentTransactionLine>? Lines { get => GetCollection<Finance.Payments.PaymentTransactionLine>("Lines"); set => SetCollection<Finance.Payments.PaymentTransactionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentTransactionLines", TableName = "Cash_Payment_Transaction_Lines")]
             public partial class PaymentTransactionLine: EntityResource
@@ -8077,7 +8168,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Payments_Transfers", TableName = "Cash_Transfers")]
-            public partial class Transfer: General.Document
+            public partial class Transfer: General.Documents.Document
             {
                 public Transfer(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Payments_Transfers";
@@ -8096,21 +8187,21 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Payments.PaymentAccount? SourcePaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("SourcePaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("SourcePaymentAccount", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
         }
         namespace Vat
         {
             [Entity(EntitySet = "Finance_Vat_BGVATDeclarations", TableName = "Nat_BG_VAT_Declarations")]
-            public partial class BGVATDeclaration: General.Document
+            public partial class BGVATDeclaration: General.Documents.Document
             {
                 public BGVATDeclaration(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Vat_BGVATDeclarations";
@@ -8143,15 +8234,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public General.Contacts.Person? VATDeclarationRepresentingPerson { get => GetPropertyValue<General.Contacts.Person>("VATDeclarationRepresentingPerson"); set => SetPropertyValue<General.Contacts.Person>("VATDeclarationRepresentingPerson", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Vat_BGVATDeclaringPersons", TableName = "Nat_BG_VAT_Declaring_Persons")]
             public partial class BGVATDeclaringPerson: EntityResource
@@ -8405,7 +8496,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Vat_Declarations", TableName = "VAT_Declarations")]
-            public partial class Declaration: General.Document
+            public partial class Declaration: General.Documents.Document
             {
                 public Declaration(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Vat_Declarations";
@@ -8420,15 +8511,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Finance.Vat.DeclarationLine>? Lines { get => GetCollection<Finance.Vat.DeclarationLine>("Lines"); set => SetCollection<Finance.Vat.DeclarationLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Finance_Vat_DeclarationAmountDetails")]
             public partial class DeclarationAmountDetail: EntityResource
@@ -8484,7 +8575,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Finance_Vat_Entries", TableName = "VAT_Entries")]
-            public partial class Entry: General.Document
+            public partial class Entry: General.Documents.Document
             {
                 public Entry(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Finance_Vat_Entries";
@@ -8517,15 +8608,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public Systems.Documents.DocumentType? ReferencedDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("ReferencedDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("ReferencedDocumentType", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
         }
     }
@@ -8543,7 +8634,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "General_Activities_Activities", TableName = "Cm_Activities")]
-            public partial class Activity: General.Document
+            public partial class Activity: General.Documents.Document
             {
                 public Activity(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "General_Activities_Activities";
@@ -8592,15 +8683,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<General.Activities.Reminder>? Reminders { get => GetCollection<General.Activities.Reminder>("Reminders"); set => SetCollection<General.Activities.Reminder>("Reminders", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "General_Activities_ActivityParticipants", TableName = "Cm_Activity_Participants")]
             public partial class ActivityParticipant: EntityResource
@@ -8704,7 +8795,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public TimeSpan? StartTime { get => GetPropertyValue<TimeSpan?>("StartTime"); set => SetPropertyValue<TimeSpan?>("StartTime", value); }
                 [ODataProperty]
-                public General.DocumentState? State { get => GetPropertyValue<General.DocumentState?>("State"); set => SetPropertyValue<General.DocumentState?>("State", value); }
+                public General.Documents.DocumentState? State { get => GetPropertyValue<General.Documents.DocumentState?>("State"); set => SetPropertyValue<General.Documents.DocumentState?>("State", value); }
                 [ODataProperty]
                 public General.Activities.Activity? Activity { get => GetPropertyValue<General.Activities.Activity>("Activity"); set => SetPropertyValue<General.Activities.Activity>("Activity", value); }
                 [ODataProperty]
@@ -9013,17 +9104,70 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public IEnumerable<Crm.Distributor>? Distributors { get => GetCollection<Crm.Distributor>("Distributors"); set => SetCollection<Crm.Distributor>("Distributors", value); }
                 [ODataProperty]
-                public IEnumerable<General.PartyApplicableLegislation>? ApplicableLegislations { get => GetCollection<General.PartyApplicableLegislation>("ApplicableLegislations"); set => SetCollection<General.PartyApplicableLegislation>("ApplicableLegislations", value); }
+                public IEnumerable<General.Contacts.PartyApplicableLegislation>? ApplicableLegislations { get => GetCollection<General.Contacts.PartyApplicableLegislation>("ApplicableLegislations"); set => SetCollection<General.Contacts.PartyApplicableLegislation>("ApplicableLegislations", value); }
                 [ODataProperty]
                 public IEnumerable<General.Contacts.PartyBankAccount>? BankAccounts { get => GetCollection<General.Contacts.PartyBankAccount>("BankAccounts"); set => SetCollection<General.Contacts.PartyBankAccount>("BankAccounts", value); }
                 [ODataProperty]
-                public IEnumerable<General.PartyLocationNumber>? LocationNumbers { get => GetCollection<General.PartyLocationNumber>("LocationNumbers"); set => SetCollection<General.PartyLocationNumber>("LocationNumbers", value); }
+                public IEnumerable<General.Contacts.PartyLocationNumber>? LocationNumbers { get => GetCollection<General.Contacts.PartyLocationNumber>("LocationNumbers"); set => SetCollection<General.Contacts.PartyLocationNumber>("LocationNumbers", value); }
                 [ODataProperty]
                 public IEnumerable<General.Contacts.PartyPicture>? Pictures { get => GetCollection<General.Contacts.PartyPicture>("Pictures"); set => SetCollection<General.Contacts.PartyPicture>("Pictures", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Contacts_PartyApplicableLegislations", TableName = "Gen_Party_Applicable_Legislations")]
+            public partial class PartyApplicableLegislation: EntityResource
+            {
+                public PartyApplicableLegislation(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Contacts_PartyApplicableLegislations";
+                public const string EntityTableName = "Gen_Party_Applicable_Legislations";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation? ApplicableLegislation { get => GetPropertyValue<General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation"); set => SetPropertyValue<General.Contacts.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace PartyApplicableLegislationsRepository
+            {
+                public enum ApplicableLegislation
+                {
+                    UnitedArabEmirates = 0,
+                    Australia = 1,
+                    Bulgaria = 2,
+                    Canada = 3,
+                    China = 4,
+                    CzechRepublic = 5,
+                    Germany = 6,
+                    Spain = 7,
+                    EuropeanUnion = 8,
+                    France = 9,
+                    Greece = 10,
+                    Hungary = 11,
+                    India = 12,
+                    Italy = 13,
+                    Japan = 14,
+                    Macedonia = 15,
+                    Poland = 16,
+                    Portugal = 17,
+                    Romania = 18,
+                    Serbia = 19,
+                    Russia = 20,
+                    Turkey = 21,
+                    UnitedKingdom = 22,
+                    UnitedStates = 23,
+                    SouthAfrica = 24
+                }
             }
             [Entity(EntitySet = "General_Contacts_PartyBankAccounts", TableName = "Gen_Party_Bank_Accounts")]
             public partial class PartyBankAccount: EntityResource
@@ -9090,6 +9234,42 @@ namespace ErpNet.Api.Client.DomainApi
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Contacts_PartyLocationNumbers", TableName = "Gen_Party_Location_Numbers")]
+            public partial class PartyLocationNumber: EntityResource
+            {
+                public PartyLocationNumber(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Contacts_PartyLocationNumbers";
+                public const string EntityTableName = "Gen_Party_Location_Numbers";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public General.Contacts.PartyLocationNumbersRepository.LocationCodingSystem? LocationCodingSystem { get => GetPropertyValue<General.Contacts.PartyLocationNumbersRepository.LocationCodingSystem?>("LocationCodingSystem"); set => SetPropertyValue<General.Contacts.PartyLocationNumbersRepository.LocationCodingSystem?>("LocationCodingSystem", value); }
+                [ODataProperty]
+                public String? LocationNumber { get => GetPropertyValue<String?>("LocationNumber"); set => SetPropertyValue<String?>("LocationNumber", value); }
+                [ODataProperty]
+                public String? PartnerLocationNumber { get => GetPropertyValue<String?>("PartnerLocationNumber"); set => SetPropertyValue<String?>("PartnerLocationNumber", value); }
+                [ODataProperty]
+                public Int32? Significance { get => GetPropertyValue<Int32?>("Significance"); set => SetPropertyValue<Int32?>("Significance", value); }
+                [ODataProperty]
+                public General.Contacts.Party? PartnerParty { get => GetPropertyValue<General.Contacts.Party>("PartnerParty"); set => SetPropertyValue<General.Contacts.Party>("PartnerParty", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace PartyLocationNumbersRepository
+            {
+                public enum LocationCodingSystem
+                {
+                    GLN = 0,
+                    Internal = 1
+                }
             }
             [Entity(EntitySet = "General_Contacts_PartyPictures", TableName = "Gen_Party_Pictures")]
             public partial class PartyPicture: EntityResource
@@ -9224,616 +9404,628 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
         }
-        [Entity(EntitySet = "General_Currencies", TableName = "Gen_Currencies")]
-        public partial class Currency: EntityResource
+        namespace Currencies
         {
-            public Currency(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_Currencies";
-            public const string EntityTableName = "Gen_Currencies";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
-            [ODataProperty]
-            public String? CurrencySign { get => GetPropertyValue<String?>("CurrencySign"); set => SetPropertyValue<String?>("CurrencySign", value); }
-            [ODataProperty]
-            public Int32? ShowOrder { get => GetPropertyValue<Int32?>("ShowOrder"); set => SetPropertyValue<Int32?>("ShowOrder", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_CurrencyDirectories", TableName = "Gen_Currency_Directories")]
-        public partial class CurrencyDirectory: General.Document
-        {
-            public CurrencyDirectory(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public new const string EntitySetName = "General_CurrencyDirectories";
-            public new const string EntityTableName = "Gen_Currency_Directories";
-            [ODataProperty]
-            public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
-            [ODataProperty]
-            public Boolean? IsDefault { get => GetPropertyValue<Boolean?>("IsDefault"); set => SetPropertyValue<Boolean?>("IsDefault", value); }
-            [ODataProperty]
-            public Boolean? IsReleased { get => GetPropertyValue<Boolean?>("IsReleased"); set => SetPropertyValue<Boolean?>("IsReleased", value); }
-            [ODataProperty]
-            public Boolean? IsSingleExecution { get => GetPropertyValue<Boolean?>("IsSingleExecution"); set => SetPropertyValue<Boolean?>("IsSingleExecution", value); }
-            [ODataProperty]
-            public Boolean? IsValidField { get => GetPropertyValue<Boolean?>("IsValidField"); set => SetPropertyValue<Boolean?>("IsValidField", value); }
-            [ODataProperty]
-            public General.Currency? ToCurrency { get => GetPropertyValue<General.Currency>("ToCurrency"); set => SetPropertyValue<General.Currency>("ToCurrency", value); }
-            [ODataProperty]
-            public IEnumerable<General.CurrencyDirectoryLine>? Lines { get => GetCollection<General.CurrencyDirectoryLine>("Lines"); set => SetCollection<General.CurrencyDirectoryLine>("Lines", value); }
-            public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
-            public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-            public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-            public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
-            public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
-            public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
-            public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
-        }
-        [Entity(EntitySet = "General_CurrencyDirectoryLines", TableName = "Gen_Currency_Directory_Lines")]
-        public partial class CurrencyDirectoryLine: EntityResource
-        {
-            public CurrencyDirectoryLine(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_CurrencyDirectoryLines";
-            public const string EntityTableName = "Gen_Currency_Directory_Lines";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Decimal? RateDivisor { get => GetPropertyValue<Decimal?>("RateDivisor"); set => SetPropertyValue<Decimal?>("RateDivisor", value); }
-            [ODataProperty]
-            public Decimal? RateMultiplier { get => GetPropertyValue<Decimal?>("RateMultiplier"); set => SetPropertyValue<Decimal?>("RateMultiplier", value); }
-            [Owner]
-            [ODataProperty]
-            public General.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory", value); }
-            [ODataProperty]
-            public General.Currency? FromCurrency { get => GetPropertyValue<General.Currency>("FromCurrency"); set => SetPropertyValue<General.Currency>("FromCurrency", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_Documents", TableName = "Gen_Documents")]
-        public partial class Document: EntityResource
-        {
-            public Document(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_Documents";
-            public const string EntityTableName = "Gen_Documents";
-            [ODataProperty]
-            public Guid? DocumentId { get => GetPropertyValue<Guid?>("DocumentId"); set => SetPropertyValue<Guid?>("DocumentId", value); }
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Int32? AdjustmentNumber { get => GetPropertyValue<Int32?>("AdjustmentNumber"); set => SetPropertyValue<Int32?>("AdjustmentNumber", value); }
-            [ODataProperty]
-            public DateTime? AdjustmentTime { get => GetPropertyValue<DateTime?>("AdjustmentTime"); set => SetPropertyValue<DateTime?>("AdjustmentTime", value); }
-            [ODataProperty]
-            public String? AdjustmentUser { get => GetPropertyValue<String?>("AdjustmentUser"); set => SetPropertyValue<String?>("AdjustmentUser", value); }
-            [ODataProperty]
-            public DateTime? CompleteTime { get => GetPropertyValue<DateTime?>("CompleteTime"); set => SetPropertyValue<DateTime?>("CompleteTime", value); }
-            [ODataProperty]
-            public DateTime? CreationTime { get => GetPropertyValue<DateTime?>("CreationTime"); set => SetPropertyValue<DateTime?>("CreationTime", value); }
-            [ODataProperty]
-            public String? CreationUser { get => GetPropertyValue<String?>("CreationUser"); set => SetPropertyValue<String?>("CreationUser", value); }
-            [ODataProperty]
-            public DateTime? DocumentDate { get => GetPropertyValue<DateTime?>("DocumentDate"); set => SetPropertyValue<DateTime?>("DocumentDate", value); }
-            [ODataProperty]
-            public String? DocumentNo { get => GetPropertyValue<String?>("DocumentNo"); set => SetPropertyValue<String?>("DocumentNo", value); }
-            [ODataProperty]
-            public Int32? DocumentVersion { get => GetPropertyValue<Int32?>("DocumentVersion"); set => SetPropertyValue<Int32?>("DocumentVersion", value); }
-            [ODataProperty]
-            public String? EntityName { get => GetPropertyValue<String?>("EntityName"); set => SetPropertyValue<String?>("EntityName", value); }
-            [ODataProperty]
-            public String? DocumentNotes { get => GetPropertyValue<String?>("DocumentNotes"); set => SetPropertyValue<String?>("DocumentNotes", value); }
-            [ODataProperty]
-            public General.ParentDocumentRelationshipType? ParentDocumentRelationshipType { get => GetPropertyValue<General.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType"); set => SetPropertyValue<General.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType", value); }
-            [ODataProperty]
-            public Boolean? PlanningOnly { get => GetPropertyValue<Boolean?>("PlanningOnly"); set => SetPropertyValue<Boolean?>("PlanningOnly", value); }
-            [ODataProperty]
-            public Boolean? ReadOnly { get => GetPropertyValue<Boolean?>("ReadOnly"); set => SetPropertyValue<Boolean?>("ReadOnly", value); }
-            [ODataProperty]
-            public DateTime? ReferenceDate { get => GetPropertyValue<DateTime?>("ReferenceDate"); set => SetPropertyValue<DateTime?>("ReferenceDate", value); }
-            [ODataProperty]
-            public String? ReferenceDocumentNo { get => GetPropertyValue<String?>("ReferenceDocumentNo"); set => SetPropertyValue<String?>("ReferenceDocumentNo", value); }
-            [ODataProperty]
-            public DateTime? ReleaseTime { get => GetPropertyValue<DateTime?>("ReleaseTime"); set => SetPropertyValue<DateTime?>("ReleaseTime", value); }
-            [ODataProperty]
-            public General.DocumentState? State { get => GetPropertyValue<General.DocumentState?>("State"); set => SetPropertyValue<General.DocumentState?>("State", value); }
-            [ODataProperty]
-            public Boolean? Void { get => GetPropertyValue<Boolean?>("Void"); set => SetPropertyValue<Boolean?>("Void", value); }
-            [ODataProperty]
-            public String? VoidReason { get => GetPropertyValue<String?>("VoidReason"); set => SetPropertyValue<String?>("VoidReason", value); }
-            [ODataProperty]
-            public DateTime? VoidTime { get => GetPropertyValue<DateTime?>("VoidTime"); set => SetPropertyValue<DateTime?>("VoidTime", value); }
-            [ODataProperty]
-            public String? VoidUser { get => GetPropertyValue<String?>("VoidUser"); set => SetPropertyValue<String?>("VoidUser", value); }
-            [ODataProperty]
-            public String? StateTagsAttribute { get => GetPropertyValue<String?>("StateTagsAttribute"); set => SetPropertyValue<String?>("StateTagsAttribute", value); }
-            [ODataProperty]
-            public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
-            [ODataProperty]
-            public General.Document? AdjustedDocument { get => GetPropertyValue<General.Document>("AdjustedDocument"); set => SetPropertyValue<General.Document>("AdjustedDocument", value); }
-            [ODataProperty]
-            public Systems.Security.User? AssignedToUser { get => GetPropertyValue<Systems.Security.User>("AssignedToUser"); set => SetPropertyValue<Systems.Security.User>("AssignedToUser", value); }
-            [ODataProperty]
-            public General.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
-            [ODataProperty]
-            public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
-            [ODataProperty]
-            public General.Contacts.CompanyLocation? EnterpriseCompanyLocation { get => GetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation"); set => SetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation", value); }
-            [ODataProperty]
-            public General.Contacts.CompanyDivision? FromCompanyDivision { get => GetPropertyValue<General.Contacts.CompanyDivision>("FromCompanyDivision"); set => SetPropertyValue<General.Contacts.CompanyDivision>("FromCompanyDivision", value); }
-            [ODataProperty]
-            public General.Contacts.Party? FromParty { get => GetPropertyValue<General.Contacts.Party>("FromParty"); set => SetPropertyValue<General.Contacts.Party>("FromParty", value); }
-            [ODataProperty]
-            public General.Document? MasterDocument { get => GetPropertyValue<General.Document>("MasterDocument"); set => SetPropertyValue<General.Document>("MasterDocument", value); }
-            [ODataProperty]
-            public General.Document? Parent { get => GetPropertyValue<General.Document>("Parent"); set => SetPropertyValue<General.Document>("Parent", value); }
-            [ODataProperty]
-            public General.Document? PrimeCauseDocument { get => GetPropertyValue<General.Document>("PrimeCauseDocument"); set => SetPropertyValue<General.Document>("PrimeCauseDocument", value); }
-            [ODataProperty]
-            public General.Contacts.Person? ResponsiblePerson { get => GetPropertyValue<General.Contacts.Person>("ResponsiblePerson"); set => SetPropertyValue<General.Contacts.Person>("ResponsiblePerson", value); }
-            [ODataProperty]
-            public General.Document? ReverseOfDocument { get => GetPropertyValue<General.Document>("ReverseOfDocument"); set => SetPropertyValue<General.Document>("ReverseOfDocument", value); }
-            [ODataProperty]
-            public Systems.Documents.Sequence? Sequence { get => GetPropertyValue<Systems.Documents.Sequence>("Sequence"); set => SetPropertyValue<Systems.Documents.Sequence>("Sequence", value); }
-            [ODataProperty]
-            public General.Contacts.CompanyDivision? ToCompanyDivision { get => GetPropertyValue<General.Contacts.CompanyDivision>("ToCompanyDivision"); set => SetPropertyValue<General.Contacts.CompanyDivision>("ToCompanyDivision", value); }
-            [ODataProperty]
-            public General.Contacts.Party? ToParty { get => GetPropertyValue<General.Contacts.Party>("ToParty"); set => SetPropertyValue<General.Contacts.Party>("ToParty", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentTypeUserStatus? UserStatus { get => GetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus"); set => SetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentAmount>? DocumentAmounts { get => GetCollection<General.DocumentAmount>("DocumentAmounts"); set => SetCollection<General.DocumentAmount>("DocumentAmounts", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentComment>? Comments { get => GetCollection<General.DocumentComment>("Comments"); set => SetCollection<General.DocumentComment>("Comments", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentDistributedAmount>? DistributedAmounts { get => GetCollection<General.DocumentDistributedAmount>("DistributedAmounts"); set => SetCollection<General.DocumentDistributedAmount>("DistributedAmounts", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentFileAttachment>? FileAttachments { get => GetCollection<General.DocumentFileAttachment>("FileAttachments"); set => SetCollection<General.DocumentFileAttachment>("FileAttachments", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentFulfillment>? Fulfillments { get => GetCollection<General.DocumentFulfillment>("Fulfillments"); set => SetCollection<General.DocumentFulfillment>("Fulfillments", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentLineAmount>? LineAmounts { get => GetCollection<General.DocumentLineAmount>("LineAmounts"); set => SetCollection<General.DocumentLineAmount>("LineAmounts", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentParty>? Parties { get => GetCollection<General.DocumentParty>("Parties"); set => SetCollection<General.DocumentParty>("Parties", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentPrint>? Prints { get => GetCollection<General.DocumentPrint>("Prints"); set => SetCollection<General.DocumentPrint>("Prints", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentStateChange>? StateChanges { get => GetCollection<General.DocumentStateChange>("StateChanges"); set => SetCollection<General.DocumentStateChange>("StateChanges", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
-            public async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-            public async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-            public async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
-            public async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
-            public async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
-        }
-        [Entity(EntitySet = "General_DocumentAmounts", TableName = "Gen_Document_Amounts")]
-        public partial class DocumentAmount: EntityResource
-        {
-            public DocumentAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentAmounts";
-            public const string EntityTableName = "Gen_Document_Amounts";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Amount? BaseAmount { get => GetPropertyValue<Amount?>("BaseAmount"); set => SetPropertyValue<Amount?>("BaseAmount", value); }
-            [ODataProperty]
-            public Amount? InputAmount { get => GetPropertyValue<Amount?>("InputAmount"); set => SetPropertyValue<Amount?>("InputAmount", value); }
-            [ODataProperty]
-            public Decimal? InputPercent { get => GetPropertyValue<Decimal?>("InputPercent"); set => SetPropertyValue<Decimal?>("InputPercent", value); }
-            [ODataProperty]
-            public Amount? InputUnitAmount { get => GetPropertyValue<Amount?>("InputUnitAmount"); set => SetPropertyValue<Amount?>("InputUnitAmount", value); }
-            [ODataProperty]
-            public Amount? TotalDistributedAmount { get => GetPropertyValue<Amount?>("TotalDistributedAmount"); set => SetPropertyValue<Amount?>("TotalDistributedAmount", value); }
-            [ODataProperty]
-            public Boolean? UserCanChangeInput { get => GetPropertyValue<Boolean?>("UserCanChangeInput"); set => SetPropertyValue<Boolean?>("UserCanChangeInput", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public General.Currency? InputAmountCurrency { get => GetPropertyValue<General.Currency>("InputAmountCurrency"); set => SetPropertyValue<General.Currency>("InputAmountCurrency", value); }
-            [ODataProperty]
-            public General.Products.MeasurementUnit? InputUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("InputUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("InputUnit", value); }
-            [ODataProperty]
-            public IEnumerable<General.DocumentAmountReferencedDocument>? ReferencedDocuments { get => GetCollection<General.DocumentAmountReferencedDocument>("ReferencedDocuments"); set => SetCollection<General.DocumentAmountReferencedDocument>("ReferencedDocuments", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentAmountReferencedDocuments", TableName = "Gen_Document_Amount_Referenced_Documents")]
-        public partial class DocumentAmountReferencedDocument: EntityResource
-        {
-            public DocumentAmountReferencedDocument(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentAmountReferencedDocuments";
-            public const string EntityTableName = "Gen_Document_Amount_Referenced_Documents";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [Owner]
-            [ODataProperty]
-            public General.DocumentAmount? DocumentAmount { get => GetPropertyValue<General.DocumentAmount>("DocumentAmount"); set => SetPropertyValue<General.DocumentAmount>("DocumentAmount", value); }
-            [ODataProperty]
-            public General.Document? ReferencedDocument { get => GetPropertyValue<General.Document>("ReferencedDocument"); set => SetPropertyValue<General.Document>("ReferencedDocument", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentComments", TableName = "Gen_Document_Comments")]
-        public partial class DocumentComment: EntityResource
-        {
-            public DocumentComment(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentComments";
-            public const string EntityTableName = "Gen_Document_Comments";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? Comment { get => GetPropertyValue<String?>("Comment"); set => SetPropertyValue<String?>("Comment", value); }
-            [ODataProperty]
-            public DateTime? CommentTimestamp { get => GetPropertyValue<DateTime?>("CommentTimestamp"); set => SetPropertyValue<DateTime?>("CommentTimestamp", value); }
-            [ODataProperty]
-            public Systems.Security.User? AssignToUser { get => GetPropertyValue<Systems.Security.User>("AssignToUser"); set => SetPropertyValue<Systems.Security.User>("AssignToUser", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public Systems.Security.User? User { get => GetPropertyValue<Systems.Security.User>("User"); set => SetPropertyValue<Systems.Security.User>("User", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        public enum DocumentCompletion
-        {
-            OnlyDocument = 0,
-            WithAllChildren = 1,
-            WithReleasedChildren = 2
-        }
-        [Entity(EntitySet = "General_DocumentDistributedAmounts", TableName = "Gen_Document_Distributed_Amounts")]
-        public partial class DocumentDistributedAmount: EntityResource
-        {
-            public DocumentDistributedAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentDistributedAmounts";
-            public const string EntityTableName = "Gen_Document_Distributed_Amounts";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Amount? Amount { get => GetPropertyValue<Amount?>("Amount"); set => SetPropertyValue<Amount?>("Amount", value); }
-            [ODataProperty]
-            public Amount? BaseAmount { get => GetPropertyValue<Amount?>("BaseAmount"); set => SetPropertyValue<Amount?>("BaseAmount", value); }
-            [ODataProperty]
-            public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public General.Document? ReferencedDocument { get => GetPropertyValue<General.Document>("ReferencedDocument"); set => SetPropertyValue<General.Document>("ReferencedDocument", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentFileAttachments", TableName = "Gen_Document_File_Attachments")]
-        public partial class DocumentFileAttachment: EntityResource
-        {
-            public DocumentFileAttachment(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentFileAttachments";
-            public const string EntityTableName = "Gen_Document_File_Attachments";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Byte[]? EmbeddedFileContents { get => GetPropertyValue<Byte[]?>("EmbeddedFileContents"); set => SetPropertyValue<Byte[]?>("EmbeddedFileContents", value); }
-            [ODataProperty]
-            public String? FileName { get => GetPropertyValue<String?>("FileName"); set => SetPropertyValue<String?>("FileName", value); }
-            [ODataProperty]
-            public Boolean? IsLinked { get => GetPropertyValue<Boolean?>("IsLinked"); set => SetPropertyValue<Boolean?>("IsLinked", value); }
-            [ODataProperty]
-            public String? LinkedFilePath { get => GetPropertyValue<String?>("LinkedFilePath"); set => SetPropertyValue<String?>("LinkedFilePath", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentFulfillments", TableName = "Gen_Document_Fulfillments")]
-        public partial class DocumentFulfillment: EntityResource
-        {
-            public DocumentFulfillment(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentFulfillments";
-            public const string EntityTableName = "Gen_Document_Fulfillments";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
-            [ODataProperty]
-            public String? DestinationEntityName { get => GetPropertyValue<String?>("DestinationEntityName"); set => SetPropertyValue<String?>("DestinationEntityName", value); }
-            [ODataProperty]
-            public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
-            [ODataProperty]
-            public General.DocumentFulfillmentsRepository.FulfillmentType? FulfillmentType { get => GetPropertyValue<General.DocumentFulfillmentsRepository.FulfillmentType?>("FulfillmentType"); set => SetPropertyValue<General.DocumentFulfillmentsRepository.FulfillmentType?>("FulfillmentType", value); }
-            [ODataProperty]
-            public Boolean? IsFinal { get => GetPropertyValue<Boolean?>("IsFinal"); set => SetPropertyValue<Boolean?>("IsFinal", value); }
-            [ODataProperty]
-            public Int32? LineNo { get => GetPropertyValue<Int32?>("LineNo"); set => SetPropertyValue<Int32?>("LineNo", value); }
-            [ODataProperty]
-            public String? LineType { get => GetPropertyValue<String?>("LineType"); set => SetPropertyValue<String?>("LineType", value); }
-            [ODataProperty]
-            public Decimal? QuantityBase { get => GetPropertyValue<Decimal?>("QuantityBase"); set => SetPropertyValue<Decimal?>("QuantityBase", value); }
-            [ODataProperty]
-            public Decimal? StandardQuantity { get => GetPropertyValue<Decimal?>("StandardQuantity"); set => SetPropertyValue<Decimal?>("StandardQuantity", value); }
-            [ODataProperty]
-            public Systems.Security.User? CreationUser { get => GetPropertyValue<Systems.Security.User>("CreationUser"); set => SetPropertyValue<Systems.Security.User>("CreationUser", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
-            [ODataProperty]
-            public General.DocumentFulfillment? ParentFulfillment { get => GetPropertyValue<General.DocumentFulfillment>("ParentFulfillment"); set => SetPropertyValue<General.DocumentFulfillment>("ParentFulfillment", value); }
-            [ODataProperty]
-            public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
-            [ODataProperty]
-            public General.Products.ProductVariant? ProductVariant { get => GetPropertyValue<General.Products.ProductVariant>("ProductVariant"); set => SetPropertyValue<General.Products.ProductVariant>("ProductVariant", value); }
-            [ODataProperty]
-            public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        namespace DocumentFulfillmentsRepository
-        {
-            public enum FulfillmentType
+            [Entity(EntitySet = "General_Currencies_Currencies", TableName = "Gen_Currencies")]
+            public partial class Currency: EntityResource
             {
-                Planned = 0,
-                Completed = 1
+                public Currency(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Currencies_Currencies";
+                public const string EntityTableName = "Gen_Currencies";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
+                [ODataProperty]
+                public String? CurrencySign { get => GetPropertyValue<String?>("CurrencySign"); set => SetPropertyValue<String?>("CurrencySign", value); }
+                [ODataProperty]
+                public Int32? ShowOrder { get => GetPropertyValue<Int32?>("ShowOrder"); set => SetPropertyValue<Int32?>("ShowOrder", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Currencies_CurrencyDirectories", TableName = "Gen_Currency_Directories")]
+            public partial class CurrencyDirectory: General.Documents.Document
+            {
+                public CurrencyDirectory(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public new const string EntitySetName = "General_Currencies_CurrencyDirectories";
+                public new const string EntityTableName = "Gen_Currency_Directories";
+                [ODataProperty]
+                public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
+                [ODataProperty]
+                public Boolean? IsDefault { get => GetPropertyValue<Boolean?>("IsDefault"); set => SetPropertyValue<Boolean?>("IsDefault", value); }
+                [ODataProperty]
+                public Boolean? IsReleased { get => GetPropertyValue<Boolean?>("IsReleased"); set => SetPropertyValue<Boolean?>("IsReleased", value); }
+                [ODataProperty]
+                public Boolean? IsSingleExecution { get => GetPropertyValue<Boolean?>("IsSingleExecution"); set => SetPropertyValue<Boolean?>("IsSingleExecution", value); }
+                [ODataProperty]
+                public Boolean? IsValidField { get => GetPropertyValue<Boolean?>("IsValidField"); set => SetPropertyValue<Boolean?>("IsValidField", value); }
+                [ODataProperty]
+                public General.Currencies.Currency? ToCurrency { get => GetPropertyValue<General.Currencies.Currency>("ToCurrency"); set => SetPropertyValue<General.Currencies.Currency>("ToCurrency", value); }
+                [ODataProperty]
+                public IEnumerable<General.Currencies.CurrencyDirectoryLine>? Lines { get => GetCollection<General.Currencies.CurrencyDirectoryLine>("Lines"); set => SetCollection<General.Currencies.CurrencyDirectoryLine>("Lines", value); }
+                public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
+                public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
+                public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+            }
+            [Entity(EntitySet = "General_Currencies_CurrencyDirectoryLines", TableName = "Gen_Currency_Directory_Lines")]
+            public partial class CurrencyDirectoryLine: EntityResource
+            {
+                public CurrencyDirectoryLine(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Currencies_CurrencyDirectoryLines";
+                public const string EntityTableName = "Gen_Currency_Directory_Lines";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Decimal? RateDivisor { get => GetPropertyValue<Decimal?>("RateDivisor"); set => SetPropertyValue<Decimal?>("RateDivisor", value); }
+                [ODataProperty]
+                public Decimal? RateMultiplier { get => GetPropertyValue<Decimal?>("RateMultiplier"); set => SetPropertyValue<Decimal?>("RateMultiplier", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Currencies.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory", value); }
+                [ODataProperty]
+                public General.Currencies.Currency? FromCurrency { get => GetPropertyValue<General.Currencies.Currency>("FromCurrency"); set => SetPropertyValue<General.Currencies.Currency>("FromCurrency", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
         }
-        [Entity(EntitySet = "General_DocumentLineAmounts", TableName = "Gen_Document_Line_Amounts")]
-        public partial class DocumentLineAmount: EntityResource
+        namespace Documents
         {
-            public DocumentLineAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentLineAmounts";
-            public const string EntityTableName = "Gen_Document_Line_Amounts";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
-            [ODataProperty]
-            public Decimal? LinePercent { get => GetPropertyValue<Decimal?>("LinePercent"); set => SetPropertyValue<Decimal?>("LinePercent", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
-            [ODataProperty]
-            public General.Document? ReferencedDocument { get => GetPropertyValue<General.Document>("ReferencedDocument"); set => SetPropertyValue<General.Document>("ReferencedDocument", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentLinks", TableName = "Gen_Document_Links")]
-        public partial class DocumentLink: EntityResource
-        {
-            public DocumentLink(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentLinks";
-            public const string EntityTableName = "Gen_Document_Links";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentManualDistributedAmounts", TableName = "Gen_Document_Manual_Distributed_Amounts")]
-        public partial class DocumentManualDistributedAmount: EntityResource
-        {
-            public DocumentManualDistributedAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentManualDistributedAmounts";
-            public const string EntityTableName = "Gen_Document_Manual_Distributed_Amounts";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Guid? DocumentAmountTypeId { get => GetPropertyValue<Guid?>("DocumentAmountTypeId"); set => SetPropertyValue<Guid?>("DocumentAmountTypeId", value); }
-            [ODataProperty]
-            public Guid? DocumentId { get => GetPropertyValue<Guid?>("DocumentId"); set => SetPropertyValue<Guid?>("DocumentId", value); }
-            [ODataProperty]
-            public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
-            [ODataProperty]
-            public Decimal? LinePercent { get => GetPropertyValue<Decimal?>("LinePercent"); set => SetPropertyValue<Decimal?>("LinePercent", value); }
-            [ODataProperty]
-            public Guid? ProductId { get => GetPropertyValue<Guid?>("ProductId"); set => SetPropertyValue<Guid?>("ProductId", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentParties", TableName = "Gen_Document_Parties")]
-        public partial class DocumentParty: EntityResource
-        {
-            public DocumentParty(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentParties";
-            public const string EntityTableName = "Gen_Document_Parties";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentPartyRole? Role { get => GetPropertyValue<Systems.Documents.DocumentPartyRole>("Role"); set => SetPropertyValue<Systems.Documents.DocumentPartyRole>("Role", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_DocumentPrints", TableName = "Gen_Document_Prints")]
-        public partial class DocumentPrint: EntityResource
-        {
-            public DocumentPrint(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentPrints";
-            public const string EntityTableName = "Gen_Document_Prints";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? AdditionalData { get => GetPropertyValue<String?>("AdditionalData"); set => SetPropertyValue<String?>("AdditionalData", value); }
-            [ODataProperty]
-            public String? Description { get => GetPropertyValue<String?>("Description"); set => SetPropertyValue<String?>("Description", value); }
-            [ODataProperty]
-            public Boolean? IsOriginal { get => GetPropertyValue<Boolean?>("IsOriginal"); set => SetPropertyValue<Boolean?>("IsOriginal", value); }
-            [ODataProperty]
-            public DateTime? PrintTime { get => GetPropertyValue<DateTime?>("PrintTime"); set => SetPropertyValue<DateTime?>("PrintTime", value); }
-            [ODataProperty]
-            public String? PrintUser { get => GetPropertyValue<String?>("PrintUser"); set => SetPropertyValue<String?>("PrintUser", value); }
-            [ODataProperty]
-            public General.DocumentPrintsRepository.PrintoutType? PrintoutType { get => GetPropertyValue<General.DocumentPrintsRepository.PrintoutType?>("PrintoutType"); set => SetPropertyValue<General.DocumentPrintsRepository.PrintoutType?>("PrintoutType", value); }
-            [ODataProperty]
-            public String? ReferenceNo { get => GetPropertyValue<String?>("ReferenceNo"); set => SetPropertyValue<String?>("ReferenceNo", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public Systems.Core.DocumentPrintImage? DocumentPrintImage { get => GetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage"); set => SetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        namespace DocumentPrintsRepository
-        {
-            public enum PrintoutType
+            [Entity(EntitySet = "General_Documents_Documents", TableName = "Gen_Documents")]
+            public partial class Document: EntityResource
             {
-                PhysicalPrinterPrintout = 0,
-                FiscalPrinterPrintout = 1,
-                Export = 2,
-                UserDownload = 3
+                public Document(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_Documents";
+                public const string EntityTableName = "Gen_Documents";
+                [ODataProperty]
+                public Guid? DocumentId { get => GetPropertyValue<Guid?>("DocumentId"); set => SetPropertyValue<Guid?>("DocumentId", value); }
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Int32? AdjustmentNumber { get => GetPropertyValue<Int32?>("AdjustmentNumber"); set => SetPropertyValue<Int32?>("AdjustmentNumber", value); }
+                [ODataProperty]
+                public DateTime? AdjustmentTime { get => GetPropertyValue<DateTime?>("AdjustmentTime"); set => SetPropertyValue<DateTime?>("AdjustmentTime", value); }
+                [ODataProperty]
+                public String? AdjustmentUser { get => GetPropertyValue<String?>("AdjustmentUser"); set => SetPropertyValue<String?>("AdjustmentUser", value); }
+                [ODataProperty]
+                public DateTime? CompleteTime { get => GetPropertyValue<DateTime?>("CompleteTime"); set => SetPropertyValue<DateTime?>("CompleteTime", value); }
+                [ODataProperty]
+                public DateTime? CreationTime { get => GetPropertyValue<DateTime?>("CreationTime"); set => SetPropertyValue<DateTime?>("CreationTime", value); }
+                [ODataProperty]
+                public String? CreationUser { get => GetPropertyValue<String?>("CreationUser"); set => SetPropertyValue<String?>("CreationUser", value); }
+                [ODataProperty]
+                public DateTime? DocumentDate { get => GetPropertyValue<DateTime?>("DocumentDate"); set => SetPropertyValue<DateTime?>("DocumentDate", value); }
+                [ODataProperty]
+                public String? DocumentNo { get => GetPropertyValue<String?>("DocumentNo"); set => SetPropertyValue<String?>("DocumentNo", value); }
+                [ODataProperty]
+                public Int32? DocumentVersion { get => GetPropertyValue<Int32?>("DocumentVersion"); set => SetPropertyValue<Int32?>("DocumentVersion", value); }
+                [ODataProperty]
+                public String? EntityName { get => GetPropertyValue<String?>("EntityName"); set => SetPropertyValue<String?>("EntityName", value); }
+                [ODataProperty]
+                public String? DocumentNotes { get => GetPropertyValue<String?>("DocumentNotes"); set => SetPropertyValue<String?>("DocumentNotes", value); }
+                [ODataProperty]
+                public General.Documents.ParentDocumentRelationshipType? ParentDocumentRelationshipType { get => GetPropertyValue<General.Documents.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType"); set => SetPropertyValue<General.Documents.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType", value); }
+                [ODataProperty]
+                public Boolean? PlanningOnly { get => GetPropertyValue<Boolean?>("PlanningOnly"); set => SetPropertyValue<Boolean?>("PlanningOnly", value); }
+                [ODataProperty]
+                public Boolean? ReadOnly { get => GetPropertyValue<Boolean?>("ReadOnly"); set => SetPropertyValue<Boolean?>("ReadOnly", value); }
+                [ODataProperty]
+                public DateTime? ReferenceDate { get => GetPropertyValue<DateTime?>("ReferenceDate"); set => SetPropertyValue<DateTime?>("ReferenceDate", value); }
+                [ODataProperty]
+                public String? ReferenceDocumentNo { get => GetPropertyValue<String?>("ReferenceDocumentNo"); set => SetPropertyValue<String?>("ReferenceDocumentNo", value); }
+                [ODataProperty]
+                public DateTime? ReleaseTime { get => GetPropertyValue<DateTime?>("ReleaseTime"); set => SetPropertyValue<DateTime?>("ReleaseTime", value); }
+                [ODataProperty]
+                public General.Documents.DocumentState? State { get => GetPropertyValue<General.Documents.DocumentState?>("State"); set => SetPropertyValue<General.Documents.DocumentState?>("State", value); }
+                [ODataProperty]
+                public Boolean? Void { get => GetPropertyValue<Boolean?>("Void"); set => SetPropertyValue<Boolean?>("Void", value); }
+                [ODataProperty]
+                public String? VoidReason { get => GetPropertyValue<String?>("VoidReason"); set => SetPropertyValue<String?>("VoidReason", value); }
+                [ODataProperty]
+                public DateTime? VoidTime { get => GetPropertyValue<DateTime?>("VoidTime"); set => SetPropertyValue<DateTime?>("VoidTime", value); }
+                [ODataProperty]
+                public String? VoidUser { get => GetPropertyValue<String?>("VoidUser"); set => SetPropertyValue<String?>("VoidUser", value); }
+                [ODataProperty]
+                public String? StateTagsAttribute { get => GetPropertyValue<String?>("StateTagsAttribute"); set => SetPropertyValue<String?>("StateTagsAttribute", value); }
+                [ODataProperty]
+                public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
+                [ODataProperty]
+                public General.Documents.Document? AdjustedDocument { get => GetPropertyValue<General.Documents.Document>("AdjustedDocument"); set => SetPropertyValue<General.Documents.Document>("AdjustedDocument", value); }
+                [ODataProperty]
+                public Systems.Security.User? AssignedToUser { get => GetPropertyValue<Systems.Security.User>("AssignedToUser"); set => SetPropertyValue<Systems.Security.User>("AssignedToUser", value); }
+                [ODataProperty]
+                public General.Currencies.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
+                [ODataProperty]
+                public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
+                [ODataProperty]
+                public General.Contacts.CompanyLocation? EnterpriseCompanyLocation { get => GetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation"); set => SetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation", value); }
+                [ODataProperty]
+                public General.Contacts.CompanyDivision? FromCompanyDivision { get => GetPropertyValue<General.Contacts.CompanyDivision>("FromCompanyDivision"); set => SetPropertyValue<General.Contacts.CompanyDivision>("FromCompanyDivision", value); }
+                [ODataProperty]
+                public General.Contacts.Party? FromParty { get => GetPropertyValue<General.Contacts.Party>("FromParty"); set => SetPropertyValue<General.Contacts.Party>("FromParty", value); }
+                [ODataProperty]
+                public General.Documents.Document? MasterDocument { get => GetPropertyValue<General.Documents.Document>("MasterDocument"); set => SetPropertyValue<General.Documents.Document>("MasterDocument", value); }
+                [ODataProperty]
+                public General.Documents.Document? Parent { get => GetPropertyValue<General.Documents.Document>("Parent"); set => SetPropertyValue<General.Documents.Document>("Parent", value); }
+                [ODataProperty]
+                public General.Documents.Document? PrimeCauseDocument { get => GetPropertyValue<General.Documents.Document>("PrimeCauseDocument"); set => SetPropertyValue<General.Documents.Document>("PrimeCauseDocument", value); }
+                [ODataProperty]
+                public General.Contacts.Person? ResponsiblePerson { get => GetPropertyValue<General.Contacts.Person>("ResponsiblePerson"); set => SetPropertyValue<General.Contacts.Person>("ResponsiblePerson", value); }
+                [ODataProperty]
+                public General.Documents.Document? ReverseOfDocument { get => GetPropertyValue<General.Documents.Document>("ReverseOfDocument"); set => SetPropertyValue<General.Documents.Document>("ReverseOfDocument", value); }
+                [ODataProperty]
+                public Systems.Documents.Sequence? Sequence { get => GetPropertyValue<Systems.Documents.Sequence>("Sequence"); set => SetPropertyValue<Systems.Documents.Sequence>("Sequence", value); }
+                [ODataProperty]
+                public General.Contacts.CompanyDivision? ToCompanyDivision { get => GetPropertyValue<General.Contacts.CompanyDivision>("ToCompanyDivision"); set => SetPropertyValue<General.Contacts.CompanyDivision>("ToCompanyDivision", value); }
+                [ODataProperty]
+                public General.Contacts.Party? ToParty { get => GetPropertyValue<General.Contacts.Party>("ToParty"); set => SetPropertyValue<General.Contacts.Party>("ToParty", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentTypeUserStatus? UserStatus { get => GetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus"); set => SetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentAmount>? DocumentAmounts { get => GetCollection<General.Documents.DocumentAmount>("DocumentAmounts"); set => SetCollection<General.Documents.DocumentAmount>("DocumentAmounts", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentComment>? Comments { get => GetCollection<General.Documents.DocumentComment>("Comments"); set => SetCollection<General.Documents.DocumentComment>("Comments", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentDistributedAmount>? DistributedAmounts { get => GetCollection<General.Documents.DocumentDistributedAmount>("DistributedAmounts"); set => SetCollection<General.Documents.DocumentDistributedAmount>("DistributedAmounts", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentFileAttachment>? FileAttachments { get => GetCollection<General.Documents.DocumentFileAttachment>("FileAttachments"); set => SetCollection<General.Documents.DocumentFileAttachment>("FileAttachments", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentFulfillment>? Fulfillments { get => GetCollection<General.Documents.DocumentFulfillment>("Fulfillments"); set => SetCollection<General.Documents.DocumentFulfillment>("Fulfillments", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentLineAmount>? LineAmounts { get => GetCollection<General.Documents.DocumentLineAmount>("LineAmounts"); set => SetCollection<General.Documents.DocumentLineAmount>("LineAmounts", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentParty>? Parties { get => GetCollection<General.Documents.DocumentParty>("Parties"); set => SetCollection<General.Documents.DocumentParty>("Parties", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentPrint>? Prints { get => GetCollection<General.Documents.DocumentPrint>("Prints"); set => SetCollection<General.Documents.DocumentPrint>("Prints", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentStateChange>? StateChanges { get => GetCollection<General.Documents.DocumentStateChange>("StateChanges"); set => SetCollection<General.Documents.DocumentStateChange>("StateChanges", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
+                public async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
+                public async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
-        }
-        namespace DocumentsRepositoryBase
-        {
-            public enum VoidType
+            [Entity(EntitySet = "General_Documents_DocumentAmounts", TableName = "Gen_Document_Amounts")]
+            public partial class DocumentAmount: EntityResource
             {
-                VoidDocument = 0,
-                VoidWithSubDocuments = 1,
-                VoidWithReleasedSubDocuments = 2
+                public DocumentAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentAmounts";
+                public const string EntityTableName = "Gen_Document_Amounts";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Amount? BaseAmount { get => GetPropertyValue<Amount?>("BaseAmount"); set => SetPropertyValue<Amount?>("BaseAmount", value); }
+                [ODataProperty]
+                public Amount? InputAmount { get => GetPropertyValue<Amount?>("InputAmount"); set => SetPropertyValue<Amount?>("InputAmount", value); }
+                [ODataProperty]
+                public Decimal? InputPercent { get => GetPropertyValue<Decimal?>("InputPercent"); set => SetPropertyValue<Decimal?>("InputPercent", value); }
+                [ODataProperty]
+                public Amount? InputUnitAmount { get => GetPropertyValue<Amount?>("InputUnitAmount"); set => SetPropertyValue<Amount?>("InputUnitAmount", value); }
+                [ODataProperty]
+                public Amount? TotalDistributedAmount { get => GetPropertyValue<Amount?>("TotalDistributedAmount"); set => SetPropertyValue<Amount?>("TotalDistributedAmount", value); }
+                [ODataProperty]
+                public Boolean? UserCanChangeInput { get => GetPropertyValue<Boolean?>("UserCanChangeInput"); set => SetPropertyValue<Boolean?>("UserCanChangeInput", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Currencies.Currency? InputAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("InputAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("InputAmountCurrency", value); }
+                [ODataProperty]
+                public General.Products.MeasurementUnit? InputUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("InputUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("InputUnit", value); }
+                [ODataProperty]
+                public IEnumerable<General.Documents.DocumentAmountReferencedDocument>? ReferencedDocuments { get => GetCollection<General.Documents.DocumentAmountReferencedDocument>("ReferencedDocuments"); set => SetCollection<General.Documents.DocumentAmountReferencedDocument>("ReferencedDocuments", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
-        }
-        public enum DocumentState
-        {
-            New = 0,
-            Adjustment = 5,
-            Planned = 10,
-            FirmPlanned = 20,
-            Released = 30,
-            Completed = 40,
-            Closed = 50
-        }
-        [Entity(EntitySet = "General_DocumentStateChanges", TableName = "Gen_Document_State_Changes")]
-        public partial class DocumentStateChange: EntityResource
-        {
-            public DocumentStateChange(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_DocumentStateChanges";
-            public const string EntityTableName = "Gen_Document_State_Changes";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public General.DocumentStateChangesRepository.NewState? NewState { get => GetPropertyValue<General.DocumentStateChangesRepository.NewState?>("NewState"); set => SetPropertyValue<General.DocumentStateChangesRepository.NewState?>("NewState", value); }
-            [ODataProperty]
-            public Boolean? SystemInitiated { get => GetPropertyValue<Boolean?>("SystemInitiated"); set => SetPropertyValue<Boolean?>("SystemInitiated", value); }
-            [ODataProperty]
-            public DateTime? UpdateTime { get => GetPropertyValue<DateTime?>("UpdateTime"); set => SetPropertyValue<DateTime?>("UpdateTime", value); }
-            [ODataProperty]
-            public String? UpdateUser { get => GetPropertyValue<String?>("UpdateUser"); set => SetPropertyValue<String?>("UpdateUser", value); }
-            [ODataProperty]
-            public Boolean? Void { get => GetPropertyValue<Boolean?>("Void"); set => SetPropertyValue<Boolean?>("Void", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentTypeUserStatus? UserStatus { get => GetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus"); set => SetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        namespace DocumentStateChangesRepository
-        {
-            public enum NewState
+            [Entity(EntitySet = "General_Documents_DocumentAmountReferencedDocuments", TableName = "Gen_Document_Amount_Referenced_Documents")]
+            public partial class DocumentAmountReferencedDocument: EntityResource
+            {
+                public DocumentAmountReferencedDocument(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentAmountReferencedDocuments";
+                public const string EntityTableName = "Gen_Document_Amount_Referenced_Documents";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.DocumentAmount? DocumentAmount { get => GetPropertyValue<General.Documents.DocumentAmount>("DocumentAmount"); set => SetPropertyValue<General.Documents.DocumentAmount>("DocumentAmount", value); }
+                [ODataProperty]
+                public General.Documents.Document? ReferencedDocument { get => GetPropertyValue<General.Documents.Document>("ReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("ReferencedDocument", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentComments", TableName = "Gen_Document_Comments")]
+            public partial class DocumentComment: EntityResource
+            {
+                public DocumentComment(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentComments";
+                public const string EntityTableName = "Gen_Document_Comments";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Comment { get => GetPropertyValue<String?>("Comment"); set => SetPropertyValue<String?>("Comment", value); }
+                [ODataProperty]
+                public DateTime? CommentTimestamp { get => GetPropertyValue<DateTime?>("CommentTimestamp"); set => SetPropertyValue<DateTime?>("CommentTimestamp", value); }
+                [ODataProperty]
+                public Systems.Security.User? AssignToUser { get => GetPropertyValue<Systems.Security.User>("AssignToUser"); set => SetPropertyValue<Systems.Security.User>("AssignToUser", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public Systems.Security.User? User { get => GetPropertyValue<Systems.Security.User>("User"); set => SetPropertyValue<Systems.Security.User>("User", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            public enum DocumentCompletion
+            {
+                OnlyDocument = 0,
+                WithAllChildren = 1,
+                WithReleasedChildren = 2
+            }
+            [Entity(EntitySet = "General_Documents_DocumentDistributedAmounts", TableName = "Gen_Document_Distributed_Amounts")]
+            public partial class DocumentDistributedAmount: EntityResource
+            {
+                public DocumentDistributedAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentDistributedAmounts";
+                public const string EntityTableName = "Gen_Document_Distributed_Amounts";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Amount? Amount { get => GetPropertyValue<Amount?>("Amount"); set => SetPropertyValue<Amount?>("Amount", value); }
+                [ODataProperty]
+                public Amount? BaseAmount { get => GetPropertyValue<Amount?>("BaseAmount"); set => SetPropertyValue<Amount?>("BaseAmount", value); }
+                [ODataProperty]
+                public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? ReferencedDocument { get => GetPropertyValue<General.Documents.Document>("ReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("ReferencedDocument", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentFileAttachments", TableName = "Gen_Document_File_Attachments")]
+            public partial class DocumentFileAttachment: EntityResource
+            {
+                public DocumentFileAttachment(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentFileAttachments";
+                public const string EntityTableName = "Gen_Document_File_Attachments";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Byte[]? EmbeddedFileContents { get => GetPropertyValue<Byte[]?>("EmbeddedFileContents"); set => SetPropertyValue<Byte[]?>("EmbeddedFileContents", value); }
+                [ODataProperty]
+                public String? FileName { get => GetPropertyValue<String?>("FileName"); set => SetPropertyValue<String?>("FileName", value); }
+                [ODataProperty]
+                public Boolean? IsLinked { get => GetPropertyValue<Boolean?>("IsLinked"); set => SetPropertyValue<Boolean?>("IsLinked", value); }
+                [ODataProperty]
+                public String? LinkedFilePath { get => GetPropertyValue<String?>("LinkedFilePath"); set => SetPropertyValue<String?>("LinkedFilePath", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentFulfillments", TableName = "Gen_Document_Fulfillments")]
+            public partial class DocumentFulfillment: EntityResource
+            {
+                public DocumentFulfillment(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentFulfillments";
+                public const string EntityTableName = "Gen_Document_Fulfillments";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
+                [ODataProperty]
+                public String? DestinationEntityName { get => GetPropertyValue<String?>("DestinationEntityName"); set => SetPropertyValue<String?>("DestinationEntityName", value); }
+                [ODataProperty]
+                public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
+                [ODataProperty]
+                public General.Documents.DocumentFulfillmentsRepository.FulfillmentType? FulfillmentType { get => GetPropertyValue<General.Documents.DocumentFulfillmentsRepository.FulfillmentType?>("FulfillmentType"); set => SetPropertyValue<General.Documents.DocumentFulfillmentsRepository.FulfillmentType?>("FulfillmentType", value); }
+                [ODataProperty]
+                public Boolean? IsFinal { get => GetPropertyValue<Boolean?>("IsFinal"); set => SetPropertyValue<Boolean?>("IsFinal", value); }
+                [ODataProperty]
+                public Int32? LineNo { get => GetPropertyValue<Int32?>("LineNo"); set => SetPropertyValue<Int32?>("LineNo", value); }
+                [ODataProperty]
+                public String? LineType { get => GetPropertyValue<String?>("LineType"); set => SetPropertyValue<String?>("LineType", value); }
+                [ODataProperty]
+                public Decimal? QuantityBase { get => GetPropertyValue<Decimal?>("QuantityBase"); set => SetPropertyValue<Decimal?>("QuantityBase", value); }
+                [ODataProperty]
+                public Decimal? StandardQuantity { get => GetPropertyValue<Decimal?>("StandardQuantity"); set => SetPropertyValue<Decimal?>("StandardQuantity", value); }
+                [ODataProperty]
+                public Systems.Security.User? CreationUser { get => GetPropertyValue<Systems.Security.User>("CreationUser"); set => SetPropertyValue<Systems.Security.User>("CreationUser", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
+                [ODataProperty]
+                public General.Documents.DocumentFulfillment? ParentFulfillment { get => GetPropertyValue<General.Documents.DocumentFulfillment>("ParentFulfillment"); set => SetPropertyValue<General.Documents.DocumentFulfillment>("ParentFulfillment", value); }
+                [ODataProperty]
+                public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
+                [ODataProperty]
+                public General.Products.ProductVariant? ProductVariant { get => GetPropertyValue<General.Products.ProductVariant>("ProductVariant"); set => SetPropertyValue<General.Products.ProductVariant>("ProductVariant", value); }
+                [ODataProperty]
+                public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace DocumentFulfillmentsRepository
+            {
+                public enum FulfillmentType
+                {
+                    Planned = 0,
+                    Completed = 1
+                }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentLineAmounts", TableName = "Gen_Document_Line_Amounts")]
+            public partial class DocumentLineAmount: EntityResource
+            {
+                public DocumentLineAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentLineAmounts";
+                public const string EntityTableName = "Gen_Document_Line_Amounts";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
+                [ODataProperty]
+                public Decimal? LinePercent { get => GetPropertyValue<Decimal?>("LinePercent"); set => SetPropertyValue<Decimal?>("LinePercent", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentAmountType? DocumentAmountType { get => GetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType"); set => SetPropertyValue<Systems.Documents.DocumentAmountType>("DocumentAmountType", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
+                [ODataProperty]
+                public General.Documents.Document? ReferencedDocument { get => GetPropertyValue<General.Documents.Document>("ReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("ReferencedDocument", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentLinks", TableName = "Gen_Document_Links")]
+            public partial class DocumentLink: EntityResource
+            {
+                public DocumentLink(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentLinks";
+                public const string EntityTableName = "Gen_Document_Links";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentManualDistributedAmounts", TableName = "Gen_Document_Manual_Distributed_Amounts")]
+            public partial class DocumentManualDistributedAmount: EntityResource
+            {
+                public DocumentManualDistributedAmount(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentManualDistributedAmounts";
+                public const string EntityTableName = "Gen_Document_Manual_Distributed_Amounts";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Guid? DocumentAmountTypeId { get => GetPropertyValue<Guid?>("DocumentAmountTypeId"); set => SetPropertyValue<Guid?>("DocumentAmountTypeId", value); }
+                [ODataProperty]
+                public Guid? DocumentId { get => GetPropertyValue<Guid?>("DocumentId"); set => SetPropertyValue<Guid?>("DocumentId", value); }
+                [ODataProperty]
+                public Guid? DocumentLineId { get => GetPropertyValue<Guid?>("DocumentLineId"); set => SetPropertyValue<Guid?>("DocumentLineId", value); }
+                [ODataProperty]
+                public Decimal? LinePercent { get => GetPropertyValue<Decimal?>("LinePercent"); set => SetPropertyValue<Decimal?>("LinePercent", value); }
+                [ODataProperty]
+                public Guid? ProductId { get => GetPropertyValue<Guid?>("ProductId"); set => SetPropertyValue<Guid?>("ProductId", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentParties", TableName = "Gen_Document_Parties")]
+            public partial class DocumentParty: EntityResource
+            {
+                public DocumentParty(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentParties";
+                public const string EntityTableName = "Gen_Document_Parties";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentPartyRole? Role { get => GetPropertyValue<Systems.Documents.DocumentPartyRole>("Role"); set => SetPropertyValue<Systems.Documents.DocumentPartyRole>("Role", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Documents_DocumentPrints", TableName = "Gen_Document_Prints")]
+            public partial class DocumentPrint: EntityResource
+            {
+                public DocumentPrint(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentPrints";
+                public const string EntityTableName = "Gen_Document_Prints";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? AdditionalData { get => GetPropertyValue<String?>("AdditionalData"); set => SetPropertyValue<String?>("AdditionalData", value); }
+                [ODataProperty]
+                public String? Description { get => GetPropertyValue<String?>("Description"); set => SetPropertyValue<String?>("Description", value); }
+                [ODataProperty]
+                public Boolean? IsOriginal { get => GetPropertyValue<Boolean?>("IsOriginal"); set => SetPropertyValue<Boolean?>("IsOriginal", value); }
+                [ODataProperty]
+                public DateTime? PrintTime { get => GetPropertyValue<DateTime?>("PrintTime"); set => SetPropertyValue<DateTime?>("PrintTime", value); }
+                [ODataProperty]
+                public String? PrintUser { get => GetPropertyValue<String?>("PrintUser"); set => SetPropertyValue<String?>("PrintUser", value); }
+                [ODataProperty]
+                public General.Documents.DocumentPrintsRepository.PrintoutType? PrintoutType { get => GetPropertyValue<General.Documents.DocumentPrintsRepository.PrintoutType?>("PrintoutType"); set => SetPropertyValue<General.Documents.DocumentPrintsRepository.PrintoutType?>("PrintoutType", value); }
+                [ODataProperty]
+                public String? ReferenceNo { get => GetPropertyValue<String?>("ReferenceNo"); set => SetPropertyValue<String?>("ReferenceNo", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public Systems.Core.DocumentPrintImage? DocumentPrintImage { get => GetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage"); set => SetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace DocumentPrintsRepository
+            {
+                public enum PrintoutType
+                {
+                    PhysicalPrinterPrintout = 0,
+                    FiscalPrinterPrintout = 1,
+                    Export = 2,
+                    UserDownload = 3
+                }
+            }
+            namespace DocumentsRepositoryBase
+            {
+                public enum VoidType
+                {
+                    VoidDocument = 0,
+                    VoidWithSubDocuments = 1,
+                    VoidWithReleasedSubDocuments = 2
+                }
+            }
+            public enum DocumentState
             {
                 New = 0,
-                Corrective = 5,
+                Adjustment = 5,
                 Planned = 10,
                 FirmPlanned = 20,
                 Released = 30,
                 Completed = 40,
                 Closed = 50
             }
-        }
-        public enum DocumentStateFlags
-        {
-            New = 1,
-            Planned = 2,
-            FirmPlanned = 4,
-            Released = 8,
-            Completed = 16,
-            Adjustment = 32,
-            Closed = 64
+            [Entity(EntitySet = "General_Documents_DocumentStateChanges", TableName = "Gen_Document_State_Changes")]
+            public partial class DocumentStateChange: EntityResource
+            {
+                public DocumentStateChange(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Documents_DocumentStateChanges";
+                public const string EntityTableName = "Gen_Document_State_Changes";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public General.Documents.DocumentStateChangesRepository.NewState? NewState { get => GetPropertyValue<General.Documents.DocumentStateChangesRepository.NewState?>("NewState"); set => SetPropertyValue<General.Documents.DocumentStateChangesRepository.NewState?>("NewState", value); }
+                [ODataProperty]
+                public Boolean? SystemInitiated { get => GetPropertyValue<Boolean?>("SystemInitiated"); set => SetPropertyValue<Boolean?>("SystemInitiated", value); }
+                [ODataProperty]
+                public DateTime? UpdateTime { get => GetPropertyValue<DateTime?>("UpdateTime"); set => SetPropertyValue<DateTime?>("UpdateTime", value); }
+                [ODataProperty]
+                public String? UpdateUser { get => GetPropertyValue<String?>("UpdateUser"); set => SetPropertyValue<String?>("UpdateUser", value); }
+                [ODataProperty]
+                public Boolean? Void { get => GetPropertyValue<Boolean?>("Void"); set => SetPropertyValue<Boolean?>("Void", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentTypeUserStatus? UserStatus { get => GetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus"); set => SetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace DocumentStateChangesRepository
+            {
+                public enum NewState
+                {
+                    New = 0,
+                    Corrective = 5,
+                    Planned = 10,
+                    FirmPlanned = 20,
+                    Released = 30,
+                    Completed = 40,
+                    Closed = 50
+                }
+            }
+            public enum DocumentStateFlags
+            {
+                New = 1,
+                Planned = 2,
+                FirmPlanned = 4,
+                Released = 8,
+                Completed = 16,
+                Adjustment = 32,
+                Closed = 64
+            }
+            public enum ParentDocumentRelationshipType
+            {
+                Subtask = 0,
+                NextTask = 1,
+                IndependentTask = 2
+            }
         }
         namespace EnterpriseCompaniesRepository
         {
@@ -9880,7 +10072,7 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public General.Products.Product? AdvanceProduct { get => GetPropertyValue<General.Products.Product>("AdvanceProduct"); set => SetPropertyValue<General.Products.Product>("AdvanceProduct", value); }
             [ODataProperty]
-            public General.Currency? BaseCurrency { get => GetPropertyValue<General.Currency>("BaseCurrency"); set => SetPropertyValue<General.Currency>("BaseCurrency", value); }
+            public General.Currencies.Currency? BaseCurrency { get => GetPropertyValue<General.Currencies.Currency>("BaseCurrency"); set => SetPropertyValue<General.Currencies.Currency>("BaseCurrency", value); }
             [ODataProperty]
             public General.Contacts.Company? Company { get => GetPropertyValue<General.Contacts.Company>("Company"); set => SetPropertyValue<General.Contacts.Company>("Company", value); }
             [ODataProperty]
@@ -10057,122 +10249,6 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
         }
-        [Entity(EntitySet = "General_LinkTypes", TableName = "Gen_Link_Types")]
-        public partial class LinkType: EntityResource
-        {
-            public LinkType(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_LinkTypes";
-            public const string EntityTableName = "Gen_Link_Types";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Guid? FromDocTypeId { get => GetPropertyValue<Guid?>("FromDocTypeId"); set => SetPropertyValue<Guid?>("FromDocTypeId", value); }
-            [ODataProperty]
-            public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
-            [ODataProperty]
-            public Guid? ToDocTypeId { get => GetPropertyValue<Guid?>("ToDocTypeId"); set => SetPropertyValue<Guid?>("ToDocTypeId", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        public enum ParentDocumentRelationshipType
-        {
-            Subtask = 0,
-            NextTask = 1,
-            IndependentTask = 2
-        }
-        [Entity(EntitySet = "General_PartyApplicableLegislations", TableName = "Gen_Party_Applicable_Legislations")]
-        public partial class PartyApplicableLegislation: EntityResource
-        {
-            public PartyApplicableLegislation(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_PartyApplicableLegislations";
-            public const string EntityTableName = "Gen_Party_Applicable_Legislations";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public General.PartyApplicableLegislationsRepository.ApplicableLegislation? ApplicableLegislation { get => GetPropertyValue<General.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation"); set => SetPropertyValue<General.PartyApplicableLegislationsRepository.ApplicableLegislation?>("ApplicableLegislation", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        namespace PartyApplicableLegislationsRepository
-        {
-            public enum ApplicableLegislation
-            {
-                UnitedArabEmirates = 0,
-                Australia = 1,
-                Bulgaria = 2,
-                Canada = 3,
-                China = 4,
-                CzechRepublic = 5,
-                Germany = 6,
-                Spain = 7,
-                EuropeanUnion = 8,
-                France = 9,
-                Greece = 10,
-                Hungary = 11,
-                India = 12,
-                Italy = 13,
-                Japan = 14,
-                Macedonia = 15,
-                Poland = 16,
-                Portugal = 17,
-                Romania = 18,
-                Serbia = 19,
-                Russia = 20,
-                Turkey = 21,
-                UnitedKingdom = 22,
-                UnitedStates = 23,
-                SouthAfrica = 24
-            }
-        }
-        [Entity(EntitySet = "General_PartyLocationNumbers", TableName = "Gen_Party_Location_Numbers")]
-        public partial class PartyLocationNumber: EntityResource
-        {
-            public PartyLocationNumber(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_PartyLocationNumbers";
-            public const string EntityTableName = "Gen_Party_Location_Numbers";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public General.PartyLocationNumbersRepository.LocationCodingSystem? LocationCodingSystem { get => GetPropertyValue<General.PartyLocationNumbersRepository.LocationCodingSystem?>("LocationCodingSystem"); set => SetPropertyValue<General.PartyLocationNumbersRepository.LocationCodingSystem?>("LocationCodingSystem", value); }
-            [ODataProperty]
-            public String? LocationNumber { get => GetPropertyValue<String?>("LocationNumber"); set => SetPropertyValue<String?>("LocationNumber", value); }
-            [ODataProperty]
-            public String? PartnerLocationNumber { get => GetPropertyValue<String?>("PartnerLocationNumber"); set => SetPropertyValue<String?>("PartnerLocationNumber", value); }
-            [ODataProperty]
-            public Int32? Significance { get => GetPropertyValue<Int32?>("Significance"); set => SetPropertyValue<Int32?>("Significance", value); }
-            [ODataProperty]
-            public General.Contacts.Party? PartnerParty { get => GetPropertyValue<General.Contacts.Party>("PartnerParty"); set => SetPropertyValue<General.Contacts.Party>("PartnerParty", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        namespace PartyLocationNumbersRepository
-        {
-            public enum LocationCodingSystem
-            {
-                GLN = 0,
-                Internal = 1
-            }
-        }
         public enum Priority
         {
             Lowest = 1,
@@ -10201,6 +10277,38 @@ namespace ErpNet.Api.Client.DomainApi
                 public Boolean? IsUnique { get => GetPropertyValue<Boolean?>("IsUnique"); set => SetPropertyValue<Boolean?>("IsUnique", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? DefaultMeasurementUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("DefaultMeasurementUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("DefaultMeasurementUnit", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "General_Products_CompositeProductComponents", TableName = "Log_Composite_Product_Components")]
+            public partial class CompositeProductComponent: EntityResource
+            {
+                public CompositeProductComponent(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "General_Products_CompositeProductComponents";
+                public const string EntityTableName = "Log_Composite_Product_Components";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Int32? ComponentNo { get => GetPropertyValue<Int32?>("ComponentNo"); set => SetPropertyValue<Int32?>("ComponentNo", value); }
+                [ODataProperty]
+                public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public Decimal? Quantity { get => GetPropertyValue<Decimal?>("Quantity"); set => SetPropertyValue<Decimal?>("Quantity", value); }
+                [ODataProperty]
+                public DateTime? ToDate { get => GetPropertyValue<DateTime?>("ToDate"); set => SetPropertyValue<DateTime?>("ToDate", value); }
+                [ODataProperty]
+                public General.Products.Product? ComponentProduct { get => GetPropertyValue<General.Products.Product>("ComponentProduct"); set => SetPropertyValue<General.Products.Product>("ComponentProduct", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Products.Product? CompositeProduct { get => GetPropertyValue<General.Products.Product>("CompositeProduct"); set => SetPropertyValue<General.Products.Product>("CompositeProduct", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -10352,7 +10460,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.CargoType? CargoType { get => GetPropertyValue<Logistics.Shipment.CargoType>("CargoType"); set => SetPropertyValue<Logistics.Shipment.CargoType>("CargoType", value); }
                 [ODataProperty]
-                public General.Currency? CostingCurrency { get => GetPropertyValue<General.Currency>("CostingCurrency"); set => SetPropertyValue<General.Currency>("CostingCurrency", value); }
+                public General.Currencies.Currency? CostingCurrency { get => GetPropertyValue<General.Currencies.Currency>("CostingCurrency"); set => SetPropertyValue<General.Currencies.Currency>("CostingCurrency", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -10388,7 +10496,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public IEnumerable<Logistics.Inventory.ProductDefaultStoreBin>? DefaultStoreBins { get => GetCollection<Logistics.Inventory.ProductDefaultStoreBin>("DefaultStoreBins"); set => SetCollection<Logistics.Inventory.ProductDefaultStoreBin>("DefaultStoreBins", value); }
                 [ODataProperty]
-                public IEnumerable<Logistics.CompositeProductComponent>? CompositeProductComponents { get => GetCollection<Logistics.CompositeProductComponent>("CompositeProductComponents"); set => SetCollection<Logistics.CompositeProductComponent>("CompositeProductComponents", value); }
+                public IEnumerable<General.Products.CompositeProductComponent>? CompositeProductComponents { get => GetCollection<General.Products.CompositeProductComponent>("CompositeProductComponents"); set => SetCollection<General.Products.CompositeProductComponent>("CompositeProductComponents", value); }
                 [ODataProperty]
                 public IEnumerable<Crm.LineDiscount>? LineDiscounts { get => GetCollection<Crm.LineDiscount>("LineDiscounts"); set => SetCollection<Crm.LineDiscount>("LineDiscounts", value); }
                 [ODataProperty]
@@ -11043,41 +11151,7 @@ namespace ErpNet.Api.Client.DomainApi
             [ODataProperty]
             public Boolean? ShowParentTables { get => GetPropertyValue<Boolean?>("ShowParentTables"); set => SetPropertyValue<Boolean?>("ShowParentTables", value); }
             [ODataProperty]
-            public IEnumerable<General.ReportQuery>? Queries { get => GetCollection<General.ReportQuery>("Queries"); set => SetCollection<General.ReportQuery>("Queries", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "General_ReportQueries", TableName = "Gen_Report_Queries")]
-        public partial class ReportQuery: EntityResource
-        {
-            public ReportQuery(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_ReportQueries";
-            public const string EntityTableName = "Gen_Report_Queries";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Boolean? DependsOnChildRows { get => GetPropertyValue<Boolean?>("DependsOnChildRows"); set => SetPropertyValue<Boolean?>("DependsOnChildRows", value); }
-            [ODataProperty]
-            public String? ExtensionsList { get => GetPropertyValue<String?>("ExtensionsList"); set => SetPropertyValue<String?>("ExtensionsList", value); }
-            [ODataProperty]
-            public String? FilterXml { get => GetPropertyValue<String?>("FilterXml"); set => SetPropertyValue<String?>("FilterXml", value); }
-            [ODataProperty]
-            public String? ReferencePath { get => GetPropertyValue<String?>("ReferencePath"); set => SetPropertyValue<String?>("ReferencePath", value); }
-            [ODataProperty]
-            public Boolean? ShowCustomProperties { get => GetPropertyValue<Boolean?>("ShowCustomProperties"); set => SetPropertyValue<Boolean?>("ShowCustomProperties", value); }
-            [ODataProperty]
-            public Boolean? ShowTextColumns { get => GetPropertyValue<Boolean?>("ShowTextColumns"); set => SetPropertyValue<Boolean?>("ShowTextColumns", value); }
-            [ODataProperty]
-            public String? TableName { get => GetPropertyValue<String?>("TableName"); set => SetPropertyValue<String?>("TableName", value); }
-            [ODataProperty]
-            public String? UniqueName { get => GetPropertyValue<String?>("UniqueName"); set => SetPropertyValue<String?>("UniqueName", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Report? Report { get => GetPropertyValue<General.Report>("Report"); set => SetPropertyValue<General.Report>("Report", value); }
+            public IEnumerable<Systems.Core.ReportQuery>? Queries { get => GetCollection<Systems.Core.ReportQuery>("Queries"); set => SetCollection<Systems.Core.ReportQuery>("Queries", value); }
             public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
             public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
             public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -11100,7 +11174,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
-                public General.Currency? CostingCurrency { get => GetPropertyValue<General.Currency>("CostingCurrency"); set => SetPropertyValue<General.Currency>("CostingCurrency", value); }
+                public General.Currencies.Currency? CostingCurrency { get => GetPropertyValue<General.Currencies.Currency>("CostingCurrency"); set => SetPropertyValue<General.Currencies.Currency>("CostingCurrency", value); }
                 [Owner]
                 [ODataProperty]
                 public General.Resources.ResourceGroup? ResourceGroup { get => GetPropertyValue<General.Resources.ResourceGroup>("ResourceGroup"); set => SetPropertyValue<General.Resources.ResourceGroup>("ResourceGroup", value); }
@@ -11277,36 +11351,6 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
         }
-        [Entity(EntitySet = "General_SequenceGenerators", TableName = "Gen_Sequence_Generators")]
-        public partial class SequenceGenerator: EntityResource
-        {
-            public SequenceGenerator(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "General_SequenceGenerators";
-            public const string EntityTableName = "Gen_Sequence_Generators";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Boolean? AllowExplicitNumbering { get => GetPropertyValue<Boolean?>("AllowExplicitNumbering"); set => SetPropertyValue<Boolean?>("AllowExplicitNumbering", value); }
-            [ODataProperty]
-            public String? NextValue { get => GetPropertyValue<String?>("NextValue"); set => SetPropertyValue<String?>("NextValue", value); }
-            [ODataProperty]
-            public Int32? SequencePriority { get => GetPropertyValue<Int32?>("SequencePriority"); set => SetPropertyValue<Int32?>("SequencePriority", value); }
-            [ODataProperty]
-            public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
-            [ODataProperty]
-            public General.Contacts.CompanyLocation? EnterpriseCompanyLocation { get => GetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation"); set => SetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation", value); }
-            [ODataProperty]
-            public General.Contacts.Person? ResponsiblePerson { get => GetPropertyValue<General.Contacts.Person>("ResponsiblePerson"); set => SetPropertyValue<General.Contacts.Person>("ResponsiblePerson", value); }
-            [Owner]
-            [ODataProperty]
-            public Systems.Documents.Sequence? Sequence { get => GetPropertyValue<Systems.Documents.Sequence>("Sequence"); set => SetPropertyValue<Systems.Documents.Sequence>("Sequence", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
         public enum SignRestriction
         {
             AllowAll = 0,
@@ -11316,42 +11360,140 @@ namespace ErpNet.Api.Client.DomainApi
     }
     namespace Logistics
     {
-        [Entity(EntitySet = "Logistics_CompositeProductComponents", TableName = "Log_Composite_Product_Components")]
-        public partial class CompositeProductComponent: EntityResource
+        namespace Common
         {
-            public CompositeProductComponent(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Logistics_CompositeProductComponents";
-            public const string EntityTableName = "Log_Composite_Product_Components";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Int32? ComponentNo { get => GetPropertyValue<Int32?>("ComponentNo"); set => SetPropertyValue<Int32?>("ComponentNo", value); }
-            [ODataProperty]
-            public DateTime? FromDate { get => GetPropertyValue<DateTime?>("FromDate"); set => SetPropertyValue<DateTime?>("FromDate", value); }
-            [ODataProperty]
-            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [ODataProperty]
-            public Decimal? Quantity { get => GetPropertyValue<Decimal?>("Quantity"); set => SetPropertyValue<Decimal?>("Quantity", value); }
-            [ODataProperty]
-            public DateTime? ToDate { get => GetPropertyValue<DateTime?>("ToDate"); set => SetPropertyValue<DateTime?>("ToDate", value); }
-            [ODataProperty]
-            public General.Products.Product? ComponentProduct { get => GetPropertyValue<General.Products.Product>("ComponentProduct"); set => SetPropertyValue<General.Products.Product>("ComponentProduct", value); }
-            [Owner]
-            [ODataProperty]
-            public General.Products.Product? CompositeProduct { get => GetPropertyValue<General.Products.Product>("CompositeProduct"); set => SetPropertyValue<General.Products.Product>("CompositeProduct", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            [Entity(EntitySet = "Logistics_Common_LogisticUnits", TableName = "Log_Logistic_Units")]
+            public partial class LogisticUnit: EntityResource
+            {
+                public LogisticUnit(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Logistics_Common_LogisticUnits";
+                public const string EntityTableName = "Log_Logistic_Units";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Decimal? ExpectedWeight { get => GetPropertyValue<Decimal?>("ExpectedWeight"); set => SetPropertyValue<Decimal?>("ExpectedWeight", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
+                public Decimal? MeasuredWeight { get => GetPropertyValue<Decimal?>("MeasuredWeight"); set => SetPropertyValue<Decimal?>("MeasuredWeight", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public String? SerialCode { get => GetPropertyValue<String?>("SerialCode"); set => SetPropertyValue<String?>("SerialCode", value); }
+                [ODataProperty]
+                public Logistics.Shipment.CargoType? CargoType { get => GetPropertyValue<Logistics.Shipment.CargoType>("CargoType"); set => SetPropertyValue<Logistics.Shipment.CargoType>("CargoType", value); }
+                [ODataProperty]
+                public Logistics.Common.LogisticUnitType? LogisticUnitType { get => GetPropertyValue<Logistics.Common.LogisticUnitType>("LogisticUnitType"); set => SetPropertyValue<Logistics.Common.LogisticUnitType>("LogisticUnitType", value); }
+                [ODataProperty]
+                public General.Products.Product? RepresentedAsProduct { get => GetPropertyValue<General.Products.Product>("RepresentedAsProduct"); set => SetPropertyValue<General.Products.Product>("RepresentedAsProduct", value); }
+                [ODataProperty]
+                public IEnumerable<Logistics.Common.LogisticUnitContent>? Contents { get => GetCollection<Logistics.Common.LogisticUnitContent>("Contents"); set => SetCollection<Logistics.Common.LogisticUnitContent>("Contents", value); }
+                [ODataProperty]
+                public IEnumerable<Logistics.Common.LogisticUnitSpecification>? Specifications { get => GetCollection<Logistics.Common.LogisticUnitSpecification>("Specifications"); set => SetCollection<Logistics.Common.LogisticUnitSpecification>("Specifications", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task UpdateGS1ApplicationCodesAsync(DomainApiService service) { await this.InvokeActionAsync(service, "UpdateGS1ApplicationCodes"); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Logistics_Common_LogisticUnitContents", TableName = "Log_Logistic_Unit_Contents")]
+            public partial class LogisticUnitContent: EntityResource
+            {
+                public LogisticUnitContent(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Logistics_Common_LogisticUnitContents";
+                public const string EntityTableName = "Log_Logistic_Unit_Contents";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Quantity? BaseQuantity { get => GetPropertyValue<Quantity?>("BaseQuantity"); set => SetPropertyValue<Quantity?>("BaseQuantity", value); }
+                [ODataProperty]
+                public DateTime? ExpirationDate { get => GetPropertyValue<DateTime?>("ExpirationDate"); set => SetPropertyValue<DateTime?>("ExpirationDate", value); }
+                [ODataProperty]
+                public Decimal? GrossWeight { get => GetPropertyValue<Decimal?>("GrossWeight"); set => SetPropertyValue<Decimal?>("GrossWeight", value); }
+                [ODataProperty]
+                public Int32? LineNo { get => GetPropertyValue<Int32?>("LineNo"); set => SetPropertyValue<Int32?>("LineNo", value); }
+                [ODataProperty]
+                public String? LotNumber { get => GetPropertyValue<String?>("LotNumber"); set => SetPropertyValue<String?>("LotNumber", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public Quantity? Quantity { get => GetPropertyValue<Quantity?>("Quantity"); set => SetPropertyValue<Quantity?>("Quantity", value); }
+                [ODataProperty]
+                public Quantity? StandardQuantity { get => GetPropertyValue<Quantity?>("StandardQuantity"); set => SetPropertyValue<Quantity?>("StandardQuantity", value); }
+                [Owner]
+                [ODataProperty]
+                public Logistics.Common.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit", value); }
+                [ODataProperty]
+                public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
+                [ODataProperty]
+                public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
+                [ODataProperty]
+                public General.Products.ProductVariant? ProductVariant { get => GetPropertyValue<General.Products.ProductVariant>("ProductVariant"); set => SetPropertyValue<General.Products.ProductVariant>("ProductVariant", value); }
+                [ODataProperty]
+                public General.Products.MeasurementUnit? QuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit", value); }
+                [ODataProperty]
+                public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Logistics_Common_LogisticUnitSpecifications", TableName = "Log_Logistic_Unit_Specifications")]
+            public partial class LogisticUnitSpecification: EntityResource
+            {
+                public LogisticUnitSpecification(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Logistics_Common_LogisticUnitSpecifications";
+                public const string EntityTableName = "Log_Logistic_Unit_Specifications";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
+                [ODataProperty]
+                public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public String? Value { get => GetPropertyValue<String?>("Value"); set => SetPropertyValue<String?>("Value", value); }
+                [Owner]
+                [ODataProperty]
+                public Logistics.Common.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Logistics_Common_LogisticUnitTypes", TableName = "Log_Logistic_Unit_Types")]
+            public partial class LogisticUnitType: EntityResource
+            {
+                public LogisticUnitType(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Logistics_Common_LogisticUnitTypes";
+                public const string EntityTableName = "Log_Logistic_Unit_Types";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
+                [ODataProperty]
+                public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
         }
         namespace Inventory
         {
             [Entity(EntitySet = "Logistics_Inventory_CostCorrections", TableName = "Inv_Cost_Corrections")]
-            public partial class CostCorrection: General.Document
+            public partial class CostCorrection: General.Documents.Document
             {
                 public CostCorrection(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Inventory_CostCorrections";
@@ -11372,15 +11514,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Inventory.CostCorrectionLine>? Lines { get => GetCollection<Logistics.Inventory.CostCorrectionLine>("Lines"); set => SetCollection<Logistics.Inventory.CostCorrectionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_CostCorrectionLines", TableName = "Inv_Cost_Correction_Lines")]
             public partial class CostCorrectionLine: EntityResource
@@ -11584,11 +11726,11 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.LotsRepository.Status? Status { get => GetPropertyValue<Logistics.Inventory.LotsRepository.Status?>("Status"); set => SetPropertyValue<Logistics.Inventory.LotsRepository.Status?>("Status", value); }
                 [ODataProperty]
-                public General.Document? BlockedForDocument { get => GetPropertyValue<General.Document>("BlockedForDocument"); set => SetPropertyValue<General.Document>("BlockedForDocument", value); }
+                public General.Documents.Document? BlockedForDocument { get => GetPropertyValue<General.Documents.Document>("BlockedForDocument"); set => SetPropertyValue<General.Documents.Document>("BlockedForDocument", value); }
                 [ODataProperty]
                 public General.Contacts.Party? BlockedForParty { get => GetPropertyValue<General.Contacts.Party>("BlockedForParty"); set => SetPropertyValue<General.Contacts.Party>("BlockedForParty", value); }
                 [ODataProperty]
-                public General.Document? CertificateDocument { get => GetPropertyValue<General.Document>("CertificateDocument"); set => SetPropertyValue<General.Document>("CertificateDocument", value); }
+                public General.Documents.Document? CertificateDocument { get => GetPropertyValue<General.Documents.Document>("CertificateDocument"); set => SetPropertyValue<General.Documents.Document>("CertificateDocument", value); }
                 [ODataProperty]
                 public Finance.Excise.MeasuringTransaction? ExciseMeasuringTransaction { get => GetPropertyValue<Finance.Excise.MeasuringTransaction>("ExciseMeasuringTransaction"); set => SetPropertyValue<Finance.Excise.MeasuringTransaction>("ExciseMeasuringTransaction", value); }
                 [ODataProperty]
@@ -11659,7 +11801,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_Reconciliations", TableName = "Inv_Reconciliations")]
-            public partial class Reconciliation: General.Document
+            public partial class Reconciliation: General.Documents.Document
             {
                 public Reconciliation(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Inventory_Reconciliations";
@@ -11684,15 +11826,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Inventory.ReconciliationLine>? Lines { get => GetCollection<Logistics.Inventory.ReconciliationLine>("Lines"); set => SetCollection<Logistics.Inventory.ReconciliationLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_ReconciliationCounts", TableName = "Inv_Reconciliation_Counts")]
             public partial class ReconciliationCount: EntityResource
@@ -11912,7 +12054,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreBin? DefaultStoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("DefaultStoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("DefaultStoreBin", value); }
                 [ODataProperty]
@@ -11994,7 +12136,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_StoreOrders", TableName = "Inv_Store_Orders")]
-            public partial class StoreOrder: General.Document
+            public partial class StoreOrder: General.Documents.Document
             {
                 public StoreOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Inventory_StoreOrders";
@@ -12020,7 +12162,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? VehicleRegNumber { get => GetPropertyValue<String?>("VehicleRegNumber"); set => SetPropertyValue<String?>("VehicleRegNumber", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? IssuedByParty { get => GetPropertyValue<General.Contacts.Party>("IssuedByParty"); set => SetPropertyValue<General.Contacts.Party>("IssuedByParty", value); }
                 [ODataProperty]
@@ -12033,15 +12175,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Inventory.StoreOrderLine>? Lines { get => GetCollection<Logistics.Inventory.StoreOrderLine>("Lines"); set => SetCollection<Logistics.Inventory.StoreOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_StoreOrderLines", TableName = "Inv_Store_Order_Lines")]
             public partial class StoreOrderLine: EntityResource
@@ -12086,7 +12228,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 [ODataProperty]
@@ -12167,7 +12309,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_StoreTransactions", TableName = "Inv_Transactions")]
-            public partial class StoreTransaction: General.Document
+            public partial class StoreTransaction: General.Documents.Document
             {
                 public StoreTransaction(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Inventory_StoreTransactions";
@@ -12185,7 +12327,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.MovementType? MovementType { get => GetPropertyValue<Logistics.Inventory.MovementType?>("MovementType"); set => SetPropertyValue<Logistics.Inventory.MovementType?>("MovementType", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Person? IssuingPerson { get => GetPropertyValue<General.Contacts.Person>("IssuingPerson"); set => SetPropertyValue<General.Contacts.Person>("IssuingPerson", value); }
                 [ODataProperty]
@@ -12200,15 +12342,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Inventory.StoreTransactionLine>? Lines { get => GetCollection<Logistics.Inventory.StoreTransactionLine>("Lines"); set => SetCollection<Logistics.Inventory.StoreTransactionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_StoreTransactionLines", TableName = "Inv_Transaction_Lines")]
             public partial class StoreTransactionLine: EntityResource
@@ -12263,7 +12405,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Products.Product? OriginalProduct { get => GetPropertyValue<General.Products.Product>("OriginalProduct"); set => SetPropertyValue<General.Products.Product>("OriginalProduct", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreOrderLine? ParentStoreOrderLine { get => GetPropertyValue<Logistics.Inventory.StoreOrderLine>("ParentStoreOrderLine"); set => SetPropertyValue<Logistics.Inventory.StoreOrderLine>("ParentStoreOrderLine", value); }
                 [ODataProperty]
@@ -12388,7 +12530,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_TransferOrders", TableName = "Inv_Transfer_Orders")]
-            public partial class TransferOrder: General.Document
+            public partial class TransferOrder: General.Documents.Document
             {
                 public TransferOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Inventory_TransferOrders";
@@ -12413,15 +12555,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Inventory.TransferOrderLine>? Lines { get => GetCollection<Logistics.Inventory.TransferOrderLine>("Lines"); set => SetCollection<Logistics.Inventory.TransferOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Inventory_TransferOrderLines", TableName = "Inv_Transfer_Order_Lines")]
             public partial class TransferOrderLine: EntityResource
@@ -12506,137 +12648,10 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
         }
-        [Entity(EntitySet = "Logistics_LogisticUnits", TableName = "Log_Logistic_Units")]
-        public partial class LogisticUnit: EntityResource
-        {
-            public LogisticUnit(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Logistics_LogisticUnits";
-            public const string EntityTableName = "Log_Logistic_Units";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Decimal? ExpectedWeight { get => GetPropertyValue<Decimal?>("ExpectedWeight"); set => SetPropertyValue<Decimal?>("ExpectedWeight", value); }
-            [ODataProperty]
-            public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
-            [ODataProperty]
-            public Decimal? MeasuredWeight { get => GetPropertyValue<Decimal?>("MeasuredWeight"); set => SetPropertyValue<Decimal?>("MeasuredWeight", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [ODataProperty]
-            public String? SerialCode { get => GetPropertyValue<String?>("SerialCode"); set => SetPropertyValue<String?>("SerialCode", value); }
-            [ODataProperty]
-            public Logistics.Shipment.CargoType? CargoType { get => GetPropertyValue<Logistics.Shipment.CargoType>("CargoType"); set => SetPropertyValue<Logistics.Shipment.CargoType>("CargoType", value); }
-            [ODataProperty]
-            public Logistics.LogisticUnitType? LogisticUnitType { get => GetPropertyValue<Logistics.LogisticUnitType>("LogisticUnitType"); set => SetPropertyValue<Logistics.LogisticUnitType>("LogisticUnitType", value); }
-            [ODataProperty]
-            public General.Products.Product? RepresentedAsProduct { get => GetPropertyValue<General.Products.Product>("RepresentedAsProduct"); set => SetPropertyValue<General.Products.Product>("RepresentedAsProduct", value); }
-            [ODataProperty]
-            public IEnumerable<Logistics.LogisticUnitContent>? Contents { get => GetCollection<Logistics.LogisticUnitContent>("Contents"); set => SetCollection<Logistics.LogisticUnitContent>("Contents", value); }
-            [ODataProperty]
-            public IEnumerable<Logistics.LogisticUnitSpecification>? Specifications { get => GetCollection<Logistics.LogisticUnitSpecification>("Specifications"); set => SetCollection<Logistics.LogisticUnitSpecification>("Specifications", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task UpdateGS1ApplicationCodesAsync(DomainApiService service) { await this.InvokeActionAsync(service, "UpdateGS1ApplicationCodes"); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "Logistics_LogisticUnitContents", TableName = "Log_Logistic_Unit_Contents")]
-        public partial class LogisticUnitContent: EntityResource
-        {
-            public LogisticUnitContent(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Logistics_LogisticUnitContents";
-            public const string EntityTableName = "Log_Logistic_Unit_Contents";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Quantity? BaseQuantity { get => GetPropertyValue<Quantity?>("BaseQuantity"); set => SetPropertyValue<Quantity?>("BaseQuantity", value); }
-            [ODataProperty]
-            public DateTime? ExpirationDate { get => GetPropertyValue<DateTime?>("ExpirationDate"); set => SetPropertyValue<DateTime?>("ExpirationDate", value); }
-            [ODataProperty]
-            public Decimal? GrossWeight { get => GetPropertyValue<Decimal?>("GrossWeight"); set => SetPropertyValue<Decimal?>("GrossWeight", value); }
-            [ODataProperty]
-            public Int32? LineNo { get => GetPropertyValue<Int32?>("LineNo"); set => SetPropertyValue<Int32?>("LineNo", value); }
-            [ODataProperty]
-            public String? LotNumber { get => GetPropertyValue<String?>("LotNumber"); set => SetPropertyValue<String?>("LotNumber", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [ODataProperty]
-            public Quantity? Quantity { get => GetPropertyValue<Quantity?>("Quantity"); set => SetPropertyValue<Quantity?>("Quantity", value); }
-            [ODataProperty]
-            public Quantity? StandardQuantity { get => GetPropertyValue<Quantity?>("StandardQuantity"); set => SetPropertyValue<Quantity?>("StandardQuantity", value); }
-            [Owner]
-            [ODataProperty]
-            public Logistics.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.LogisticUnit>("LogisticUnit", value); }
-            [ODataProperty]
-            public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
-            [ODataProperty]
-            public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
-            [ODataProperty]
-            public General.Products.ProductVariant? ProductVariant { get => GetPropertyValue<General.Products.ProductVariant>("ProductVariant"); set => SetPropertyValue<General.Products.ProductVariant>("ProductVariant", value); }
-            [ODataProperty]
-            public General.Products.MeasurementUnit? QuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit", value); }
-            [ODataProperty]
-            public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "Logistics_LogisticUnitSpecifications", TableName = "Log_Logistic_Unit_Specifications")]
-        public partial class LogisticUnitSpecification: EntityResource
-        {
-            public LogisticUnitSpecification(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Logistics_LogisticUnitSpecifications";
-            public const string EntityTableName = "Log_Logistic_Unit_Specifications";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
-            [ODataProperty]
-            public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            [ODataProperty]
-            public String? Value { get => GetPropertyValue<String?>("Value"); set => SetPropertyValue<String?>("Value", value); }
-            [Owner]
-            [ODataProperty]
-            public Logistics.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.LogisticUnit>("LogisticUnit", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
-        [Entity(EntitySet = "Logistics_LogisticUnitTypes", TableName = "Log_Logistic_Unit_Types")]
-        public partial class LogisticUnitType: EntityResource
-        {
-            public LogisticUnitType(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Logistics_LogisticUnitTypes";
-            public const string EntityTableName = "Log_Logistic_Unit_Types";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
-            [ODataProperty]
-            public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
-            [ODataProperty]
-            public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
         namespace Procurement
         {
             [Entity(EntitySet = "Logistics_Procurement_PurchaseControlDocuments", TableName = "Scm_Purchase_Control_Documents")]
-            public partial class PurchaseControlDocument: General.Document
+            public partial class PurchaseControlDocument: General.Documents.Document
             {
                 public PurchaseControlDocument(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Procurement_PurchaseControlDocuments";
@@ -12653,15 +12668,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Procurement.PurchaseControlDocumentLine>? Lines { get => GetCollection<Logistics.Procurement.PurchaseControlDocumentLine>("Lines"); set => SetCollection<Logistics.Procurement.PurchaseControlDocumentLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_PurchaseControlDocumentLines", TableName = "Scm_Purchase_Control_Document_Lines")]
             public partial class PurchaseControlDocumentLine: EntityResource
@@ -12726,7 +12741,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_PurchaseInvoices", TableName = "Scm_Purchase_Invoices")]
-            public partial class PurchaseInvoice: General.Document
+            public partial class PurchaseInvoice: General.Documents.Document
             {
                 public PurchaseInvoice(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Procurement_PurchaseInvoices";
@@ -12758,7 +12773,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Vat.DealType? DealType { get => GetPropertyValue<Finance.Vat.DealType>("DealType"); set => SetPropertyValue<Finance.Vat.DealType>("DealType", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public General.Geography.AdministrativeRegion? IntrastatDestinationRegion { get => GetPropertyValue<General.Geography.AdministrativeRegion>("IntrastatDestinationRegion"); set => SetPropertyValue<General.Geography.AdministrativeRegion>("IntrastatDestinationRegion", value); }
                 [ODataProperty]
@@ -12781,15 +12796,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Procurement.PurchaseInvoiceLine>? Lines { get => GetCollection<Logistics.Procurement.PurchaseInvoiceLine>("Lines"); set => SetCollection<Logistics.Procurement.PurchaseInvoiceLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_PurchaseInvoiceLines", TableName = "Scm_Purchase_Invoice_Lines")]
             public partial class PurchaseInvoiceLine: EntityResource
@@ -12914,7 +12929,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_PurchaseOrders", TableName = "Scm_Purchase_Orders")]
-            public partial class PurchaseOrder: General.Document
+            public partial class PurchaseOrder: General.Documents.Document
             {
                 public PurchaseOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Procurement_PurchaseOrders";
@@ -12934,7 +12949,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? PlannedReleaseDate { get => GetPropertyValue<DateTime?>("PlannedReleaseDate"); set => SetPropertyValue<DateTime?>("PlannedReleaseDate", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentAccount? PaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount", value); }
                 [ODataProperty]
@@ -12949,15 +12964,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Procurement.PurchaseOrderLine>? Lines { get => GetCollection<Logistics.Procurement.PurchaseOrderLine>("Lines"); set => SetCollection<Logistics.Procurement.PurchaseOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_PurchaseOrderLines", TableName = "Scm_Purchase_Order_Lines")]
             public partial class PurchaseOrderLine: EntityResource
@@ -13000,7 +13015,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.ProductCode? ProductCode { get => GetPropertyValue<General.Products.ProductCode>("ProductCode"); set => SetPropertyValue<General.Products.ProductCode>("ProductCode", value); }
                 [ODataProperty]
@@ -13071,7 +13086,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? ThruDate { get => GetPropertyValue<DateTime?>("ThruDate"); set => SetPropertyValue<DateTime?>("ThruDate", value); }
                 [ODataProperty]
-                public General.Currency? Currency { get => GetPropertyValue<General.Currency>("Currency"); set => SetPropertyValue<General.Currency>("Currency", value); }
+                public General.Currencies.Currency? Currency { get => GetPropertyValue<General.Currencies.Currency>("Currency"); set => SetPropertyValue<General.Currencies.Currency>("Currency", value); }
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
@@ -13101,7 +13116,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Logistics_Procurement_ReceivingOrders", TableName = "Scm_Receiving_Orders")]
-            public partial class ReceivingOrder: General.Document
+            public partial class ReceivingOrder: General.Documents.Document
             {
                 public ReceivingOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Procurement_ReceivingOrders";
@@ -13123,7 +13138,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? PurchaseLotDescription { get => GetPropertyValue<String?>("PurchaseLotDescription"); set => SetPropertyValue<String?>("PurchaseLotDescription", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentAccount? PaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("PaymentAccount", value); }
                 [ODataProperty]
@@ -13140,15 +13155,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Procurement.ReceivingOrderLine>? Lines { get => GetCollection<Logistics.Procurement.ReceivingOrderLine>("Lines"); set => SetCollection<Logistics.Procurement.ReceivingOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_ReceivingOrderLines", TableName = "Scm_Receiving_Order_Lines")]
             public partial class ReceivingOrderLine: EntityResource
@@ -13217,7 +13232,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_Requisitions", TableName = "Scm_Requisitions")]
-            public partial class Requisition: General.Document
+            public partial class Requisition: General.Documents.Document
             {
                 public Requisition(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Procurement_Requisitions";
@@ -13238,15 +13253,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Procurement.RequisitionLine>? Lines { get => GetCollection<Logistics.Procurement.RequisitionLine>("Lines"); set => SetCollection<Logistics.Procurement.RequisitionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Procurement_RequisitionLines", TableName = "Scm_Requisition_Lines")]
             public partial class RequisitionLine: EntityResource
@@ -13325,7 +13340,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? UpdateUser { get => GetPropertyValue<String?>("UpdateUser"); set => SetPropertyValue<String?>("UpdateUser", value); }
                 [ODataProperty]
-                public General.Currency? DefaultCurrency { get => GetPropertyValue<General.Currency>("DefaultCurrency"); set => SetPropertyValue<General.Currency>("DefaultCurrency", value); }
+                public General.Currencies.Currency? DefaultCurrency { get => GetPropertyValue<General.Currencies.Currency>("DefaultCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DefaultCurrency", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentAccount? DefaultPaymentAccount { get => GetPropertyValue<Finance.Payments.PaymentAccount>("DefaultPaymentAccount"); set => SetPropertyValue<Finance.Payments.PaymentAccount>("DefaultPaymentAccount", value); }
                 [ODataProperty]
@@ -13416,7 +13431,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Shipment_Shipments", TableName = "Log_Shipments")]
-            public partial class Shipment: General.Document
+            public partial class Shipment: General.Documents.Document
             {
                 public Shipment(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Shipment_Shipments";
@@ -13439,15 +13454,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Shipment.ShipmentLine>? Lines { get => GetCollection<Logistics.Shipment.ShipmentLine>("Lines"); set => SetCollection<Logistics.Shipment.ShipmentLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Shipment_ShipmentLines", TableName = "Log_Shipment_Lines")]
             public partial class ShipmentLine: EntityResource
@@ -13498,7 +13513,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public Crm.Sales.SalesOrderLine? ParentSalesOrderLine { get => GetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine"); set => SetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine", value); }
                 [ODataProperty]
@@ -13522,7 +13537,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Shipment_ShipmentOrders", TableName = "Log_Shipment_Orders")]
-            public partial class ShipmentOrder: General.Document
+            public partial class ShipmentOrder: General.Documents.Document
             {
                 public ShipmentOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Shipment_ShipmentOrders";
@@ -13547,15 +13562,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Shipment.ShipmentOrderLine>? Lines { get => GetCollection<Logistics.Shipment.ShipmentOrderLine>("Lines"); set => SetCollection<Logistics.Shipment.ShipmentOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Shipment_ShipmentOrderLines", TableName = "Log_Shipment_Order_Lines")]
             public partial class ShipmentOrderLine: EntityResource
@@ -13606,7 +13621,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public Crm.Sales.SalesOrderLine? ParentSalesOrderLine { get => GetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine"); set => SetPropertyValue<Crm.Sales.SalesOrderLine>("ParentSalesOrderLine", value); }
                 [ODataProperty]
@@ -13625,11 +13640,14 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationExecutions", TableName = "Log_Transportation_Executions")]
-            public partial class TransportationExecution: General.Document
+        }
+        namespace Transportation
+        {
+            [Entity(EntitySet = "Logistics_Transportation_TransportationExecutions", TableName = "Log_Transportation_Executions")]
+            public partial class TransportationExecution: General.Documents.Document
             {
                 public TransportationExecution(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public new const string EntitySetName = "Logistics_Shipment_TransportationExecutions";
+                public new const string EntitySetName = "Logistics_Transportation_TransportationExecutions";
                 public new const string EntityTableName = "Log_Transportation_Executions";
                 [ODataProperty]
                 public DateTime? ExecutionDate { get => GetPropertyValue<DateTime?>("ExecutionDate"); set => SetPropertyValue<DateTime?>("ExecutionDate", value); }
@@ -13638,24 +13656,24 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Geography.GeoPoint? GeoPoint { get => GetPropertyValue<General.Geography.GeoPoint>("GeoPoint"); set => SetPropertyValue<General.Geography.GeoPoint>("GeoPoint", value); }
                 [ODataProperty]
-                public IEnumerable<Logistics.Shipment.TransportationExecutionLine>? Lines { get => GetCollection<Logistics.Shipment.TransportationExecutionLine>("Lines"); set => SetCollection<Logistics.Shipment.TransportationExecutionLine>("Lines", value); }
+                public IEnumerable<Logistics.Transportation.TransportationExecutionLine>? Lines { get => GetCollection<Logistics.Transportation.TransportationExecutionLine>("Lines"); set => SetCollection<Logistics.Transportation.TransportationExecutionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationExecutionLines", TableName = "Log_Transportation_Execution_Lines")]
+            [Entity(EntitySet = "Logistics_Transportation_TransportationExecutionLines", TableName = "Log_Transportation_Execution_Lines")]
             public partial class TransportationExecutionLine: EntityResource
             {
                 public TransportationExecutionLine(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public const string EntitySetName = "Logistics_Shipment_TransportationExecutionLines";
+                public const string EntitySetName = "Logistics_Transportation_TransportationExecutionLines";
                 public const string EntityTableName = "Log_Transportation_Execution_Lines";
                 [ODataProperty]
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
@@ -13670,7 +13688,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationExecutionLinesRepository.OperationType? OperationType { get => GetPropertyValue<Logistics.Shipment.TransportationExecutionLinesRepository.OperationType?>("OperationType"); set => SetPropertyValue<Logistics.Shipment.TransportationExecutionLinesRepository.OperationType?>("OperationType", value); }
+                public Logistics.Transportation.TransportationExecutionLinesRepository.OperationType? OperationType { get => GetPropertyValue<Logistics.Transportation.TransportationExecutionLinesRepository.OperationType?>("OperationType"); set => SetPropertyValue<Logistics.Transportation.TransportationExecutionLinesRepository.OperationType?>("OperationType", value); }
                 [ODataProperty]
                 public String? PalletNumber { get => GetPropertyValue<String?>("PalletNumber"); set => SetPropertyValue<String?>("PalletNumber", value); }
                 [ODataProperty]
@@ -13680,14 +13698,14 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Int32? WeightKg { get => GetPropertyValue<Int32?>("WeightKg"); set => SetPropertyValue<Int32?>("WeightKg", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationOrderLine? ExecutionOfTransportationOrderLine { get => GetPropertyValue<Logistics.Shipment.TransportationOrderLine>("ExecutionOfTransportationOrderLine"); set => SetPropertyValue<Logistics.Shipment.TransportationOrderLine>("ExecutionOfTransportationOrderLine", value); }
+                public Logistics.Transportation.TransportationOrderLine? ExecutionOfTransportationOrderLine { get => GetPropertyValue<Logistics.Transportation.TransportationOrderLine>("ExecutionOfTransportationOrderLine"); set => SetPropertyValue<Logistics.Transportation.TransportationOrderLine>("ExecutionOfTransportationOrderLine", value); }
                 [ODataProperty]
                 public General.Geography.GeoPoint? GeoPoint { get => GetPropertyValue<General.Geography.GeoPoint>("GeoPoint"); set => SetPropertyValue<General.Geography.GeoPoint>("GeoPoint", value); }
                 [Owner]
                 [ODataProperty]
-                public Logistics.Shipment.TransportationExecution? TransportationExecution { get => GetPropertyValue<Logistics.Shipment.TransportationExecution>("TransportationExecution"); set => SetPropertyValue<Logistics.Shipment.TransportationExecution>("TransportationExecution", value); }
+                public Logistics.Transportation.TransportationExecution? TransportationExecution { get => GetPropertyValue<Logistics.Transportation.TransportationExecution>("TransportationExecution"); set => SetPropertyValue<Logistics.Transportation.TransportationExecution>("TransportationExecution", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationExecution? Document { get => GetPropertyValue<Logistics.Shipment.TransportationExecution>("Document"); set => SetPropertyValue<Logistics.Shipment.TransportationExecution>("Document", value); }
+                public Logistics.Transportation.TransportationExecution? Document { get => GetPropertyValue<Logistics.Transportation.TransportationExecution>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationExecution>("Document", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -13702,11 +13720,11 @@ namespace ErpNet.Api.Client.DomainApi
                     Other = 2
                 }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationModes", TableName = "Log_Transportation_Modes")]
+            [Entity(EntitySet = "Logistics_Transportation_TransportationModes", TableName = "Log_Transportation_Modes")]
             public partial class TransportationMode: EntityResource
             {
                 public TransportationMode(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public const string EntitySetName = "Logistics_Shipment_TransportationModes";
+                public const string EntitySetName = "Logistics_Transportation_TransportationModes";
                 public const string EntityTableName = "Log_Transportation_Modes";
                 [ODataProperty]
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
@@ -13723,11 +13741,11 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationOrders", TableName = "Log_Transportation_Orders")]
-            public partial class TransportationOrder: General.Document
+            [Entity(EntitySet = "Logistics_Transportation_TransportationOrders", TableName = "Log_Transportation_Orders")]
+            public partial class TransportationOrder: General.Documents.Document
             {
                 public TransportationOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public new const string EntitySetName = "Logistics_Shipment_TransportationOrders";
+                public new const string EntitySetName = "Logistics_Transportation_TransportationOrders";
                 public new const string EntityTableName = "Log_Transportation_Orders";
                 [ODataProperty]
                 public DateTime? ArrivalDate { get => GetPropertyValue<DateTime?>("ArrivalDate"); set => SetPropertyValue<DateTime?>("ArrivalDate", value); }
@@ -13746,28 +13764,28 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Geography.GeoPoint? ToGeoPoint { get => GetPropertyValue<General.Geography.GeoPoint>("ToGeoPoint"); set => SetPropertyValue<General.Geography.GeoPoint>("ToGeoPoint", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationMode? TransportationMode { get => GetPropertyValue<Logistics.Shipment.TransportationMode>("TransportationMode"); set => SetPropertyValue<Logistics.Shipment.TransportationMode>("TransportationMode", value); }
+                public Logistics.Transportation.TransportationMode? TransportationMode { get => GetPropertyValue<Logistics.Transportation.TransportationMode>("TransportationMode"); set => SetPropertyValue<Logistics.Transportation.TransportationMode>("TransportationMode", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationVehicle? TransportationVehicle { get => GetPropertyValue<Logistics.Shipment.TransportationVehicle>("TransportationVehicle"); set => SetPropertyValue<Logistics.Shipment.TransportationVehicle>("TransportationVehicle", value); }
+                public Logistics.Transportation.TransportationVehicle? TransportationVehicle { get => GetPropertyValue<Logistics.Transportation.TransportationVehicle>("TransportationVehicle"); set => SetPropertyValue<Logistics.Transportation.TransportationVehicle>("TransportationVehicle", value); }
                 [ODataProperty]
-                public IEnumerable<Logistics.Shipment.TransportationOrderLine>? Lines { get => GetCollection<Logistics.Shipment.TransportationOrderLine>("Lines"); set => SetCollection<Logistics.Shipment.TransportationOrderLine>("Lines", value); }
+                public IEnumerable<Logistics.Transportation.TransportationOrderLine>? Lines { get => GetCollection<Logistics.Transportation.TransportationOrderLine>("Lines"); set => SetCollection<Logistics.Transportation.TransportationOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationOrderLines", TableName = "Log_Transportation_Order_Lines")]
+            [Entity(EntitySet = "Logistics_Transportation_TransportationOrderLines", TableName = "Log_Transportation_Order_Lines")]
             public partial class TransportationOrderLine: EntityResource
             {
                 public TransportationOrderLine(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public const string EntitySetName = "Logistics_Shipment_TransportationOrderLines";
+                public const string EntitySetName = "Logistics_Transportation_TransportationOrderLines";
                 public const string EntityTableName = "Log_Transportation_Order_Lines";
                 [ODataProperty]
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
@@ -13790,22 +13808,22 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.CargoType? CargoType { get => GetPropertyValue<Logistics.Shipment.CargoType>("CargoType"); set => SetPropertyValue<Logistics.Shipment.CargoType>("CargoType", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [Owner]
                 [ODataProperty]
-                public Logistics.Shipment.TransportationOrder? TransportationOrder { get => GetPropertyValue<Logistics.Shipment.TransportationOrder>("TransportationOrder"); set => SetPropertyValue<Logistics.Shipment.TransportationOrder>("TransportationOrder", value); }
+                public Logistics.Transportation.TransportationOrder? TransportationOrder { get => GetPropertyValue<Logistics.Transportation.TransportationOrder>("TransportationOrder"); set => SetPropertyValue<Logistics.Transportation.TransportationOrder>("TransportationOrder", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationOrder? Document { get => GetPropertyValue<Logistics.Shipment.TransportationOrder>("Document"); set => SetPropertyValue<Logistics.Shipment.TransportationOrder>("Document", value); }
+                public Logistics.Transportation.TransportationOrder? Document { get => GetPropertyValue<Logistics.Transportation.TransportationOrder>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationOrder>("Document", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationRequisitions", TableName = "Log_Transportation_Requisitions")]
-            public partial class TransportationRequisition: General.Document
+            [Entity(EntitySet = "Logistics_Transportation_TransportationRequisitions", TableName = "Log_Transportation_Requisitions")]
+            public partial class TransportationRequisition: General.Documents.Document
             {
                 public TransportationRequisition(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public new const string EntitySetName = "Logistics_Shipment_TransportationRequisitions";
+                public new const string EntitySetName = "Logistics_Transportation_TransportationRequisitions";
                 public new const string EntityTableName = "Log_Transportation_Requisitions";
                 [ODataProperty]
                 public DateTime? RequestedArrivalDate { get => GetPropertyValue<DateTime?>("RequestedArrivalDate"); set => SetPropertyValue<DateTime?>("RequestedArrivalDate", value); }
@@ -13828,24 +13846,24 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Contacts.Party? TransportToParty { get => GetPropertyValue<General.Contacts.Party>("TransportToParty"); set => SetPropertyValue<General.Contacts.Party>("TransportToParty", value); }
                 [ODataProperty]
-                public IEnumerable<Logistics.Shipment.TransportationRequisitionLine>? Lines { get => GetCollection<Logistics.Shipment.TransportationRequisitionLine>("Lines"); set => SetCollection<Logistics.Shipment.TransportationRequisitionLine>("Lines", value); }
+                public IEnumerable<Logistics.Transportation.TransportationRequisitionLine>? Lines { get => GetCollection<Logistics.Transportation.TransportationRequisitionLine>("Lines"); set => SetCollection<Logistics.Transportation.TransportationRequisitionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationRequisitionLines", TableName = "Log_Transportation_Requisition_Lines")]
+            [Entity(EntitySet = "Logistics_Transportation_TransportationRequisitionLines", TableName = "Log_Transportation_Requisition_Lines")]
             public partial class TransportationRequisitionLine: EntityResource
             {
                 public TransportationRequisitionLine(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public const string EntitySetName = "Logistics_Shipment_TransportationRequisitionLines";
+                public const string EntitySetName = "Logistics_Transportation_TransportationRequisitionLines";
                 public const string EntityTableName = "Log_Transportation_Requisition_Lines";
                 [ODataProperty]
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
@@ -13866,22 +13884,22 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.CargoType? CargoType { get => GetPropertyValue<Logistics.Shipment.CargoType>("CargoType"); set => SetPropertyValue<Logistics.Shipment.CargoType>("CargoType", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [Owner]
                 [ODataProperty]
-                public Logistics.Shipment.TransportationRequisition? TransportationRequisition { get => GetPropertyValue<Logistics.Shipment.TransportationRequisition>("TransportationRequisition"); set => SetPropertyValue<Logistics.Shipment.TransportationRequisition>("TransportationRequisition", value); }
+                public Logistics.Transportation.TransportationRequisition? TransportationRequisition { get => GetPropertyValue<Logistics.Transportation.TransportationRequisition>("TransportationRequisition"); set => SetPropertyValue<Logistics.Transportation.TransportationRequisition>("TransportationRequisition", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationRequisition? Document { get => GetPropertyValue<Logistics.Shipment.TransportationRequisition>("Document"); set => SetPropertyValue<Logistics.Shipment.TransportationRequisition>("Document", value); }
+                public Logistics.Transportation.TransportationRequisition? Document { get => GetPropertyValue<Logistics.Transportation.TransportationRequisition>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationRequisition>("Document", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
-            [Entity(EntitySet = "Logistics_Shipment_TransportationVehicles", TableName = "Log_Transportation_Vehicles")]
+            [Entity(EntitySet = "Logistics_Transportation_TransportationVehicles", TableName = "Log_Transportation_Vehicles")]
             public partial class TransportationVehicle: EntityResource
             {
                 public TransportationVehicle(IDictionary<string, object?>? rawData = null): base(rawData) {}
-                public const string EntitySetName = "Logistics_Shipment_TransportationVehicles";
+                public const string EntitySetName = "Logistics_Transportation_TransportationVehicles";
                 public const string EntityTableName = "Log_Transportation_Vehicles";
                 [ODataProperty]
                 public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
@@ -13902,7 +13920,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
                 [ODataProperty]
-                public Logistics.Shipment.TransportationMode? TransportationMode { get => GetPropertyValue<Logistics.Shipment.TransportationMode>("TransportationMode"); set => SetPropertyValue<Logistics.Shipment.TransportationMode>("TransportationMode", value); }
+                public Logistics.Transportation.TransportationMode? TransportationMode { get => GetPropertyValue<Logistics.Transportation.TransportationMode>("TransportationMode"); set => SetPropertyValue<Logistics.Transportation.TransportationMode>("TransportationMode", value); }
                 [Owner]
                 [ODataProperty]
                 public Applications.Fleet.Vehicle? Vehicle { get => GetPropertyValue<Applications.Fleet.Vehicle>("Vehicle"); set => SetPropertyValue<Applications.Fleet.Vehicle>("Vehicle", value); }
@@ -13954,7 +13972,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? StandardQuantityAvailable { get => GetPropertyValue<Decimal?>("StandardQuantityAvailable"); set => SetPropertyValue<Decimal?>("StandardQuantityAvailable", value); }
                 [ODataProperty]
-                public Logistics.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.LogisticUnit>("LogisticUnit", value); }
+                public Logistics.Common.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit", value); }
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
@@ -13993,7 +14011,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Wms_WarehouseOrders", TableName = "Wms_Warehouse_Orders")]
-            public partial class WarehouseOrder: General.Document
+            public partial class WarehouseOrder: General.Documents.Document
             {
                 public WarehouseOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Wms_WarehouseOrders";
@@ -14006,15 +14024,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Wms.WarehouseOrderLine>? Lines { get => GetCollection<Logistics.Wms.WarehouseOrderLine>("Lines"); set => SetCollection<Logistics.Wms.WarehouseOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Wms_WarehouseOrderLines", TableName = "Wms_Warehouse_Order_Lines")]
             public partial class WarehouseOrderLine: EntityResource
@@ -14045,7 +14063,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Wms.WarehouseOrderLinesRepository.TaskType? TaskType { get => GetPropertyValue<Logistics.Wms.WarehouseOrderLinesRepository.TaskType?>("TaskType"); set => SetPropertyValue<Logistics.Wms.WarehouseOrderLinesRepository.TaskType?>("TaskType", value); }
                 [ODataProperty]
-                public Logistics.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.LogisticUnit>("LogisticUnit", value); }
+                public Logistics.Common.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit", value); }
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
@@ -14118,7 +14136,8 @@ namespace ErpNet.Api.Client.DomainApi
                     UnassignedOrdersSectionVisibility = 14,
                     StartedByOthersSectionVisibility = 15,
                     AssignedToOthersSectionVisibility = 16,
-                    LogisticUnitScreenVisibility = 17
+                    LogisticUnitScreenVisibility = 17,
+                    BarcodeScanEntersQuantityOfOnePce = 18
                 }
             }
             [Entity(EntitySet = "Logistics_Wms_WarehousePolicies", TableName = "Wms_Warehouse_Policies")]
@@ -14162,7 +14181,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Logistics_Wms_WarehouseRequisitions", TableName = "Wms_Warehouse_Requisitions")]
-            public partial class WarehouseRequisition: General.Document
+            public partial class WarehouseRequisition: General.Documents.Document
             {
                 public WarehouseRequisition(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Logistics_Wms_WarehouseRequisitions";
@@ -14179,15 +14198,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Logistics.Wms.WarehouseRequisitionLine>? Lines { get => GetCollection<Logistics.Wms.WarehouseRequisitionLine>("Lines"); set => SetCollection<Logistics.Wms.WarehouseRequisitionLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Logistics_Wms_WarehouseRequisitionLines", TableName = "Wms_Warehouse_Requisition_Lines")]
             public partial class WarehouseRequisitionLine: EntityResource
@@ -14216,7 +14235,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 [ODataProperty]
@@ -14272,7 +14291,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Security.User? CreationUser { get => GetPropertyValue<Systems.Security.User>("CreationUser"); set => SetPropertyValue<Systems.Security.User>("CreationUser", value); }
                 [ODataProperty]
-                public Logistics.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.LogisticUnit>("LogisticUnit", value); }
+                public Logistics.Common.LogisticUnit? LogisticUnit { get => GetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit"); set => SetPropertyValue<Logistics.Common.LogisticUnit>("LogisticUnit", value); }
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
@@ -14443,7 +14462,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? FullPath { get => GetPropertyValue<String?>("FullPath"); set => SetPropertyValue<String?>("FullPath", value); }
                 [ODataProperty]
-                public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
+                public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
                 public String? Parent { get => GetPropertyValue<String?>("Parent"); set => SetPropertyValue<String?>("Parent", value); }
                 [ODataProperty]
@@ -14620,7 +14639,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Products.MeasurementUnit? PrimaryUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("PrimaryUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("PrimaryUnit", value); }
                 [ODataProperty]
-                public General.Currency? ResourceCurrency { get => GetPropertyValue<General.Currency>("ResourceCurrency"); set => SetPropertyValue<General.Currency>("ResourceCurrency", value); }
+                public General.Currencies.Currency? ResourceCurrency { get => GetPropertyValue<General.Currencies.Currency>("ResourceCurrency"); set => SetPropertyValue<General.Currencies.Currency>("ResourceCurrency", value); }
                 [Owner]
                 [ODataProperty]
                 public Production.Resources.ResourceGroup? ResourceGroup { get => GetPropertyValue<Production.Resources.ResourceGroup>("ResourceGroup"); set => SetPropertyValue<Production.Resources.ResourceGroup>("ResourceGroup", value); }
@@ -14767,7 +14786,7 @@ namespace ErpNet.Api.Client.DomainApi
         namespace ShopFloor
         {
             [Entity(EntitySet = "Production_ShopFloor_ConsumptionOrders", TableName = "Prd_Consumption_Orders")]
-            public partial class ConsumptionOrder: General.Document
+            public partial class ConsumptionOrder: General.Documents.Document
             {
                 public ConsumptionOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Production_ShopFloor_ConsumptionOrders";
@@ -14779,7 +14798,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? Status { get => GetPropertyValue<String?>("Status"); set => SetPropertyValue<String?>("Status", value); }
                 [ODataProperty]
-                public General.Currency? DocumentCurrency { get => GetPropertyValue<General.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currency>("DocumentCurrency", value); }
+                public General.Currencies.Currency? DocumentCurrency { get => GetPropertyValue<General.Currencies.Currency>("DocumentCurrency"); set => SetPropertyValue<General.Currencies.Currency>("DocumentCurrency", value); }
                 [ODataProperty]
                 public Logistics.Inventory.Store? Store { get => GetPropertyValue<Logistics.Inventory.Store>("Store"); set => SetPropertyValue<Logistics.Inventory.Store>("Store", value); }
                 [ODataProperty]
@@ -14788,15 +14807,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Production.ShopFloor.ConsumptionOrderLine>? Lines { get => GetCollection<Production.ShopFloor.ConsumptionOrderLine>("Lines"); set => SetCollection<Production.ShopFloor.ConsumptionOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Production_ShopFloor_ConsumptionOrderLines", TableName = "Prd_Consumption_Order_Lines")]
             public partial class ConsumptionOrderLine: EntityResource
@@ -14857,7 +14876,7 @@ namespace ErpNet.Api.Client.DomainApi
                 }
             }
             [Entity(EntitySet = "Production_ShopFloor_OutputOrders", TableName = "Prd_Output_Orders")]
-            public partial class OutputOrder: General.Document
+            public partial class OutputOrder: General.Documents.Document
             {
                 public OutputOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Production_ShopFloor_OutputOrders";
@@ -14876,15 +14895,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Production.ShopFloor.OutputOrderLine>? Lines { get => GetCollection<Production.ShopFloor.OutputOrderLine>("Lines"); set => SetCollection<Production.ShopFloor.OutputOrderLine>("Lines", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Production_ShopFloor_OutputOrderConsumptionLines", TableName = "Prd_Output_Order_Consumption_Lines")]
             public partial class OutputOrderConsumptionLine: EntityResource
@@ -15021,7 +15040,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Production_ShopFloor_WorkOrders", TableName = "Prd_Work_Orders")]
-            public partial class WorkOrder: General.Document
+            public partial class WorkOrder: General.Documents.Document
             {
                 public WorkOrder(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Production_ShopFloor_WorkOrders";
@@ -15054,15 +15073,46 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Production.ShopFloor.WorkOrderItem>? Items { get => GetCollection<Production.ShopFloor.WorkOrderItem>("Items"); set => SetCollection<Production.ShopFloor.WorkOrderItem>("Items", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+            }
+            [Entity(EntitySet = "Production_ShopFloor_WorkOrderDocumentTypesOptions", TableName = "Prd_Work_Order_Document_Types_Options")]
+            public partial class WorkOrderDocumentTypesOption: EntityResource
+            {
+                public WorkOrderDocumentTypesOption(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Production_ShopFloor_WorkOrderDocumentTypesOptions";
+                public const string EntityTableName = "Prd_Work_Order_Document_Types_Options";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Production.ShopFloor.WorkOrderDocumentTypesOptionsRepository.ProductionМode? ProductionМode { get => GetPropertyValue<Production.ShopFloor.WorkOrderDocumentTypesOptionsRepository.ProductionМode?>("ProductionМode"); set => SetPropertyValue<Production.ShopFloor.WorkOrderDocumentTypesOptionsRepository.ProductionМode?>("ProductionМode", value); }
+                [ODataProperty]
+                public Systems.Documents.DocumentType? CompletingOutputOrderDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("CompletingOutputOrderDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("CompletingOutputOrderDocumentType", value); }
+                [Owner]
+                [ODataProperty]
+                public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace WorkOrderDocumentTypesOptionsRepository
+            {
+                public enum ProductionМode
+                {
+                    Production = 0,
+                    Decomposition = 1,
+                    ProductionOrDecompositionDependsOnSign = 2
+                }
             }
             [Entity(EntitySet = "Production_ShopFloor_WorkOrderItems", TableName = "Prd_Work_Order_Items")]
             public partial class WorkOrderItem: EntityResource
@@ -15107,7 +15157,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Store? OutputStore { get => GetPropertyValue<Logistics.Inventory.Store>("OutputStore"); set => SetPropertyValue<Logistics.Inventory.Store>("OutputStore", value); }
                 [ODataProperty]
-                public General.Document? ParentDocument { get => GetPropertyValue<General.Document>("ParentDocument"); set => SetPropertyValue<General.Document>("ParentDocument", value); }
+                public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? ProducedQuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("ProducedQuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("ProducedQuantityUnit", value); }
                 [ODataProperty]
@@ -15457,7 +15507,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? UpdateUser { get => GetPropertyValue<String?>("UpdateUser"); set => SetPropertyValue<String?>("UpdateUser", value); }
                 [ODataProperty]
-                public General.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.CurrencyDirectory>("CurrencyDirectory", value); }
+                public General.Currencies.CurrencyDirectory? CurrencyDirectory { get => GetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory"); set => SetPropertyValue<General.Currencies.CurrencyDirectory>("CurrencyDirectory", value); }
                 [ODataProperty]
                 public Production.Technologies.PrincipalRecipe? PrincipalRecipe { get => GetPropertyValue<Production.Technologies.PrincipalRecipe>("PrincipalRecipe"); set => SetPropertyValue<Production.Technologies.PrincipalRecipe>("PrincipalRecipe", value); }
                 [ODataProperty]
@@ -15574,26 +15624,6 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
         }
-        [Entity(EntitySet = "Production_WorkOrderDocumentTypesOptions", TableName = "Prd_Work_Order_Document_Types_Options")]
-        public partial class WorkOrderDocumentTypesOption: EntityResource
-        {
-            public WorkOrderDocumentTypesOption(IDictionary<string, object?>? rawData = null): base(rawData) {}
-            public const string EntitySetName = "Production_WorkOrderDocumentTypesOptions";
-            public const string EntityTableName = "Prd_Work_Order_Document_Types_Options";
-            [ODataProperty]
-            public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
-            [ODataProperty]
-            public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
-            [ODataProperty]
-            public Systems.Documents.DocumentType? CompletingOutputOrderDocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("CompletingOutputOrderDocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("CompletingOutputOrderDocumentType", value); }
-            [Owner]
-            [ODataProperty]
-            public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
-            public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
-            public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-            public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-            public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-        }
     }
     namespace Projects
     {
@@ -15612,6 +15642,10 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Int32? Number { get => GetPropertyValue<Int32?>("Number"); set => SetPropertyValue<Int32?>("Number", value); }
                 [ODataProperty]
+                public DateTime? ClosedTimeUTC { get => GetPropertyValue<DateTime?>("ClosedTimeUTC"); set => SetPropertyValue<DateTime?>("ClosedTimeUTC", value); }
+                [ODataProperty]
+                public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
+                [ODataProperty]
                 public String? Description { get => GetPropertyValue<String?>("Description"); set => SetPropertyValue<String?>("Description", value); }
                 [ODataProperty]
                 public DateTime? DueDate { get => GetPropertyValue<DateTime?>("DueDate"); set => SetPropertyValue<DateTime?>("DueDate", value); }
@@ -15620,11 +15654,21 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Decimal? EstimatedTimeHours { get => GetPropertyValue<Decimal?>("EstimatedTimeHours"); set => SetPropertyValue<Decimal?>("EstimatedTimeHours", value); }
                 [ODataProperty]
+                public DateTime? InProgressTimeUTC { get => GetPropertyValue<DateTime?>("InProgressTimeUTC"); set => SetPropertyValue<DateTime?>("InProgressTimeUTC", value); }
+                [ODataProperty]
                 public Projects.Agile.CasesRepository.Priority? Priority { get => GetPropertyValue<Projects.Agile.CasesRepository.Priority?>("Priority"); set => SetPropertyValue<Projects.Agile.CasesRepository.Priority?>("Priority", value); }
+                [ODataProperty]
+                public DateTime? ReadyTimeUTC { get => GetPropertyValue<DateTime?>("ReadyTimeUTC"); set => SetPropertyValue<DateTime?>("ReadyTimeUTC", value); }
+                [ODataProperty]
+                public DateTime? ResolvedTimeUTC { get => GetPropertyValue<DateTime?>("ResolvedTimeUTC"); set => SetPropertyValue<DateTime?>("ResolvedTimeUTC", value); }
                 [ODataProperty]
                 public Projects.Agile.CasesRepository.SystemState? SystemState { get => GetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState"); set => SetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState", value); }
                 [ODataProperty]
-                public MultilanguageString? Title { get => GetPropertyValue<MultilanguageString?>("Title"); set => SetPropertyValue<MultilanguageString?>("Title", value); }
+                public String? Title { get => GetPropertyValue<String?>("Title"); set => SetPropertyValue<String?>("Title", value); }
+                [ODataProperty]
+                public DateTime? WaitingTimeUTC { get => GetPropertyValue<DateTime?>("WaitingTimeUTC"); set => SetPropertyValue<DateTime?>("WaitingTimeUTC", value); }
+                [ODataProperty]
+                public String? FullState { get => GetPropertyValue<String?>("FullState"); set => SetPropertyValue<String?>("FullState", value); }
                 [ODataProperty]
                 public Systems.Security.User? AssignedToUser { get => GetPropertyValue<Systems.Security.User>("AssignedToUser"); set => SetPropertyValue<Systems.Security.User>("AssignedToUser", value); }
                 [ODataProperty]
@@ -15639,6 +15683,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Projects.Agile.ProjectMilestone? ProjectMilestone { get => GetPropertyValue<Projects.Agile.ProjectMilestone>("ProjectMilestone"); set => SetPropertyValue<Projects.Agile.ProjectMilestone>("ProjectMilestone", value); }
                 [ODataProperty]
                 public Communities.Social.Group? SocialGroup { get => GetPropertyValue<Communities.Social.Group>("SocialGroup"); set => SetPropertyValue<Communities.Social.Group>("SocialGroup", value); }
+                [ODataProperty]
+                public Projects.Agile.UserState? UserState { get => GetPropertyValue<Projects.Agile.UserState>("UserState"); set => SetPropertyValue<Projects.Agile.UserState>("UserState", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -15708,7 +15754,9 @@ namespace ErpNet.Api.Client.DomainApi
                 {
                     Edit = 0,
                     Assignment = 1,
-                    ChangeState = 2
+                    ChangeState = 2,
+                    AssignmentH = 3,
+                    ChangeStateH = 4
                 }
             }
             namespace CasesRepository
@@ -15725,11 +15773,12 @@ namespace ErpNet.Api.Client.DomainApi
                 }
                 public enum SystemState
                 {
-                    QUEUED = 0,
-                    ACTIVE = 1,
-                    WAITING = 2,
-                    RESOLVED = 3,
-                    CLOSED = 4
+                    BACKLOG = 0,
+                    READY = 1,
+                    INPROGRESS = 2,
+                    WAITING = 3,
+                    RESOLVED = 4,
+                    CLOSED = 5
                 }
             }
             [Entity(EntitySet = "Projects_Agile_Projects", TableName = "Apm_Projects")]
@@ -15823,6 +15872,31 @@ namespace ErpNet.Api.Client.DomainApi
                 public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Projects_Agile_UserStates", TableName = "Apm_User_States")]
+            public partial class UserState: EntityResource
+            {
+                public UserState(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Projects_Agile_UserStates";
+                public const string EntityTableName = "Apm_User_States";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
+                public Int32? Ord { get => GetPropertyValue<Int32?>("Ord"); set => SetPropertyValue<Int32?>("Ord", value); }
+                [ODataProperty]
+                public Projects.Agile.CasesRepository.SystemState? SystemState { get => GetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState"); set => SetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState", value); }
+                [ODataProperty]
+                public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                [ODataProperty]
+                public Projects.Agile.CaseCategory? CaseCategory { get => GetPropertyValue<Projects.Agile.CaseCategory>("CaseCategory"); set => SetPropertyValue<Projects.Agile.CaseCategory>("CaseCategory", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -16141,7 +16215,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? StartDate { get => GetPropertyValue<DateTime?>("StartDate"); set => SetPropertyValue<DateTime?>("StartDate", value); }
                 [ODataProperty]
-                public General.Currency? BudgetingCurrency { get => GetPropertyValue<General.Currency>("BudgetingCurrency"); set => SetPropertyValue<General.Currency>("BudgetingCurrency", value); }
+                public General.Currencies.Currency? BudgetingCurrency { get => GetPropertyValue<General.Currencies.Currency>("BudgetingCurrency"); set => SetPropertyValue<General.Currencies.Currency>("BudgetingCurrency", value); }
                 [ODataProperty]
                 public General.Contacts.Party? ClientParty { get => GetPropertyValue<General.Contacts.Party>("ClientParty"); set => SetPropertyValue<General.Contacts.Party>("ClientParty", value); }
                 [ODataProperty]
@@ -16679,7 +16753,7 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
             [Entity(EntitySet = "Projects_Classic_WorkReports", TableName = "Prj_Work_Reports")]
-            public partial class WorkReport: General.Document
+            public partial class WorkReport: General.Documents.Document
             {
                 public WorkReport(IDictionary<string, object?>? rawData = null): base(rawData) {}
                 public new const string EntitySetName = "Projects_Classic_WorkReports";
@@ -16698,15 +16772,15 @@ namespace ErpNet.Api.Client.DomainApi
                 public IEnumerable<Projects.Classic.WorkReportResource>? Resources { get => GetCollection<Projects.Classic.WorkReportResource>("Resources"); set => SetCollection<Projects.Classic.WorkReportResource>("Resources", value); }
                 public new async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public new async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
-                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
+                public new async System.Threading.Tasks.Task ChangeStateAsync(DomainApiService service, General.Documents.DocumentState newState, Systems.Documents.DocumentTypeUserStatus? userStatus = null) { await this.InvokeActionAsync(service, "ChangeState", new Param<General.Documents.DocumentState>("newState", newState), new Param<Systems.Documents.DocumentTypeUserStatus?>("userStatus", userStatus)); }
                 public new async System.Threading.Tasks.Task ProcessSingleRouteAsync(DomainApiService service, Systems.Documents.Route route, Boolean processForLowerDocumentStates) { await this.InvokeActionAsync(service, "ProcessSingleRoute", new Param<Systems.Documents.Route>("route", route), new Param<Boolean>("processForLowerDocumentStates", processForLowerDocumentStates)); }
-                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.DocumentCompletion>("completion", completion)); }
-                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.DocumentsRepositoryBase.VoidType voidType = General.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
+                public new async System.Threading.Tasks.Task CompleteAsync(DomainApiService service, General.Documents.DocumentCompletion completion) { await this.InvokeActionAsync(service, "Complete", new Param<General.Documents.DocumentCompletion>("completion", completion)); }
+                public new async System.Threading.Tasks.Task MakeVoidAsync(DomainApiService service, String reason, General.Documents.DocumentsRepositoryBase.VoidType voidType = General.Documents.DocumentsRepositoryBase.VoidType.VoidDocument, Boolean resetParentState = true) { await this.InvokeActionAsync(service, "MakeVoid", new Param<String>("reason", reason), new Param<General.Documents.DocumentsRepositoryBase.VoidType>("voidType", voidType), new Param<Boolean>("resetParentState", resetParentState)); }
                 public new async System.Threading.Tasks.Task<String?> GetPrintoutAsync(DomainApiService service, String fileFormat = "pdf", Systems.Documents.Printout? printout = null) { return (String?)(await this.InvokeActionAsync(service, "GetPrintout", new Param<String>("fileFormat", fileFormat), new Param<Systems.Documents.Printout?>("printout", printout))); }
                 public new async System.Threading.Tasks.Task RecalculateAsync(DomainApiService service) { await this.InvokeActionAsync(service, "Recalculate"); }
                 public new async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public new async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
-                public new async System.Threading.Tasks.Task<IEnumerable<General.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
+                public new async System.Threading.Tasks.Task<IEnumerable<General.Documents.Document>?> GetAllParentDocumentsAsync(DomainApiService service, Boolean includeSelf = false) { return (IEnumerable<General.Documents.Document>?)(await this.InvokeFunctionAsync(service, "GetAllParentDocuments", new Param<Boolean>("includeSelf", includeSelf))); }
             }
             [Entity(EntitySet = "Projects_Classic_WorkReportMaterials", TableName = "Prj_Work_Report_Materials")]
             public partial class WorkReportMaterial: EntityResource
@@ -17767,7 +17841,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? FilterXml { get => GetPropertyValue<String?>("FilterXml"); set => SetPropertyValue<String?>("FilterXml", value); }
                 [ODataProperty]
-                public General.DocumentState? NewState { get => GetPropertyValue<General.DocumentState?>("NewState"); set => SetPropertyValue<General.DocumentState?>("NewState", value); }
+                public General.Documents.DocumentState? NewState { get => GetPropertyValue<General.Documents.DocumentState?>("NewState"); set => SetPropertyValue<General.Documents.DocumentState?>("NewState", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
                 [ODataProperty]
@@ -17823,7 +17897,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Int32? Version { get => GetPropertyValue<Int32?>("Version"); set => SetPropertyValue<Int32?>("Version", value); }
                 [ODataProperty]
-                public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -17871,9 +17945,9 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Security.User? CreationUser { get => GetPropertyValue<Systems.Security.User>("CreationUser"); set => SetPropertyValue<Systems.Security.User>("CreationUser", value); }
                 [ODataProperty]
-                public Systems.Security.User? LastUpdateUser { get => GetPropertyValue<Systems.Security.User>("LastUpdateUser"); set => SetPropertyValue<Systems.Security.User>("LastUpdateUser", value); }
+                public General.Files.Folder? Folder { get => GetPropertyValue<General.Files.Folder>("Folder"); set => SetPropertyValue<General.Files.Folder>("Folder", value); }
                 [ODataProperty]
-                public IEnumerable<Systems.Core.ObjectFile>? Files { get => GetCollection<Systems.Core.ObjectFile>("Files"); set => SetCollection<Systems.Core.ObjectFile>("Files", value); }
+                public Systems.Security.User? LastUpdateUser { get => GetPropertyValue<Systems.Security.User>("LastUpdateUser"); set => SetPropertyValue<Systems.Security.User>("LastUpdateUser", value); }
                 [ODataProperty]
                 public IEnumerable<Systems.Core.ObjectVersion>? Versions { get => GetCollection<Systems.Core.ObjectVersion>("Versions"); set => SetCollection<Systems.Core.ObjectVersion>("Versions", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
@@ -18037,7 +18111,6 @@ namespace ErpNet.Api.Client.DomainApi
                 public Systems.Security.User? CreationUser { get => GetPropertyValue<Systems.Security.User>("CreationUser"); set => SetPropertyValue<Systems.Security.User>("CreationUser", value); }
                 [ODataProperty]
                 public Systems.Security.User? LastUpdateUser { get => GetPropertyValue<Systems.Security.User>("LastUpdateUser"); set => SetPropertyValue<Systems.Security.User>("LastUpdateUser", value); }
-                [Owner]
                 [ODataProperty]
                 public Systems.Core.ExtensibleDataObject? Object { get => GetPropertyValue<Systems.Core.ExtensibleDataObject>("Object"); set => SetPropertyValue<Systems.Core.ExtensibleDataObject>("Object", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
@@ -18128,6 +18201,40 @@ namespace ErpNet.Api.Client.DomainApi
                 public Int32? TemplatePriority { get => GetPropertyValue<Int32?>("TemplatePriority"); set => SetPropertyValue<Int32?>("TemplatePriority", value); }
                 [ODataProperty]
                 public Systems.Documents.DataSource? DataSource { get => GetPropertyValue<Systems.Documents.DataSource>("DataSource"); set => SetPropertyValue<Systems.Documents.DataSource>("DataSource", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Systems_Core_ReportQueries", TableName = "Gen_Report_Queries")]
+            public partial class ReportQuery: EntityResource
+            {
+                public ReportQuery(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Systems_Core_ReportQueries";
+                public const string EntityTableName = "Gen_Report_Queries";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Boolean? DependsOnChildRows { get => GetPropertyValue<Boolean?>("DependsOnChildRows"); set => SetPropertyValue<Boolean?>("DependsOnChildRows", value); }
+                [ODataProperty]
+                public String? ExtensionsList { get => GetPropertyValue<String?>("ExtensionsList"); set => SetPropertyValue<String?>("ExtensionsList", value); }
+                [ODataProperty]
+                public String? FilterXml { get => GetPropertyValue<String?>("FilterXml"); set => SetPropertyValue<String?>("FilterXml", value); }
+                [ODataProperty]
+                public String? ReferencePath { get => GetPropertyValue<String?>("ReferencePath"); set => SetPropertyValue<String?>("ReferencePath", value); }
+                [ODataProperty]
+                public Boolean? ShowCustomProperties { get => GetPropertyValue<Boolean?>("ShowCustomProperties"); set => SetPropertyValue<Boolean?>("ShowCustomProperties", value); }
+                [ODataProperty]
+                public Boolean? ShowTextColumns { get => GetPropertyValue<Boolean?>("ShowTextColumns"); set => SetPropertyValue<Boolean?>("ShowTextColumns", value); }
+                [ODataProperty]
+                public String? TableName { get => GetPropertyValue<String?>("TableName"); set => SetPropertyValue<String?>("TableName", value); }
+                [ODataProperty]
+                public String? UniqueName { get => GetPropertyValue<String?>("UniqueName"); set => SetPropertyValue<String?>("UniqueName", value); }
+                [Owner]
+                [ODataProperty]
+                public General.Report? Report { get => GetPropertyValue<General.Report>("Report"); set => SetPropertyValue<General.Report>("Report", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -18388,7 +18495,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public IEnumerable<Logistics.Inventory.TransferOrdersOption>? TransferOrdersOptions { get => GetCollection<Logistics.Inventory.TransferOrdersOption>("TransferOrdersOptions"); set => SetCollection<Logistics.Inventory.TransferOrdersOption>("TransferOrdersOptions", value); }
                 [ODataProperty]
-                public IEnumerable<Production.WorkOrderDocumentTypesOption>? WorkOrderDocumentTypesOptions { get => GetCollection<Production.WorkOrderDocumentTypesOption>("WorkOrderDocumentTypesOptions"); set => SetCollection<Production.WorkOrderDocumentTypesOption>("WorkOrderDocumentTypesOptions", value); }
+                public IEnumerable<Production.ShopFloor.WorkOrderDocumentTypesOption>? WorkOrderDocumentTypesOptions { get => GetCollection<Production.ShopFloor.WorkOrderDocumentTypesOption>("WorkOrderDocumentTypesOptions"); set => SetCollection<Production.ShopFloor.WorkOrderDocumentTypesOption>("WorkOrderDocumentTypesOptions", value); }
                 [ODataProperty]
                 public IEnumerable<Logistics.Procurement.PurchaseInvoicesOption>? PurchaseInvoicesOptions { get => GetCollection<Logistics.Procurement.PurchaseInvoicesOption>("PurchaseInvoicesOptions"); set => SetCollection<Logistics.Procurement.PurchaseInvoicesOption>("PurchaseInvoicesOptions", value); }
                 [ODataProperty]
@@ -18581,12 +18688,33 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Boolean? IsExitStatus { get => GetPropertyValue<Boolean?>("IsExitStatus"); set => SetPropertyValue<Boolean?>("IsExitStatus", value); }
                 [ODataProperty]
-                public General.DocumentState? State { get => GetPropertyValue<General.DocumentState?>("State"); set => SetPropertyValue<General.DocumentState?>("State", value); }
+                public General.Documents.DocumentState? State { get => GetPropertyValue<General.Documents.DocumentState?>("State"); set => SetPropertyValue<General.Documents.DocumentState?>("State", value); }
                 [ODataProperty]
                 public String? UserStatusName { get => GetPropertyValue<String?>("UserStatusName"); set => SetPropertyValue<String?>("UserStatusName", value); }
                 [Owner]
                 [ODataProperty]
                 public Systems.Documents.DocumentType? DocumentType { get => GetPropertyValue<Systems.Documents.DocumentType>("DocumentType"); set => SetPropertyValue<Systems.Documents.DocumentType>("DocumentType", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Systems_Documents_LinkTypes", TableName = "Gen_Link_Types")]
+            public partial class LinkType: EntityResource
+            {
+                public LinkType(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Systems_Documents_LinkTypes";
+                public const string EntityTableName = "Gen_Link_Types";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Guid? FromDocTypeId { get => GetPropertyValue<Guid?>("FromDocTypeId"); set => SetPropertyValue<Guid?>("FromDocTypeId", value); }
+                [ODataProperty]
+                public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
+                [ODataProperty]
+                public Guid? ToDocTypeId { get => GetPropertyValue<Guid?>("ToDocTypeId"); set => SetPropertyValue<Guid?>("ToDocTypeId", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -18704,19 +18832,19 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? ConditionFilterXML { get => GetPropertyValue<String?>("ConditionFilterXML"); set => SetPropertyValue<String?>("ConditionFilterXML", value); }
                 [ODataProperty]
-                public General.DocumentStateFlags? ConditionStatesBitMask { get => GetPropertyValue<General.DocumentStateFlags?>("ConditionStatesBitMask"); set => SetPropertyValue<General.DocumentStateFlags?>("ConditionStatesBitMask", value); }
+                public General.Documents.DocumentStateFlags? ConditionStatesBitMask { get => GetPropertyValue<General.Documents.DocumentStateFlags?>("ConditionStatesBitMask"); set => SetPropertyValue<General.Documents.DocumentStateFlags?>("ConditionStatesBitMask", value); }
                 [ODataProperty]
                 public Systems.Documents.RoutesRepository.ConnectedPartyCondition? ConnectedPartyCondition { get => GetPropertyValue<Systems.Documents.RoutesRepository.ConnectedPartyCondition?>("ConnectedPartyCondition"); set => SetPropertyValue<Systems.Documents.RoutesRepository.ConnectedPartyCondition?>("ConnectedPartyCondition", value); }
                 [ODataProperty]
                 public DateTime? DeactivationDate { get => GetPropertyValue<DateTime?>("DeactivationDate"); set => SetPropertyValue<DateTime?>("DeactivationDate", value); }
                 [ODataProperty]
-                public General.DocumentState? DestinationState { get => GetPropertyValue<General.DocumentState?>("DestinationState"); set => SetPropertyValue<General.DocumentState?>("DestinationState", value); }
+                public General.Documents.DocumentState? DestinationState { get => GetPropertyValue<General.Documents.DocumentState?>("DestinationState"); set => SetPropertyValue<General.Documents.DocumentState?>("DestinationState", value); }
                 [ODataProperty]
                 public String? NegativeConditionFilterXml { get => GetPropertyValue<String?>("NegativeConditionFilterXml"); set => SetPropertyValue<String?>("NegativeConditionFilterXml", value); }
                 [ODataProperty]
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
-                public General.ParentDocumentRelationshipType? ParentDocumentRelationshipType { get => GetPropertyValue<General.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType"); set => SetPropertyValue<General.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType", value); }
+                public General.Documents.ParentDocumentRelationshipType? ParentDocumentRelationshipType { get => GetPropertyValue<General.Documents.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType"); set => SetPropertyValue<General.Documents.ParentDocumentRelationshipType?>("ParentDocumentRelationshipType", value); }
                 [ODataProperty]
                 public String? ProcedureName { get => GetPropertyValue<String?>("ProcedureName"); set => SetPropertyValue<String?>("ProcedureName", value); }
                 [ODataProperty]
@@ -18785,7 +18913,37 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Boolean? SimultaneousTransactions { get => GetPropertyValue<Boolean?>("SimultaneousTransactions"); set => SetPropertyValue<Boolean?>("SimultaneousTransactions", value); }
                 [ODataProperty]
-                public IEnumerable<General.SequenceGenerator>? Generators { get => GetCollection<General.SequenceGenerator>("Generators"); set => SetCollection<General.SequenceGenerator>("Generators", value); }
+                public IEnumerable<Systems.Documents.SequenceGenerator>? Generators { get => GetCollection<Systems.Documents.SequenceGenerator>("Generators"); set => SetCollection<Systems.Documents.SequenceGenerator>("Generators", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Systems_Documents_SequenceGenerators", TableName = "Gen_Sequence_Generators")]
+            public partial class SequenceGenerator: EntityResource
+            {
+                public SequenceGenerator(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Systems_Documents_SequenceGenerators";
+                public const string EntityTableName = "Gen_Sequence_Generators";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Boolean? AllowExplicitNumbering { get => GetPropertyValue<Boolean?>("AllowExplicitNumbering"); set => SetPropertyValue<Boolean?>("AllowExplicitNumbering", value); }
+                [ODataProperty]
+                public String? NextValue { get => GetPropertyValue<String?>("NextValue"); set => SetPropertyValue<String?>("NextValue", value); }
+                [ODataProperty]
+                public Int32? SequencePriority { get => GetPropertyValue<Int32?>("SequencePriority"); set => SetPropertyValue<Int32?>("SequencePriority", value); }
+                [ODataProperty]
+                public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
+                [ODataProperty]
+                public General.Contacts.CompanyLocation? EnterpriseCompanyLocation { get => GetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation"); set => SetPropertyValue<General.Contacts.CompanyLocation>("EnterpriseCompanyLocation", value); }
+                [ODataProperty]
+                public General.Contacts.Person? ResponsiblePerson { get => GetPropertyValue<General.Contacts.Person>("ResponsiblePerson"); set => SetPropertyValue<General.Contacts.Person>("ResponsiblePerson", value); }
+                [Owner]
+                [ODataProperty]
+                public Systems.Documents.Sequence? Sequence { get => GetPropertyValue<Systems.Documents.Sequence>("Sequence"); set => SetPropertyValue<Systems.Documents.Sequence>("Sequence", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -19271,9 +19429,9 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Monitoring.ScheduledDocumentEventsRepository.State? State { get => GetPropertyValue<Systems.Monitoring.ScheduledDocumentEventsRepository.State?>("State"); set => SetPropertyValue<Systems.Monitoring.ScheduledDocumentEventsRepository.State?>("State", value); }
                 [ODataProperty]
-                public General.Document? Document { get => GetPropertyValue<General.Document>("Document"); set => SetPropertyValue<General.Document>("Document", value); }
+                public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 [ODataProperty]
-                public General.Document? SourceDocument { get => GetPropertyValue<General.Document>("SourceDocument"); set => SetPropertyValue<General.Document>("SourceDocument", value); }
+                public General.Documents.Document? SourceDocument { get => GetPropertyValue<General.Documents.Document>("SourceDocument"); set => SetPropertyValue<General.Documents.Document>("SourceDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<Boolean?> ProcessAsync(DomainApiService service) { return (Boolean?)(await this.InvokeActionAsync(service, "Process")); }
@@ -19330,6 +19488,37 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Systems_Monitoring_WaitStats")]
+            public partial class WaitStatsEntry: EntityResource
+            {
+                public WaitStatsEntry(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Systems_Monitoring_WaitStats";
+                public const string EntityTableName = "";
+                [ODataProperty]
+                public Guid? ViewItemId { get => GetPropertyValue<Guid?>("ViewItemId"); set => SetPropertyValue<Guid?>("ViewItemId", value); }
+                [ODataProperty]
+                public String? Database { get => GetPropertyValue<String?>("Database"); set => SetPropertyValue<String?>("Database", value); }
+                [ODataProperty]
+                public Double? MaxHoldLockTimeMs { get => GetPropertyValue<Double?>("MaxHoldLockTimeMs"); set => SetPropertyValue<Double?>("MaxHoldLockTimeMs", value); }
+                [ODataProperty]
+                public Double? MaxWaitTimeMs { get => GetPropertyValue<Double?>("MaxWaitTimeMs"); set => SetPropertyValue<Double?>("MaxWaitTimeMs", value); }
+                [ODataProperty]
+                public DateTime? StatisticsSince { get => GetPropertyValue<DateTime?>("StatisticsSince"); set => SetPropertyValue<DateTime?>("StatisticsSince", value); }
+                [ODataProperty]
+                public Double? TotalFailWaitTimeMs { get => GetPropertyValue<Double?>("TotalFailWaitTimeMs"); set => SetPropertyValue<Double?>("TotalFailWaitTimeMs", value); }
+                [ODataProperty]
+                public Double? TotalFailedAttempts { get => GetPropertyValue<Double?>("TotalFailedAttempts"); set => SetPropertyValue<Double?>("TotalFailedAttempts", value); }
+                [ODataProperty]
+                public Double? TotalHoldLockTimeMs { get => GetPropertyValue<Double?>("TotalHoldLockTimeMs"); set => SetPropertyValue<Double?>("TotalHoldLockTimeMs", value); }
+                [ODataProperty]
+                public Double? TotalLocks { get => GetPropertyValue<Double?>("TotalLocks"); set => SetPropertyValue<Double?>("TotalLocks", value); }
+                [ODataProperty]
+                public Double? TotalSuccessWaitTimeMs { get => GetPropertyValue<Double?>("TotalSuccessWaitTimeMs"); set => SetPropertyValue<Double?>("TotalSuccessWaitTimeMs", value); }
+                [ODataProperty]
+                public Double? TotalWaitLocks { get => GetPropertyValue<Double?>("TotalWaitLocks"); set => SetPropertyValue<Double?>("TotalWaitLocks", value); }
+                [ODataProperty]
+                public String? WaitCategory { get => GetPropertyValue<String?>("WaitCategory"); set => SetPropertyValue<String?>("WaitCategory", value); }
             }
             [Entity(EntitySet = "Systems_Monitoring_WebSites")]
             public partial class WebSitesEntry: EntityResource
@@ -19841,7 +20030,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
                 [ODataProperty]
-                public String? DefaultCulture { get => GetPropertyValue<String?>("DefaultCulture"); set => SetPropertyValue<String?>("DefaultCulture", value); }
+                public String? DefaultLanguage { get => GetPropertyValue<String?>("DefaultLanguage"); set => SetPropertyValue<String?>("DefaultLanguage", value); }
                 [ODataProperty]
                 public String? Email { get => GetPropertyValue<String?>("Email"); set => SetPropertyValue<String?>("Email", value); }
                 [ODataProperty]

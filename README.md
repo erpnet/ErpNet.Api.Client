@@ -1,6 +1,6 @@
 # Welcome to ErpNet.Api.Client Project
 
-Dot Net client for ERP.net APIs
+.NET client for ERP.net APIs
 
 ## Introduction
 ErpNet.Api.Client allows you to build external applications for ERP.net platform. Currently there are two types of API - Table API and Domain API. Both APIs are build on top of [ODATA](http://odata.org) standard. The project consists of two libraries: ErpNet.Api.Client and ErpNet.Api.Client.DomainApi. 
@@ -13,6 +13,15 @@ https://www.nuget.org/packages/ErpNet.Api.Client.DomainApi
 ERP.net Developer Documentation:  
 https://docs.erp.net/dev/  
 
+## Branching Strategy
+
+### Main Branch (`main`)
+
+The `main` branch contains the **current in-development version** of the library, which includes features and updates aligned with upcoming releases of ERP.net. This version is not yet officially released and is subject to change. Use this branch if you're contributing or testing new features, but note that it is **not intended for production use**.
+
+### Stable Releases
+
+For **stable and production-ready versions** of the library corresponding to specific major updates of ERP.net, please refer to the appropriate version branch (e.g., `23`, `24`). Each version branch is tied to a specific major release of ERP.net, ensuring stability and compatibility.
 
 ## ErpNet.Api.Client
 This library provides a generic ODATA service and ODATA command for building API HTTP requests. The JSON result is paresed to IDictionary<string, object> containting the entity properties.
