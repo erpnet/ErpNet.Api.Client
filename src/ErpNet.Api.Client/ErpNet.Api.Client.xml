@@ -470,46 +470,89 @@
             </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.ID">
-            <summary>ID value. Stored as 'ID'. Open ID Provider. </summary>
+            <summary>
+            ID value. Stored as 'ID'. Open ID Provider.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.UserProfile">
-            <summary>UserProfile value. Stored as 'PROFILE'.</summary>
+            <summary>
+            UserProfile value. Stored as 'PROFILE'.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.InstanceManager">
-            <summary>Instance manager system type.</summary>
+            <summary>
+            Instance manager system type.
+            </summary>
         </member>
-        <member name="F:ErpNet.Api.Client.WebsiteType.API">
-            <summary>Allows external applications to access the ERP resources using REST API.. Stored as &apos;API&apos;.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.DomainAPI">
+            <summary>
+            Allows external applications to access the ERP resources using Domain API.. Stored as &apos;API&apos;
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.ClientCenter">
-            <summary>Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;.</summary>
+            <summary>
+            Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.ECommerce">
-            <summary>ECommerce value. Stored as &apos;EC&apos;.</summary>
+            <summary>
+            ECommerce value. Stored as &apos;EC&apos;
+            </summary>
         </member>
-        <member name="F:ErpNet.Api.Client.WebsiteType.LEGALBG">
-            <summary>LEGALBG value. Stored as &apos;LEG&apos;.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.LegalBG">
+            <summary>
+            LEGALBG value. Stored as &apos;LEG&apos;.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.SocialInteractions">
-            <summary>SocialInteractions value. Stored as &apos;SI&apos;.</summary>
+            <summary>
+            SocialInteractions value. Stored as &apos;SI&apos;.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.DigitalMarketplace">
-            <summary>DigitalMarketplace value. Stored as &apos;DM&apos;.</summary>
+            <summary>
+            DigitalMarketplace value. Stored as &apos;DM&apos;.
+            </summary>
         </member>
-        <member name="F:ErpNet.Api.Client.WebsiteType.WebClientApplication">
-            <summary>WebClientApplication value. Stored as &apos;APP&apos;.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.WebClient">
+            <summary>
+            WebClient value. Stored as &apos;APP&apos;.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.TableAPI">
-            <summary>TableAPI value. Stored as &apos;TAP&apos;.</summary>
+            <summary>
+            TableAPI value. Stored as &apos;TAP&apos;.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.DataAccessAPI">
-            <summary>DataAccessAPI value. Stored as &apos;DAP&apos;.</summary>
+            <summary>
+            DataAccessAPI value. Stored as &apos;DAP&apos;.
+            </summary>
         </member>
-        <member name="F:ErpNet.Api.Client.WebsiteType.LEGALUK">
-            <summary>LEGALUK value. Stored as &apos;LUK&apos;.</summary>
+        <member name="F:ErpNet.Api.Client.WebsiteType.LegalUK">
+            <summary>
+            LEGALUK value. Stored as &apos;LUK&apos;.
+            </summary>
         </member>
         <member name="F:ErpNet.Api.Client.WebsiteType.OLAP">
-            <summary>OLAP value. Stored as &apos;OLP&apos;.</summary>
+            <summary>
+            OLAP value. Stored as &apos;OLP&apos;.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.MicrosoftSync">
+            <summary>
+            MicrosoftSync value. Stored as &apos;MSS&apos;.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.VideoConferencing">
+            <summary>
+            VideoConference value. Stored as &apos;MET&apos;.
+            </summary>
+        </member>
+        <member name="F:ErpNet.Api.Client.WebsiteType.AIServer">
+            <summary>
+            AIServer value. Stored as &apos;AIS&apos;
+            </summary>
         </member>
         <member name="T:ErpNet.Api.Client.WebsiteStatus">
             <summary>

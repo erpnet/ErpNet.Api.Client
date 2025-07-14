@@ -14,18 +14,20 @@ namespace ErpNet.Api.Client.DomainApi.Generator
         static void Main(string[] args)
         {
             GenerateEntities().Wait();
+            Console.WriteLine("Model generated successfully. Press any key to exit.");
+            Console.ReadKey();
         }
 
         static async Task<DomainApiService> CreateServiceAsync(string erpNetDatabaseUri)
         {
-            ErpNetServiceClient identityClient = new ErpNetServiceClient(
+            var identityClient = new ErpNetServiceClient(
                 erpNetDatabaseUri,
-                "ServiceDemoClient",
-                "DEMO");
+                "PK",
+                "pk");
 
             var apiRoot = await identityClient.GetDomainApiODataServiceRootAsync();
 
-            DomainApiService service = new DomainApiService(
+            var service = new DomainApiService(
                  apiRoot,
                  identityClient.GetAccessTokenAsync);
             return service;

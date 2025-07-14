@@ -247,7 +247,6 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                         comma = "";
                     type.Members.Add(members[i] + comma);
                 }
-
             }
 
             foreach (XElement complexType in schema.Elements(schema.Name.Namespace + "ComplexType"))
@@ -290,8 +289,6 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                 parentNode.Types.Add(type);
                 nodes.Add(type.FullName, type);
             }
-
-
 
             FileContents fileContents = new FileContents();
 
@@ -346,14 +343,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
 
                 fileContents.EndBlock();
             }
-
-
-
-
-
-
         }
-
 
         static string GetTypeFromEdmType(Dictionary<string, TypeNode> allTypes, string mainNamespace, string edmType)
         {
@@ -454,7 +444,9 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                 DefaultValue = defaultValue;
             }
             public string Name { get; }
+
             public string Type { get; }
+
             public string DefaultValue { get; }
 
             public override string ToString()
@@ -468,6 +460,9 @@ namespace ErpNet.Api.Client.DomainApi.Generator
 
         class TypeNode
         {
+            public string BaseType;
+            public NodeKind Kind;
+
             public TypeNode(string fullName)
             {
                 FullName = fullName;
@@ -484,14 +479,14 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                 return $"{Kind} {FullName}";
             }
 
-            public string BaseType;
-            public NodeKind Kind;
-
             public List<string> Attributes { get; } = new List<string>();
+
             public string FullName { get; }
+
             public string Name { get; }
 
             public string Parent { get; }
+
             public List<string> Members { get; } = new List<string>();
 
             public List<TypeNode> Types { get; } = new List<TypeNode>();

@@ -53,47 +53,91 @@ namespace ErpNet.Api.Client
         /// </summary>
         Unknown,
 
-        /// <summary>ID value. Stored as 'ID'. Open ID Provider. </summary>
+        // System types
+        /// <summary>
+        /// ID value. Stored as 'ID'. Open ID Provider.
+        /// </summary>
         ID,
 
-        /// <summary>UserProfile value. Stored as 'PROFILE'.</summary>
+        /// <summary>
+        /// UserProfile value. Stored as 'PROFILE'.
+        /// </summary>
         UserProfile,
-        
-        /// <summary>Instance manager system type.</summary>
+
+        /// <summary>
+        /// Instance manager system type.
+        /// </summary>
         InstanceManager,
 
-        /// <summary>Allows external applications to access the ERP resources using REST API.. Stored as &apos;API&apos;.</summary>
-        API,
+        /// <summary>
+        /// Allows external applications to access the ERP resources using Domain API.. Stored as &apos;API&apos;
+        /// </summary>
+        DomainAPI,
 
-        /// <summary>Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;.</summary>
+        /// <summary>
+        /// Allows community users to access ERP resources. Requires working ID site.. Stored as &apos;CC&apos;
+        /// </summary>
         ClientCenter,
-        
-        /// <summary>ECommerce value. Stored as &apos;EC&apos;.</summary>
+
+        /// <summary>
+        /// ECommerce value. Stored as &apos;EC&apos;
+        /// </summary>
         ECommerce,
-        
-        /// <summary>LEGALBG value. Stored as &apos;LEG&apos;.</summary>
-        LEGALBG,
-        
-        /// <summary>SocialInteractions value. Stored as &apos;SI&apos;.</summary>
+
+        /// <summary>
+        /// LEGALBG value. Stored as &apos;LEG&apos;.
+        /// </summary>
+        LegalBG,
+
+        /// <summary>
+        /// SocialInteractions value. Stored as &apos;SI&apos;.
+        /// </summary>
         SocialInteractions,
-        
-        /// <summary>DigitalMarketplace value. Stored as &apos;DM&apos;.</summary>
+
+        /// <summary>
+        /// DigitalMarketplace value. Stored as &apos;DM&apos;.
+        /// </summary>
         DigitalMarketplace,
-        
-        /// <summary>WebClientApplication value. Stored as &apos;APP&apos;.</summary>
-        WebClientApplication,
-        
-        /// <summary>TableAPI value. Stored as &apos;TAP&apos;.</summary>
+
+        /// <summary>
+        /// WebClient value. Stored as &apos;APP&apos;.
+        /// </summary>
+        WebClient,
+
+        /// <summary>
+        /// TableAPI value. Stored as &apos;TAP&apos;.
+        /// </summary>
         TableAPI,
-        
-        /// <summary>DataAccessAPI value. Stored as &apos;DAP&apos;.</summary>
+
+        /// <summary>
+        /// DataAccessAPI value. Stored as &apos;DAP&apos;.
+        /// </summary>
         DataAccessAPI,
-        
-        /// <summary>LEGALUK value. Stored as &apos;LUK&apos;.</summary>
-        LEGALUK,
-        
-        /// <summary>OLAP value. Stored as &apos;OLP&apos;.</summary>
-        OLAP
+
+        /// <summary>
+        /// LEGALUK value. Stored as &apos;LUK&apos;.
+        /// </summary>
+        LegalUK,
+
+        /// <summary>
+        /// OLAP value. Stored as &apos;OLP&apos;.
+        /// </summary>
+        OLAP,
+
+        /// <summary>
+        /// MicrosoftSync value. Stored as &apos;MSS&apos;.
+        /// </summary>
+        MicrosoftSync,
+
+        /// <summary>
+        /// VideoConference value. Stored as &apos;MET&apos;.
+        /// </summary>
+        VideoConferencing,
+
+        /// <summary>
+        /// AIServer value. Stored as &apos;AIS&apos;
+        /// </summary>
+        AIServer,
     }
 
     /// <summary>

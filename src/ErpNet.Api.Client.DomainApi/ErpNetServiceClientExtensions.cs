@@ -19,7 +19,7 @@ namespace ErpNet.Api.Client.DomainApi
             var disco = await client.GetAutoDiscoveryAsync()
                 ?? throw new InvalidOperationException("API site not running!");
 
-            var apiSite = disco.WebSites?.FirstOrDefault(s => s.Type == WebsiteType.API && s.Status == WebsiteStatus.Working)
+            var apiSite = disco.WebSites?.FirstOrDefault(s => s.Type == WebsiteType.DomainAPI && s.Status == WebsiteStatus.Working)
                 ?? throw new InvalidOperationException("API site not running!");
             var apiRoot = apiSite.AdditionalProperties?["ODataServiceRoot"] 
                 ?? (apiSite.Url?.TrimEnd('/') + "/domain/odata/");
