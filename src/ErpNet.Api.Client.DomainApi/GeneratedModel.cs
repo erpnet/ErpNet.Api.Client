@@ -66,6 +66,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Applications.AssetManagement.MaintenanceOrder? Document { get => GetPropertyValue<Applications.AssetManagement.MaintenanceOrder>("Document"); set => SetPropertyValue<Applications.AssetManagement.MaintenanceOrder>("Document", value); }
                 [ODataProperty]
+                public Applications.AssetManagement.MaintenanceOrder? OwnerDocument { get => GetPropertyValue<Applications.AssetManagement.MaintenanceOrder>("OwnerDocument"); set => SetPropertyValue<Applications.AssetManagement.MaintenanceOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Applications.AssetManagement.MaintenanceType? MaintenanceType { get => GetPropertyValue<Applications.AssetManagement.MaintenanceType>("MaintenanceType"); set => SetPropertyValue<Applications.AssetManagement.MaintenanceType>("MaintenanceType", value); }
                 [ODataProperty]
                 public Applications.AssetManagement.ManagedAsset? ManagedAsset { get => GetPropertyValue<Applications.AssetManagement.ManagedAsset>("ManagedAsset"); set => SetPropertyValue<Applications.AssetManagement.ManagedAsset>("ManagedAsset", value); }
@@ -2151,6 +2153,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Applications.Service.ServiceActivity? Document { get => GetPropertyValue<Applications.Service.ServiceActivity>("Document"); set => SetPropertyValue<Applications.Service.ServiceActivity>("Document", value); }
                 [ODataProperty]
+                public Applications.Service.ServiceActivity? OwnerDocument { get => GetPropertyValue<Applications.Service.ServiceActivity>("OwnerDocument"); set => SetPropertyValue<Applications.Service.ServiceActivity>("OwnerDocument", value); }
+                [ODataProperty]
                 public Applications.Service.ServiceObject? ServiceObject { get => GetPropertyValue<Applications.Service.ServiceObject>("ServiceObject"); set => SetPropertyValue<Applications.Service.ServiceObject>("ServiceObject", value); }
                 [ODataProperty]
                 public IEnumerable<Applications.Service.ServiceActivityAgreedMaterial>? ServiceActivityAgreedMaterials { get => GetCollection<Applications.Service.ServiceActivityAgreedMaterial>("ServiceActivityAgreedMaterials"); set => SetCollection<Applications.Service.ServiceActivityAgreedMaterial>("ServiceActivityAgreedMaterials", value); }
@@ -2186,6 +2190,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Applications.Service.ServiceActivity? ServiceActivity { get => GetPropertyValue<Applications.Service.ServiceActivity>("ServiceActivity"); set => SetPropertyValue<Applications.Service.ServiceActivity>("ServiceActivity", value); }
                 [ODataProperty]
                 public Applications.Service.ServiceActivity? Document { get => GetPropertyValue<Applications.Service.ServiceActivity>("Document"); set => SetPropertyValue<Applications.Service.ServiceActivity>("Document", value); }
+                [ODataProperty]
+                public Applications.Service.ServiceActivity? OwnerDocument { get => GetPropertyValue<Applications.Service.ServiceActivity>("OwnerDocument"); set => SetPropertyValue<Applications.Service.ServiceActivity>("OwnerDocument", value); }
                 [ODataProperty]
                 public Applications.Service.Service? Service { get => GetPropertyValue<Applications.Service.Service>("Service"); set => SetPropertyValue<Applications.Service.Service>("Service", value); }
                 [ODataProperty]
@@ -2261,6 +2267,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Applications.Service.ServiceAgreement? Document { get => GetPropertyValue<Applications.Service.ServiceAgreement>("Document"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("Document", value); }
                 [ODataProperty]
+                public Applications.Service.ServiceAgreement? OwnerDocument { get => GetPropertyValue<Applications.Service.ServiceAgreement>("OwnerDocument"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("OwnerDocument", value); }
+                [ODataProperty]
                 public Applications.Service.ServiceObject? ServiceObject { get => GetPropertyValue<Applications.Service.ServiceObject>("ServiceObject"); set => SetPropertyValue<Applications.Service.ServiceObject>("ServiceObject", value); }
                 [ODataProperty]
                 public Applications.Service.ServiceType? ServiceType { get => GetPropertyValue<Applications.Service.ServiceType>("ServiceType"); set => SetPropertyValue<Applications.Service.ServiceType>("ServiceType", value); }
@@ -2302,6 +2310,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Applications.Service.ServiceAgreement? ServiceAgreement { get => GetPropertyValue<Applications.Service.ServiceAgreement>("ServiceAgreement"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("ServiceAgreement", value); }
                 [ODataProperty]
                 public Applications.Service.ServiceAgreement? Document { get => GetPropertyValue<Applications.Service.ServiceAgreement>("Document"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("Document", value); }
+                [ODataProperty]
+                public Applications.Service.ServiceAgreement? OwnerDocument { get => GetPropertyValue<Applications.Service.ServiceAgreement>("OwnerDocument"); set => SetPropertyValue<Applications.Service.ServiceAgreement>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -2648,6 +2658,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
+                public DateTime? HistoryVisibleSinceTimeUtc { get => GetPropertyValue<DateTime?>("HistoryVisibleSinceTimeUtc"); set => SetPropertyValue<DateTime?>("HistoryVisibleSinceTimeUtc", value); }
+                [ODataProperty]
                 public DateTime? JoinTimeUtc { get => GetPropertyValue<DateTime?>("JoinTimeUtc"); set => SetPropertyValue<DateTime?>("JoinTimeUtc", value); }
                 [ODataProperty]
                 public DateTime? LastSeenTimeUtc { get => GetPropertyValue<DateTime?>("LastSeenTimeUtc"); set => SetPropertyValue<DateTime?>("LastSeenTimeUtc", value); }
@@ -2765,7 +2777,17 @@ namespace ErpNet.Api.Client.DomainApi
             }
         }
     }
-
+    namespace Core
+    {
+        public enum TrackChangesLevel
+        {
+            DoNotTrackChanges = 0,
+            TrackLastChangesOnly = 1,
+            TrackObjectChanges = 2,
+            TrackObjectAndAttributeChanges = 3,
+            TrackObjectAttributeAndBlobChanges = 4
+        }
+    }
     namespace Crm
     {
         namespace Invoicing
@@ -2890,6 +2912,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Invoicing.Invoice? Document { get => GetPropertyValue<Crm.Invoicing.Invoice>("Document"); set => SetPropertyValue<Crm.Invoicing.Invoice>("Document", value); }
                 [ODataProperty]
+                public Crm.Invoicing.Invoice? OwnerDocument { get => GetPropertyValue<Crm.Invoicing.Invoice>("OwnerDocument"); set => SetPropertyValue<Crm.Invoicing.Invoice>("OwnerDocument", value); }
+                [ODataProperty]
                 public Crm.Invoicing.InvoiceOrderLine? InvoiceOrderLine { get => GetPropertyValue<Crm.Invoicing.InvoiceOrderLine>("InvoiceOrderLine"); set => SetPropertyValue<Crm.Invoicing.InvoiceOrderLine>("InvoiceOrderLine", value); }
                 [ODataProperty]
                 public Finance.Vat.DealType? LineDealType { get => GetPropertyValue<Finance.Vat.DealType>("LineDealType"); set => SetPropertyValue<Finance.Vat.DealType>("LineDealType", value); }
@@ -3007,6 +3031,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Crm.Invoicing.InvoiceOrder? InvoiceOrder { get => GetPropertyValue<Crm.Invoicing.InvoiceOrder>("InvoiceOrder"); set => SetPropertyValue<Crm.Invoicing.InvoiceOrder>("InvoiceOrder", value); }
                 [ODataProperty]
                 public Crm.Invoicing.InvoiceOrder? Document { get => GetPropertyValue<Crm.Invoicing.InvoiceOrder>("Document"); set => SetPropertyValue<Crm.Invoicing.InvoiceOrder>("Document", value); }
+                [ODataProperty]
+                public Crm.Invoicing.InvoiceOrder? OwnerDocument { get => GetPropertyValue<Crm.Invoicing.InvoiceOrder>("OwnerDocument"); set => SetPropertyValue<Crm.Invoicing.InvoiceOrder>("OwnerDocument", value); }
                 [ODataProperty]
                 public Finance.Vat.DealType? LineDealType { get => GetPropertyValue<Finance.Vat.DealType>("LineDealType"); set => SetPropertyValue<Finance.Vat.DealType>("LineDealType", value); }
                 [ODataProperty]
@@ -3320,6 +3346,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Crm.Marketing.MarketingActivity? MarketingActivity { get => GetPropertyValue<Crm.Marketing.MarketingActivity>("MarketingActivity"); set => SetPropertyValue<Crm.Marketing.MarketingActivity>("MarketingActivity", value); }
                 [ODataProperty]
                 public Crm.Marketing.MarketingActivity? Document { get => GetPropertyValue<Crm.Marketing.MarketingActivity>("Document"); set => SetPropertyValue<Crm.Marketing.MarketingActivity>("Document", value); }
+                [ODataProperty]
+                public Crm.Marketing.MarketingActivity? OwnerDocument { get => GetPropertyValue<Crm.Marketing.MarketingActivity>("OwnerDocument"); set => SetPropertyValue<Crm.Marketing.MarketingActivity>("OwnerDocument", value); }
                 [ODataProperty]
                 public Crm.Marketing.MarketingActivityLineType? MarketingActivityLineType { get => GetPropertyValue<Crm.Marketing.MarketingActivityLineType>("MarketingActivityLineType"); set => SetPropertyValue<Crm.Marketing.MarketingActivityLineType>("MarketingActivityLineType", value); }
                 [ODataProperty]
@@ -4060,6 +4088,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Presales.Deal? Document { get => GetPropertyValue<Crm.Presales.Deal>("Document"); set => SetPropertyValue<Crm.Presales.Deal>("Document", value); }
                 [ODataProperty]
+                public Crm.Presales.Deal? OwnerDocument { get => GetPropertyValue<Crm.Presales.Deal>("OwnerDocument"); set => SetPropertyValue<Crm.Presales.Deal>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? QuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit", value); }
@@ -4291,6 +4321,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Crm.Presales.Offer? Offer { get => GetPropertyValue<Crm.Presales.Offer>("Offer"); set => SetPropertyValue<Crm.Presales.Offer>("Offer", value); }
                 [ODataProperty]
                 public Crm.Presales.Offer? Document { get => GetPropertyValue<Crm.Presales.Offer>("Document"); set => SetPropertyValue<Crm.Presales.Offer>("Document", value); }
+                [ODataProperty]
+                public Crm.Presales.Offer? OwnerDocument { get => GetPropertyValue<Crm.Presales.Offer>("OwnerDocument"); set => SetPropertyValue<Crm.Presales.Offer>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Products.ProductCode? ProductCode { get => GetPropertyValue<General.Products.ProductCode>("ProductCode"); set => SetPropertyValue<General.Products.ProductCode>("ProductCode", value); }
                 [ODataProperty]
@@ -5407,6 +5439,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Crm.Sales.SalesOrder? Document { get => GetPropertyValue<Crm.Sales.SalesOrder>("Document"); set => SetPropertyValue<Crm.Sales.SalesOrder>("Document", value); }
                 [ODataProperty]
+                public Crm.Sales.SalesOrder? OwnerDocument { get => GetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument"); set => SetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreBin? StoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin", value); }
@@ -5478,6 +5512,10 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public Crm.Sales.SalesOrder? SalesOrder { get => GetPropertyValue<Crm.Sales.SalesOrder>("SalesOrder"); set => SetPropertyValue<Crm.Sales.SalesOrder>("SalesOrder", value); }
+                [ODataProperty]
+                public Crm.Sales.SalesOrder? Document { get => GetPropertyValue<Crm.Sales.SalesOrder>("Document"); set => SetPropertyValue<Crm.Sales.SalesOrder>("Document", value); }
+                [ODataProperty]
+                public Crm.Sales.SalesOrder? OwnerDocument { get => GetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument"); set => SetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -5502,6 +5540,10 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public Crm.Sales.SalesOrder? SalesOrder { get => GetPropertyValue<Crm.Sales.SalesOrder>("SalesOrder"); set => SetPropertyValue<Crm.Sales.SalesOrder>("SalesOrder", value); }
+                [ODataProperty]
+                public Crm.Sales.SalesOrder? Document { get => GetPropertyValue<Crm.Sales.SalesOrder>("Document"); set => SetPropertyValue<Crm.Sales.SalesOrder>("Document", value); }
+                [ODataProperty]
+                public Crm.Sales.SalesOrder? OwnerDocument { get => GetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument"); set => SetPropertyValue<Crm.Sales.SalesOrder>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -5738,6 +5780,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Crm.SalesForce.SalesPersonTarget? SalesPersonTarget { get => GetPropertyValue<Crm.SalesForce.SalesPersonTarget>("SalesPersonTarget"); set => SetPropertyValue<Crm.SalesForce.SalesPersonTarget>("SalesPersonTarget", value); }
                 [ODataProperty]
                 public Crm.SalesForce.SalesPersonTarget? Document { get => GetPropertyValue<Crm.SalesForce.SalesPersonTarget>("Document"); set => SetPropertyValue<Crm.SalesForce.SalesPersonTarget>("Document", value); }
+                [ODataProperty]
+                public Crm.SalesForce.SalesPersonTarget? OwnerDocument { get => GetPropertyValue<Crm.SalesForce.SalesPersonTarget>("OwnerDocument"); set => SetPropertyValue<Crm.SalesForce.SalesPersonTarget>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Currencies.Currency? TargetAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("TargetAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("TargetAmountCurrency", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -5997,6 +6041,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Accounting.AccountingVoucher? Voucher { get => GetPropertyValue<Finance.Accounting.AccountingVoucher>("Voucher"); set => SetPropertyValue<Finance.Accounting.AccountingVoucher>("Voucher", value); }
                 [ODataProperty]
                 public Finance.Accounting.AccountingVoucher? Document { get => GetPropertyValue<Finance.Accounting.AccountingVoucher>("Document"); set => SetPropertyValue<Finance.Accounting.AccountingVoucher>("Document", value); }
+                [ODataProperty]
+                public Finance.Accounting.AccountingVoucher? OwnerDocument { get => GetPropertyValue<Finance.Accounting.AccountingVoucher>("OwnerDocument"); set => SetPropertyValue<Finance.Accounting.AccountingVoucher>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -6791,6 +6837,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Assets.AssetOrder? Document { get => GetPropertyValue<Finance.Assets.AssetOrder>("Document"); set => SetPropertyValue<Finance.Assets.AssetOrder>("Document", value); }
                 [ODataProperty]
+                public Finance.Assets.AssetOrder? OwnerDocument { get => GetPropertyValue<Finance.Assets.AssetOrder>("OwnerDocument"); set => SetPropertyValue<Finance.Assets.AssetOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Currencies.Currency? AssetValueCurrency { get => GetPropertyValue<General.Currencies.Currency>("AssetValueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("AssetValueCurrency", value); }
                 [ODataProperty]
                 public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
@@ -7034,6 +7082,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Assets.DepreciationPlan? DepreciationPlan { get => GetPropertyValue<Finance.Assets.DepreciationPlan>("DepreciationPlan"); set => SetPropertyValue<Finance.Assets.DepreciationPlan>("DepreciationPlan", value); }
                 [ODataProperty]
                 public Finance.Assets.DepreciationPlan? Document { get => GetPropertyValue<Finance.Assets.DepreciationPlan>("Document"); set => SetPropertyValue<Finance.Assets.DepreciationPlan>("Document", value); }
+                [ODataProperty]
+                public Finance.Assets.DepreciationPlan? OwnerDocument { get => GetPropertyValue<Finance.Assets.DepreciationPlan>("OwnerDocument"); set => SetPropertyValue<Finance.Assets.DepreciationPlan>("OwnerDocument", value); }
                 [ODataProperty]
                 public Finance.Assets.ValuationModel? ValuationModel { get => GetPropertyValue<Finance.Assets.ValuationModel>("ValuationModel"); set => SetPropertyValue<Finance.Assets.ValuationModel>("ValuationModel", value); }
                 [ODataProperty]
@@ -7563,6 +7613,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Finance.Excise.ExciseAdministrativeDocument? Document { get => GetPropertyValue<Finance.Excise.ExciseAdministrativeDocument>("Document"); set => SetPropertyValue<Finance.Excise.ExciseAdministrativeDocument>("Document", value); }
                 [ODataProperty]
+                public Finance.Excise.ExciseAdministrativeDocument? OwnerDocument { get => GetPropertyValue<Finance.Excise.ExciseAdministrativeDocument>("OwnerDocument"); set => SetPropertyValue<Finance.Excise.ExciseAdministrativeDocument>("OwnerDocument", value); }
+                [ODataProperty]
                 public Finance.Excise.ExciseDutyRate? ExciseDutyRate { get => GetPropertyValue<Finance.Excise.ExciseDutyRate>("ExciseDutyRate"); set => SetPropertyValue<Finance.Excise.ExciseDutyRate>("ExciseDutyRate", value); }
                 [ODataProperty]
                 public Finance.Excise.ExciseProduct? ExciseProduct { get => GetPropertyValue<Finance.Excise.ExciseProduct>("ExciseProduct"); set => SetPropertyValue<Finance.Excise.ExciseProduct>("ExciseProduct", value); }
@@ -7870,6 +7922,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Excise.ExciseStampOperation? ExciseStampOperation { get => GetPropertyValue<Finance.Excise.ExciseStampOperation>("ExciseStampOperation"); set => SetPropertyValue<Finance.Excise.ExciseStampOperation>("ExciseStampOperation", value); }
                 [ODataProperty]
                 public Finance.Excise.ExciseStampOperation? Document { get => GetPropertyValue<Finance.Excise.ExciseStampOperation>("Document"); set => SetPropertyValue<Finance.Excise.ExciseStampOperation>("Document", value); }
+                [ODataProperty]
+                public Finance.Excise.ExciseStampOperation? OwnerDocument { get => GetPropertyValue<Finance.Excise.ExciseStampOperation>("OwnerDocument"); set => SetPropertyValue<Finance.Excise.ExciseStampOperation>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Documents.Document? ParentDocument { get => GetPropertyValue<General.Documents.Document>("ParentDocument"); set => SetPropertyValue<General.Documents.Document>("ParentDocument", value); }
                 [ODataProperty]
@@ -8387,6 +8441,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 [ODataProperty]
+                public Boolean? UseBaseCurrency { get => GetPropertyValue<Boolean?>("UseBaseCurrency"); set => SetPropertyValue<Boolean?>("UseBaseCurrency", value); }
+                [ODataProperty]
                 public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
                 [ODataProperty]
                 public General.Contacts.PartyBankAccount? BankAccount { get => GetPropertyValue<General.Contacts.PartyBankAccount>("BankAccount"); set => SetPropertyValue<General.Contacts.PartyBankAccount>("BankAccount", value); }
@@ -8476,7 +8532,8 @@ namespace ErpNet.Api.Client.DomainApi
                     Unpaid = 0,
                     PartiallyPaid = 1,
                     Paid = 2,
-                    Overpaid = 3
+                    Overpaid = 3,
+                    Other = 4
                 }
             }
             [Entity(EntitySet = "Finance_Payments_PaymentOrders", TableName = "Cash_Payment_Orders")]
@@ -8786,6 +8843,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Payments.PaymentTransaction? PaymentTransaction { get => GetPropertyValue<Finance.Payments.PaymentTransaction>("PaymentTransaction"); set => SetPropertyValue<Finance.Payments.PaymentTransaction>("PaymentTransaction", value); }
                 [ODataProperty]
                 public Finance.Payments.PaymentTransaction? Document { get => GetPropertyValue<Finance.Payments.PaymentTransaction>("Document"); set => SetPropertyValue<Finance.Payments.PaymentTransaction>("Document", value); }
+                [ODataProperty]
+                public Finance.Payments.PaymentTransaction? OwnerDocument { get => GetPropertyValue<Finance.Payments.PaymentTransaction>("OwnerDocument"); set => SetPropertyValue<Finance.Payments.PaymentTransaction>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -9245,6 +9304,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Finance.Vat.Declaration? Declaration { get => GetPropertyValue<Finance.Vat.Declaration>("Declaration"); set => SetPropertyValue<Finance.Vat.Declaration>("Declaration", value); }
                 [ODataProperty]
                 public Finance.Vat.Declaration? Document { get => GetPropertyValue<Finance.Vat.Declaration>("Document"); set => SetPropertyValue<Finance.Vat.Declaration>("Document", value); }
+                [ODataProperty]
+                public Finance.Vat.Declaration? OwnerDocument { get => GetPropertyValue<Finance.Vat.Declaration>("OwnerDocument"); set => SetPropertyValue<Finance.Vat.Declaration>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -10227,6 +10288,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? StateTagsAttribute { get => GetPropertyValue<String?>("StateTagsAttribute"); set => SetPropertyValue<String?>("StateTagsAttribute", value); }
                 [ODataProperty]
+                public String? FullState { get => GetPropertyValue<String?>("FullState"); set => SetPropertyValue<String?>("FullState", value); }
+                [ODataProperty]
                 public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
                 [ODataProperty]
                 public General.Documents.Document? AdjustedDocument { get => GetPropertyValue<General.Documents.Document>("AdjustedDocument"); set => SetPropertyValue<General.Documents.Document>("AdjustedDocument", value); }
@@ -10320,6 +10383,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Currencies.Currency? InputAmountCurrency { get => GetPropertyValue<General.Currencies.Currency>("InputAmountCurrency"); set => SetPropertyValue<General.Currencies.Currency>("InputAmountCurrency", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? InputUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("InputUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("InputUnit", value); }
@@ -10370,6 +10435,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
+                [ODataProperty]
                 public Systems.Security.User? User { get => GetPropertyValue<Systems.Security.User>("User"); set => SetPropertyValue<Systems.Security.User>("User", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -10404,6 +10471,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Documents.Document? ReferencedDocument { get => GetPropertyValue<General.Documents.Document>("ReferencedDocument"); set => SetPropertyValue<General.Documents.Document>("ReferencedDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -10433,6 +10502,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -10471,6 +10542,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
                 [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
@@ -10513,6 +10586,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
                 [ODataProperty]
@@ -10578,6 +10653,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
                 [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Contacts.Party? Party { get => GetPropertyValue<General.Contacts.Party>("Party"); set => SetPropertyValue<General.Contacts.Party>("Party", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentPartyRole? Role { get => GetPropertyValue<Systems.Documents.DocumentPartyRole>("Role"); set => SetPropertyValue<Systems.Documents.DocumentPartyRole>("Role", value); }
@@ -10613,6 +10690,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
                 [ODataProperty]
                 public Systems.Core.DocumentPrintImage? DocumentPrintImage { get => GetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage"); set => SetPropertyValue<Systems.Core.DocumentPrintImage>("DocumentPrintImage", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -10672,6 +10751,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [Owner]
                 [ODataProperty]
                 public General.Documents.Document? Document { get => GetPropertyValue<General.Documents.Document>("Document"); set => SetPropertyValue<General.Documents.Document>("Document", value); }
+                [ODataProperty]
+                public General.Documents.Document? OwnerDocument { get => GetPropertyValue<General.Documents.Document>("OwnerDocument"); set => SetPropertyValue<General.Documents.Document>("OwnerDocument", value); }
                 [ODataProperty]
                 public Systems.Documents.DocumentTypeUserStatus? UserStatus { get => GetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus"); set => SetPropertyValue<Systems.Documents.DocumentTypeUserStatus>("UserStatus", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -12158,6 +12239,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.CostCorrection? Document { get => GetPropertyValue<Logistics.Inventory.CostCorrection>("Document"); set => SetPropertyValue<Logistics.Inventory.CostCorrection>("Document", value); }
                 [ODataProperty]
+                public Logistics.Inventory.CostCorrection? OwnerDocument { get => GetPropertyValue<Logistics.Inventory.CostCorrection>("OwnerDocument"); set => SetPropertyValue<Logistics.Inventory.CostCorrection>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.StoreTransactionLine? TransactionLine { get => GetPropertyValue<Logistics.Inventory.StoreTransactionLine>("TransactionLine"); set => SetPropertyValue<Logistics.Inventory.StoreTransactionLine>("TransactionLine", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -12525,6 +12608,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Inventory.Reconciliation? Document { get => GetPropertyValue<Logistics.Inventory.Reconciliation>("Document"); set => SetPropertyValue<Logistics.Inventory.Reconciliation>("Document", value); }
                 [ODataProperty]
+                public Logistics.Inventory.Reconciliation? OwnerDocument { get => GetPropertyValue<Logistics.Inventory.Reconciliation>("OwnerDocument"); set => SetPropertyValue<Logistics.Inventory.Reconciliation>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreBin? StoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin", value); }
@@ -12862,6 +12947,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Inventory.StoreOrder? StoreOrder { get => GetPropertyValue<Logistics.Inventory.StoreOrder>("StoreOrder"); set => SetPropertyValue<Logistics.Inventory.StoreOrder>("StoreOrder", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreOrder? Document { get => GetPropertyValue<Logistics.Inventory.StoreOrder>("Document"); set => SetPropertyValue<Logistics.Inventory.StoreOrder>("Document", value); }
+                [ODataProperty]
+                public Logistics.Inventory.StoreOrder? OwnerDocument { get => GetPropertyValue<Logistics.Inventory.StoreOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Inventory.StoreOrder>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -13041,6 +13128,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Inventory.StoreTransaction? TransactionObj { get => GetPropertyValue<Logistics.Inventory.StoreTransaction>("TransactionObj"); set => SetPropertyValue<Logistics.Inventory.StoreTransaction>("TransactionObj", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreTransaction? Document { get => GetPropertyValue<Logistics.Inventory.StoreTransaction>("Document"); set => SetPropertyValue<Logistics.Inventory.StoreTransaction>("Document", value); }
+                [ODataProperty]
+                public Logistics.Inventory.StoreTransaction? OwnerDocument { get => GetPropertyValue<Logistics.Inventory.StoreTransaction>("OwnerDocument"); set => SetPropertyValue<Logistics.Inventory.StoreTransaction>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -13230,6 +13319,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Inventory.TransferOrder? TransferOrder { get => GetPropertyValue<Logistics.Inventory.TransferOrder>("TransferOrder"); set => SetPropertyValue<Logistics.Inventory.TransferOrder>("TransferOrder", value); }
                 [ODataProperty]
                 public Logistics.Inventory.TransferOrder? Document { get => GetPropertyValue<Logistics.Inventory.TransferOrder>("Document"); set => SetPropertyValue<Logistics.Inventory.TransferOrder>("Document", value); }
+                [ODataProperty]
+                public Logistics.Inventory.TransferOrder? OwnerDocument { get => GetPropertyValue<Logistics.Inventory.TransferOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Inventory.TransferOrder>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -13449,6 +13540,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Procurement.PurchaseControlDocument? Document { get => GetPropertyValue<Logistics.Procurement.PurchaseControlDocument>("Document"); set => SetPropertyValue<Logistics.Procurement.PurchaseControlDocument>("Document", value); }
                 [ODataProperty]
+                public Logistics.Procurement.PurchaseControlDocument? OwnerDocument { get => GetPropertyValue<Logistics.Procurement.PurchaseControlDocument>("OwnerDocument"); set => SetPropertyValue<Logistics.Procurement.PurchaseControlDocument>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Procurement.PurchaseInvoice? PurchaseInvoice { get => GetPropertyValue<Logistics.Procurement.PurchaseInvoice>("PurchaseInvoice"); set => SetPropertyValue<Logistics.Procurement.PurchaseInvoice>("PurchaseInvoice", value); }
                 [ODataProperty]
                 public Logistics.Procurement.PurchaseInvoiceLine? PurchaseInvoiceLine { get => GetPropertyValue<Logistics.Procurement.PurchaseInvoiceLine>("PurchaseInvoiceLine"); set => SetPropertyValue<Logistics.Procurement.PurchaseInvoiceLine>("PurchaseInvoiceLine", value); }
@@ -13590,6 +13683,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Procurement.PurchaseInvoice? PurchaseInvoice { get => GetPropertyValue<Logistics.Procurement.PurchaseInvoice>("PurchaseInvoice"); set => SetPropertyValue<Logistics.Procurement.PurchaseInvoice>("PurchaseInvoice", value); }
                 [ODataProperty]
                 public Logistics.Procurement.PurchaseInvoice? Document { get => GetPropertyValue<Logistics.Procurement.PurchaseInvoice>("Document"); set => SetPropertyValue<Logistics.Procurement.PurchaseInvoice>("Document", value); }
+                [ODataProperty]
+                public Logistics.Procurement.PurchaseInvoice? OwnerDocument { get => GetPropertyValue<Logistics.Procurement.PurchaseInvoice>("OwnerDocument"); set => SetPropertyValue<Logistics.Procurement.PurchaseInvoice>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? QuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit", value); }
                 [ODataProperty]
@@ -13758,6 +13853,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Procurement.PurchaseOrder? PurchaseOrder { get => GetPropertyValue<Logistics.Procurement.PurchaseOrder>("PurchaseOrder"); set => SetPropertyValue<Logistics.Procurement.PurchaseOrder>("PurchaseOrder", value); }
                 [ODataProperty]
                 public Logistics.Procurement.PurchaseOrder? Document { get => GetPropertyValue<Logistics.Procurement.PurchaseOrder>("Document"); set => SetPropertyValue<Logistics.Procurement.PurchaseOrder>("Document", value); }
+                [ODataProperty]
+                public Logistics.Procurement.PurchaseOrder? OwnerDocument { get => GetPropertyValue<Logistics.Procurement.PurchaseOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Procurement.PurchaseOrder>("OwnerDocument", value); }
                 [ODataProperty]
                 public Logistics.Procurement.PurchaseProductPrice? PurchaseProductPrice { get => GetPropertyValue<Logistics.Procurement.PurchaseProductPrice>("PurchaseProductPrice"); set => SetPropertyValue<Logistics.Procurement.PurchaseProductPrice>("PurchaseProductPrice", value); }
                 [ODataProperty]
@@ -13954,6 +14051,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Procurement.ReceivingOrder? Document { get => GetPropertyValue<Logistics.Procurement.ReceivingOrder>("Document"); set => SetPropertyValue<Logistics.Procurement.ReceivingOrder>("Document", value); }
                 [ODataProperty]
+                public Logistics.Procurement.ReceivingOrder? OwnerDocument { get => GetPropertyValue<Logistics.Procurement.ReceivingOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Procurement.ReceivingOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.SerialNumber? SerialNumber { get => GetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber"); set => SetPropertyValue<Logistics.Inventory.SerialNumber>("SerialNumber", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreBin? StoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin", value); }
@@ -14031,6 +14130,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Procurement.Requisition? Requisition { get => GetPropertyValue<Logistics.Procurement.Requisition>("Requisition"); set => SetPropertyValue<Logistics.Procurement.Requisition>("Requisition", value); }
                 [ODataProperty]
                 public Logistics.Procurement.Requisition? Document { get => GetPropertyValue<Logistics.Procurement.Requisition>("Document"); set => SetPropertyValue<Logistics.Procurement.Requisition>("Document", value); }
+                [ODataProperty]
+                public Logistics.Procurement.Requisition? OwnerDocument { get => GetPropertyValue<Logistics.Procurement.Requisition>("OwnerDocument"); set => SetPropertyValue<Logistics.Procurement.Requisition>("OwnerDocument", value); }
                 [ODataProperty]
                 public Logistics.Procurement.Supplier? SuggestedSupplier { get => GetPropertyValue<Logistics.Procurement.Supplier>("SuggestedSupplier"); set => SetPropertyValue<Logistics.Procurement.Supplier>("SuggestedSupplier", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -14257,6 +14358,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.Shipment? Document { get => GetPropertyValue<Logistics.Shipment.Shipment>("Document"); set => SetPropertyValue<Logistics.Shipment.Shipment>("Document", value); }
                 [ODataProperty]
+                public Logistics.Shipment.Shipment? OwnerDocument { get => GetPropertyValue<Logistics.Shipment.Shipment>("OwnerDocument"); set => SetPropertyValue<Logistics.Shipment.Shipment>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Shipment.ShipmentOrderLine? ShipmentOrderLine { get => GetPropertyValue<Logistics.Shipment.ShipmentOrderLine>("ShipmentOrderLine"); set => SetPropertyValue<Logistics.Shipment.ShipmentOrderLine>("ShipmentOrderLine", value); }
                 [ODataProperty]
                 public Logistics.Inventory.StoreBin? StoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin", value); }
@@ -14365,6 +14468,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Shipment.ShipmentOrder? Document { get => GetPropertyValue<Logistics.Shipment.ShipmentOrder>("Document"); set => SetPropertyValue<Logistics.Shipment.ShipmentOrder>("Document", value); }
                 [ODataProperty]
+                public Logistics.Shipment.ShipmentOrder? OwnerDocument { get => GetPropertyValue<Logistics.Shipment.ShipmentOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Shipment.ShipmentOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.StoreBin? StoreBin { get => GetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin"); set => SetPropertyValue<Logistics.Inventory.StoreBin>("StoreBin", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -14437,6 +14542,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Transportation.TransportationExecution? TransportationExecution { get => GetPropertyValue<Logistics.Transportation.TransportationExecution>("TransportationExecution"); set => SetPropertyValue<Logistics.Transportation.TransportationExecution>("TransportationExecution", value); }
                 [ODataProperty]
                 public Logistics.Transportation.TransportationExecution? Document { get => GetPropertyValue<Logistics.Transportation.TransportationExecution>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationExecution>("Document", value); }
+                [ODataProperty]
+                public Logistics.Transportation.TransportationExecution? OwnerDocument { get => GetPropertyValue<Logistics.Transportation.TransportationExecution>("OwnerDocument"); set => SetPropertyValue<Logistics.Transportation.TransportationExecution>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -14545,6 +14652,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Transportation.TransportationOrder? TransportationOrder { get => GetPropertyValue<Logistics.Transportation.TransportationOrder>("TransportationOrder"); set => SetPropertyValue<Logistics.Transportation.TransportationOrder>("TransportationOrder", value); }
                 [ODataProperty]
                 public Logistics.Transportation.TransportationOrder? Document { get => GetPropertyValue<Logistics.Transportation.TransportationOrder>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationOrder>("Document", value); }
+                [ODataProperty]
+                public Logistics.Transportation.TransportationOrder? OwnerDocument { get => GetPropertyValue<Logistics.Transportation.TransportationOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Transportation.TransportationOrder>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -14621,6 +14730,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Transportation.TransportationRequisition? TransportationRequisition { get => GetPropertyValue<Logistics.Transportation.TransportationRequisition>("TransportationRequisition"); set => SetPropertyValue<Logistics.Transportation.TransportationRequisition>("TransportationRequisition", value); }
                 [ODataProperty]
                 public Logistics.Transportation.TransportationRequisition? Document { get => GetPropertyValue<Logistics.Transportation.TransportationRequisition>("Document"); set => SetPropertyValue<Logistics.Transportation.TransportationRequisition>("Document", value); }
+                [ODataProperty]
+                public Logistics.Transportation.TransportationRequisition? OwnerDocument { get => GetPropertyValue<Logistics.Transportation.TransportationRequisition>("OwnerDocument"); set => SetPropertyValue<Logistics.Transportation.TransportationRequisition>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -14817,6 +14928,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Wms.WarehouseOrder? Document { get => GetPropertyValue<Logistics.Wms.WarehouseOrder>("Document"); set => SetPropertyValue<Logistics.Wms.WarehouseOrder>("Document", value); }
                 [ODataProperty]
+                public Logistics.Wms.WarehouseOrder? OwnerDocument { get => GetPropertyValue<Logistics.Wms.WarehouseOrder>("OwnerDocument"); set => SetPropertyValue<Logistics.Wms.WarehouseOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Wms.WarehouseWorker? WarehouseWorker { get => GetPropertyValue<Logistics.Wms.WarehouseWorker>("WarehouseWorker"); set => SetPropertyValue<Logistics.Wms.WarehouseWorker>("WarehouseWorker", value); }
                 [ODataProperty]
                 public Logistics.Wms.WarehouseZone? WarehouseZone { get => GetPropertyValue<Logistics.Wms.WarehouseZone>("WarehouseZone"); set => SetPropertyValue<Logistics.Wms.WarehouseZone>("WarehouseZone", value); }
@@ -14956,6 +15069,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Logistics.Wms.WarehouseReconciliation? Document { get => GetPropertyValue<Logistics.Wms.WarehouseReconciliation>("Document"); set => SetPropertyValue<Logistics.Wms.WarehouseReconciliation>("Document", value); }
                 [ODataProperty]
+                public Logistics.Wms.WarehouseReconciliation? OwnerDocument { get => GetPropertyValue<Logistics.Wms.WarehouseReconciliation>("OwnerDocument"); set => SetPropertyValue<Logistics.Wms.WarehouseReconciliation>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Wms.WarehouseWorker? WarehouseWorker { get => GetPropertyValue<Logistics.Wms.WarehouseWorker>("WarehouseWorker"); set => SetPropertyValue<Logistics.Wms.WarehouseWorker>("WarehouseWorker", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -15031,6 +15146,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Logistics.Wms.WarehouseRequisition? WarehouseRequisition { get => GetPropertyValue<Logistics.Wms.WarehouseRequisition>("WarehouseRequisition"); set => SetPropertyValue<Logistics.Wms.WarehouseRequisition>("WarehouseRequisition", value); }
                 [ODataProperty]
                 public Logistics.Wms.WarehouseRequisition? Document { get => GetPropertyValue<Logistics.Wms.WarehouseRequisition>("Document"); set => SetPropertyValue<Logistics.Wms.WarehouseRequisition>("Document", value); }
+                [ODataProperty]
+                public Logistics.Wms.WarehouseRequisition? OwnerDocument { get => GetPropertyValue<Logistics.Wms.WarehouseRequisition>("OwnerDocument"); set => SetPropertyValue<Logistics.Wms.WarehouseRequisition>("OwnerDocument", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -15175,9 +15292,7 @@ namespace ErpNet.Api.Client.DomainApi
         [ODataProperty]
         public String? BG { get => GetPropertyValue<String?>("BG"); set => SetPropertyValue<String?>("BG", value); }
         [ODataProperty]
-        public String? MK { get => GetPropertyValue<String?>("MK"); set => SetPropertyValue<String?>("MK", value); }
-        [ODataProperty]
-        public String? TR { get => GetPropertyValue<String?>("TR"); set => SetPropertyValue<String?>("TR", value); }
+        public String? DE { get => GetPropertyValue<String?>("DE"); set => SetPropertyValue<String?>("DE", value); }
     }
     public partial class OpenObject: ComplexTypeResource
     {
@@ -15639,6 +15754,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Production.ShopFloor.ConsumptionOrder? Document { get => GetPropertyValue<Production.ShopFloor.ConsumptionOrder>("Document"); set => SetPropertyValue<Production.ShopFloor.ConsumptionOrder>("Document", value); }
                 [ODataProperty]
+                public Production.ShopFloor.ConsumptionOrder? OwnerDocument { get => GetPropertyValue<Production.ShopFloor.ConsumptionOrder>("OwnerDocument"); set => SetPropertyValue<Production.ShopFloor.ConsumptionOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public Logistics.Inventory.Lot? Lot { get => GetPropertyValue<Logistics.Inventory.Lot>("Lot"); set => SetPropertyValue<Logistics.Inventory.Lot>("Lot", value); }
                 [ODataProperty]
                 public General.Products.Product? Product { get => GetPropertyValue<General.Products.Product>("Product"); set => SetPropertyValue<General.Products.Product>("Product", value); }
@@ -15723,6 +15840,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Production.ShopFloor.OutputOrder? Document { get => GetPropertyValue<Production.ShopFloor.OutputOrder>("Document"); set => SetPropertyValue<Production.ShopFloor.OutputOrder>("Document", value); }
                 [ODataProperty]
+                public Production.ShopFloor.OutputOrder? OwnerDocument { get => GetPropertyValue<Production.ShopFloor.OutputOrder>("OwnerDocument"); set => SetPropertyValue<Production.ShopFloor.OutputOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public General.Products.MeasurementUnit? QuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("QuantityUnit", value); }
                 [ODataProperty]
                 public Logistics.Inventory.ScrapType? ScrapType { get => GetPropertyValue<Logistics.Inventory.ScrapType>("ScrapType"); set => SetPropertyValue<Logistics.Inventory.ScrapType>("ScrapType", value); }
@@ -15800,6 +15919,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Production.ShopFloor.OutputOrder? OutputOrder { get => GetPropertyValue<Production.ShopFloor.OutputOrder>("OutputOrder"); set => SetPropertyValue<Production.ShopFloor.OutputOrder>("OutputOrder", value); }
                 [ODataProperty]
                 public Production.ShopFloor.OutputOrder? Document { get => GetPropertyValue<Production.ShopFloor.OutputOrder>("Document"); set => SetPropertyValue<Production.ShopFloor.OutputOrder>("Document", value); }
+                [ODataProperty]
+                public Production.ShopFloor.OutputOrder? OwnerDocument { get => GetPropertyValue<Production.ShopFloor.OutputOrder>("OwnerDocument"); set => SetPropertyValue<Production.ShopFloor.OutputOrder>("OwnerDocument", value); }
                 [ODataProperty]
                 public General.Products.MeasurementUnit? ProducedQuantityUnit { get => GetPropertyValue<General.Products.MeasurementUnit>("ProducedQuantityUnit"); set => SetPropertyValue<General.Products.MeasurementUnit>("ProducedQuantityUnit", value); }
                 [ODataProperty]
@@ -15964,6 +16085,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Production.ShopFloor.WorkOrder? Document { get => GetPropertyValue<Production.ShopFloor.WorkOrder>("Document"); set => SetPropertyValue<Production.ShopFloor.WorkOrder>("Document", value); }
                 [ODataProperty]
+                public Production.ShopFloor.WorkOrder? OwnerDocument { get => GetPropertyValue<Production.ShopFloor.WorkOrder>("OwnerDocument"); set => SetPropertyValue<Production.ShopFloor.WorkOrder>("OwnerDocument", value); }
+                [ODataProperty]
                 public IEnumerable<Production.ShopFloor.WorkOrderItemOperation>? Operations { get => GetCollection<Production.ShopFloor.WorkOrderItemOperation>("Operations"); set => SetCollection<Production.ShopFloor.WorkOrderItemOperation>("Operations", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
@@ -16019,6 +16142,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Production.ShopFloor.WorkOrder? WorkOrder { get => GetPropertyValue<Production.ShopFloor.WorkOrder>("WorkOrder"); set => SetPropertyValue<Production.ShopFloor.WorkOrder>("WorkOrder", value); }
                 [ODataProperty]
                 public Production.ShopFloor.WorkOrder? Document { get => GetPropertyValue<Production.ShopFloor.WorkOrder>("Document"); set => SetPropertyValue<Production.ShopFloor.WorkOrder>("Document", value); }
+                [ODataProperty]
+                public Production.ShopFloor.WorkOrder? OwnerDocument { get => GetPropertyValue<Production.ShopFloor.WorkOrder>("OwnerDocument"); set => SetPropertyValue<Production.ShopFloor.WorkOrder>("OwnerDocument", value); }
                 [ODataProperty]
                 public Production.ShopFloor.WorkOrderItem? WorkOrderItem { get => GetPropertyValue<Production.ShopFloor.WorkOrderItem>("WorkOrderItem"); set => SetPropertyValue<Production.ShopFloor.WorkOrderItem>("WorkOrderItem", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -16452,6 +16577,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? ResolvedTimeUTC { get => GetPropertyValue<DateTime?>("ResolvedTimeUTC"); set => SetPropertyValue<DateTime?>("ResolvedTimeUTC", value); }
                 [ODataProperty]
+                public Int32? StoryPoints { get => GetPropertyValue<Int32?>("StoryPoints"); set => SetPropertyValue<Int32?>("StoryPoints", value); }
+                [ODataProperty]
                 public Projects.Agile.CasesRepository.SystemState? SystemState { get => GetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState"); set => SetPropertyValue<Projects.Agile.CasesRepository.SystemState?>("SystemState", value); }
                 [ODataProperty]
                 public String? Title { get => GetPropertyValue<String?>("Title"); set => SetPropertyValue<String?>("Title", value); }
@@ -16479,6 +16606,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Projects.Agile.ProjectMilestone? ProjectMilestone { get => GetPropertyValue<Projects.Agile.ProjectMilestone>("ProjectMilestone"); set => SetPropertyValue<Projects.Agile.ProjectMilestone>("ProjectMilestone", value); }
                 [ODataProperty]
                 public Communities.Social.Group? SocialGroup { get => GetPropertyValue<Communities.Social.Group>("SocialGroup"); set => SetPropertyValue<Communities.Social.Group>("SocialGroup", value); }
+                [ODataProperty]
+                public Projects.Agile.Sprint? Sprint { get => GetPropertyValue<Projects.Agile.Sprint>("Sprint"); set => SetPropertyValue<Projects.Agile.Sprint>("Sprint", value); }
                 [ODataProperty]
                 public General.Contacts.Party? StakeholderParty { get => GetPropertyValue<General.Contacts.Party>("StakeholderParty"); set => SetPropertyValue<General.Contacts.Party>("StakeholderParty", value); }
                 [ODataProperty]
@@ -16711,6 +16840,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Security.User? PrimaryUser { get => GetPropertyValue<Systems.Security.User>("PrimaryUser"); set => SetPropertyValue<Systems.Security.User>("PrimaryUser", value); }
                 [ODataProperty]
+                public Projects.Agile.ProjectGroup? ProjectGroup { get => GetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup"); set => SetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup", value); }
+                [ODataProperty]
                 public Projects.Agile.ProjectType? ProjectType { get => GetPropertyValue<Projects.Agile.ProjectType>("ProjectType"); set => SetPropertyValue<Projects.Agile.ProjectType>("ProjectType", value); }
                 [ODataProperty]
                 public Communities.Social.Group? SocialGroup { get => GetPropertyValue<Communities.Social.Group>("SocialGroup"); set => SetPropertyValue<Communities.Social.Group>("SocialGroup", value); }
@@ -16744,9 +16875,34 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Systems.Security.User? PrimaryUser { get => GetPropertyValue<Systems.Security.User>("PrimaryUser"); set => SetPropertyValue<Systems.Security.User>("PrimaryUser", value); }
                 [ODataProperty]
+                public Projects.Agile.ProjectGroup? ProjectGroup { get => GetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup"); set => SetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup", value); }
+                [ODataProperty]
                 public Projects.Agile.Project? Project { get => GetPropertyValue<Projects.Agile.Project>("Project"); set => SetPropertyValue<Projects.Agile.Project>("Project", value); }
                 [ODataProperty]
                 public Communities.Social.Group? SocialGroup { get => GetPropertyValue<Communities.Social.Group>("SocialGroup"); set => SetPropertyValue<Communities.Social.Group>("SocialGroup", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            [Entity(EntitySet = "Projects_Agile_ProjectGroups", TableName = "Apm_Project_Groups")]
+            public partial class ProjectGroup: EntityResource
+            {
+                public ProjectGroup(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Projects_Agile_ProjectGroups";
+                public const string EntityTableName = "Apm_Project_Groups";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public String? Code { get => GetPropertyValue<String?>("Code"); set => SetPropertyValue<String?>("Code", value); }
+                [ODataProperty]
+                public MultilanguageString? Description { get => GetPropertyValue<MultilanguageString?>("Description"); set => SetPropertyValue<MultilanguageString?>("Description", value); }
+                [ODataProperty]
+                public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
+                public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -16768,6 +16924,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
                 [ODataProperty]
                 public MultilanguageString? Name { get => GetPropertyValue<MultilanguageString?>("Name"); set => SetPropertyValue<MultilanguageString?>("Name", value); }
+                [ODataProperty]
+                public Projects.Agile.ProjectGroup? ProjectGroup { get => GetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup"); set => SetPropertyValue<Projects.Agile.ProjectGroup>("ProjectGroup", value); }
                 [ODataProperty]
                 public Projects.Agile.Project? Project { get => GetPropertyValue<Projects.Agile.Project>("Project"); set => SetPropertyValue<Projects.Agile.Project>("Project", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
@@ -16818,6 +16976,47 @@ namespace ErpNet.Api.Client.DomainApi
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
                 public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
             }
+            [Entity(EntitySet = "Projects_Agile_Sprints", TableName = "Apm_Sprints")]
+            public partial class Sprint: EntityResource
+            {
+                public Sprint(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Projects_Agile_Sprints";
+                public const string EntityTableName = "Apm_Sprints";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public DateTime? ActivatedAt { get => GetPropertyValue<DateTime?>("ActivatedAt"); set => SetPropertyValue<DateTime?>("ActivatedAt", value); }
+                [ODataProperty]
+                public DateTime? EndDate { get => GetPropertyValue<DateTime?>("EndDate"); set => SetPropertyValue<DateTime?>("EndDate", value); }
+                [ODataProperty]
+                public String? Goal { get => GetPropertyValue<String?>("Goal"); set => SetPropertyValue<String?>("Goal", value); }
+                [ODataProperty]
+                public String? Name { get => GetPropertyValue<String?>("Name"); set => SetPropertyValue<String?>("Name", value); }
+                [ODataProperty]
+                public DateTime? StartDate { get => GetPropertyValue<DateTime?>("StartDate"); set => SetPropertyValue<DateTime?>("StartDate", value); }
+                [ODataProperty]
+                public Projects.Agile.SprintsRepository.State? State { get => GetPropertyValue<Projects.Agile.SprintsRepository.State?>("State"); set => SetPropertyValue<Projects.Agile.SprintsRepository.State?>("State", value); }
+                [ODataProperty]
+                public Projects.Agile.Project? Project { get => GetPropertyValue<Projects.Agile.Project>("Project"); set => SetPropertyValue<Projects.Agile.Project>("Project", value); }
+                [ODataProperty]
+                public Communities.Social.Group? SocialGroup { get => GetPropertyValue<Communities.Social.Group>("SocialGroup"); set => SetPropertyValue<Communities.Social.Group>("SocialGroup", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace SprintsRepository
+            {
+                public enum State
+                {
+                    Planned = 0,
+                    Active = 1,
+                    Completed = 2,
+                    Cancelled = 3
+                }
+            }
             [Entity(EntitySet = "Projects_Agile_TimeEntries", TableName = "Apm_Time_Entries")]
             public partial class TimeEntry: EntityResource
             {
@@ -16858,7 +17057,11 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
                 [ODataProperty]
+                public MultilanguageString? Description { get => GetPropertyValue<MultilanguageString?>("Description"); set => SetPropertyValue<MultilanguageString?>("Description", value); }
+                [ODataProperty]
                 public Boolean? IsActive { get => GetPropertyValue<Boolean?>("IsActive"); set => SetPropertyValue<Boolean?>("IsActive", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
                 public Int32? Ord { get => GetPropertyValue<Int32?>("Ord"); set => SetPropertyValue<Int32?>("Ord", value); }
                 [ODataProperty]
@@ -17848,6 +18051,8 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? CompletedDateTimeUtc { get => GetPropertyValue<DateTime?>("CompletedDateTimeUtc"); set => SetPropertyValue<DateTime?>("CompletedDateTimeUtc", value); }
                 [ODataProperty]
+                public DateTime? CreationTimeUtc { get => GetPropertyValue<DateTime?>("CreationTimeUtc"); set => SetPropertyValue<DateTime?>("CreationTimeUtc", value); }
+                [ODataProperty]
                 public DateTime? DueDate { get => GetPropertyValue<DateTime?>("DueDate"); set => SetPropertyValue<DateTime?>("DueDate", value); }
                 [ODataProperty]
                 public Projects.Todo.TasksRepository.Importance? Importance { get => GetPropertyValue<Projects.Todo.TasksRepository.Importance?>("Importance"); set => SetPropertyValue<Projects.Todo.TasksRepository.Importance?>("Importance", value); }
@@ -18505,7 +18710,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public enum ScriptLanguage
                 {
                     Integrated = 0,
-                    CSharp = 1
+                    CSharp = 1,
+                    JavaScript = 2
                 }
             }
         }
@@ -18560,6 +18766,8 @@ namespace ErpNet.Api.Client.DomainApi
                 public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
                 [ODataProperty]
                 public Boolean? RunOnIdle { get => GetPropertyValue<Boolean?>("RunOnIdle"); set => SetPropertyValue<Boolean?>("RunOnIdle", value); }
+                [ODataProperty]
+                public Systems.Config.JobsRepository.Schedule? Schedule { get => GetPropertyValue<Systems.Config.JobsRepository.Schedule?>("Schedule"); set => SetPropertyValue<Systems.Config.JobsRepository.Schedule?>("Schedule", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
                 public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
                 public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
@@ -18578,7 +18786,13 @@ namespace ErpNet.Api.Client.DomainApi
                     DeleteAttributeChangesHistory = 6,
                     DeleteOldAuditLogs = 7,
                     CompleteUnfinishedTimeEntries = 8,
-                    CalculateReportingCurrencyAmounts = 9
+                    CalculateReportingCurrencyAmounts = 9,
+                    InstanceChangesProcessor = 10
+                }
+                public enum Schedule
+                {
+                    None = 0,
+                    Night = 1
                 }
             }
             [Entity(EntitySet = "Systems_Config_Translations", TableName = "Sys_Translations")]
@@ -18751,15 +18965,6 @@ namespace ErpNet.Api.Client.DomainApi
         }
         namespace Core
         {
-            public enum TrackChangesLevel
-            {
-                DoNotTrackChanges = 0,
-                TrackLastChangesOnly = 1,
-                TrackObjectChanges = 2,
-                TrackObjectAndAttributeChanges = 3,
-                TrackObjectAttributeAndBlobChanges = 4
-            }
-
             [Entity(EntitySet = "Systems_Core_AttributeChanges")]
             public partial class AttributeChange: EntityResource
             {
@@ -19006,6 +19211,74 @@ namespace ErpNet.Api.Client.DomainApi
                     CompressedDeflate = 0,
                     CompressedLZO = 1,
                     Uncompressed = 2
+                }
+            }
+            [Entity(EntitySet = "Systems_Core_InstanceChangeRequests", TableName = "Sys_Instance_Change_Requests")]
+            public partial class InstanceChangeRequest: EntityResource
+            {
+                public InstanceChangeRequest(IDictionary<string, object?>? rawData = null): base(rawData) {}
+                public const string EntitySetName = "Systems_Core_InstanceChangeRequests";
+                public const string EntityTableName = "Sys_Instance_Change_Requests";
+                [ODataProperty]
+                public Int32? ObjectVersion { get => GetPropertyValue<Int32?>("ObjectVersion"); set => SetPropertyValue<Int32?>("ObjectVersion", value); }
+                [ODataProperty]
+                public String? DisplayText { get => GetPropertyValue<String?>("DisplayText"); set => SetPropertyValue<String?>("DisplayText", value); }
+                [ODataProperty]
+                public Systems.Core.InstanceChangeRequestsRepository.ChangeKind? ChangeKind { get => GetPropertyValue<Systems.Core.InstanceChangeRequestsRepository.ChangeKind?>("ChangeKind"); set => SetPropertyValue<Systems.Core.InstanceChangeRequestsRepository.ChangeKind?>("ChangeKind", value); }
+                [ODataProperty]
+                public Decimal? CurrencyRate { get => GetPropertyValue<Decimal?>("CurrencyRate"); set => SetPropertyValue<Decimal?>("CurrencyRate", value); }
+                [ODataProperty]
+                public DateTime? EffectiveDate { get => GetPropertyValue<DateTime?>("EffectiveDate"); set => SetPropertyValue<DateTime?>("EffectiveDate", value); }
+                [ODataProperty]
+                public DateTime? ExecutionDate { get => GetPropertyValue<DateTime?>("ExecutionDate"); set => SetPropertyValue<DateTime?>("ExecutionDate", value); }
+                [ODataProperty]
+                public String? Notes { get => GetPropertyValue<String?>("Notes"); set => SetPropertyValue<String?>("Notes", value); }
+                [ODataProperty]
+                public DateTime? ProgressDate { get => GetPropertyValue<DateTime?>("ProgressDate"); set => SetPropertyValue<DateTime?>("ProgressDate", value); }
+                [ODataProperty]
+                public Decimal? ProgressPercent { get => GetPropertyValue<Decimal?>("ProgressPercent"); set => SetPropertyValue<Decimal?>("ProgressPercent", value); }
+                [ODataProperty]
+                public String? ReferenceNo { get => GetPropertyValue<String?>("ReferenceNo"); set => SetPropertyValue<String?>("ReferenceNo", value); }
+                [ODataProperty]
+                public Int32? RequestNo { get => GetPropertyValue<Int32?>("RequestNo"); set => SetPropertyValue<Int32?>("RequestNo", value); }
+                [ODataProperty]
+                public String? SettingsJson { get => GetPropertyValue<String?>("SettingsJson"); set => SetPropertyValue<String?>("SettingsJson", value); }
+                [ODataProperty]
+                public Systems.Core.InstanceChangeRequestsRepository.State? State { get => GetPropertyValue<Systems.Core.InstanceChangeRequestsRepository.State?>("State"); set => SetPropertyValue<Systems.Core.InstanceChangeRequestsRepository.State?>("State", value); }
+                [ODataProperty]
+                public Systems.Security.User? AssignedToUser { get => GetPropertyValue<Systems.Security.User>("AssignedToUser"); set => SetPropertyValue<Systems.Security.User>("AssignedToUser", value); }
+                [ODataProperty]
+                public General.EnterpriseCompany? EnterpriseCompany { get => GetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany"); set => SetPropertyValue<General.EnterpriseCompany>("EnterpriseCompany", value); }
+                [ODataProperty]
+                public General.Currencies.Currency? NewValueCurrency { get => GetPropertyValue<General.Currencies.Currency>("NewValueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("NewValueCurrency", value); }
+                [ODataProperty]
+                public General.Currencies.Currency? OldValueCurrency { get => GetPropertyValue<General.Currencies.Currency>("OldValueCurrency"); set => SetPropertyValue<General.Currencies.Currency>("OldValueCurrency", value); }
+                public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
+                public async System.Threading.Tasks.Task<EntityResource?> CreateCopyAsync(DomainApiService service) { return (EntityResource?)(await this.InvokeActionAsync(service, "CreateCopy")); }
+                public async System.Threading.Tasks.Task<IEnumerable<Systems.Bpm.CustomPropertyValue>?> GetAllowedCustomPropertyValuesAsync(DomainApiService service, String customPropertyCode, String? search = null, Boolean exactMatch = false, Boolean orderByDescription = false, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<Systems.Bpm.CustomPropertyValue>?)(await this.InvokeFunctionAsync(service, "GetAllowedCustomPropertyValues", new Param<String>("customPropertyCode", customPropertyCode), new Param<String?>("search", search), new Param<Boolean>("exactMatch", exactMatch), new Param<Boolean>("orderByDescription", orderByDescription), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+                public async System.Threading.Tasks.Task<IEnumerable<ValueTextPair>?> GetPropertyAllowedValuesAsync(DomainApiService service, String propertyName, String? search = null, Int32 top = 10, Int32 skip = 0) { return (IEnumerable<ValueTextPair>?)(await this.InvokeFunctionAsync(service, "GetPropertyAllowedValues", new Param<String>("propertyName", propertyName), new Param<String?>("search", search), new Param<Int32>("top", top), new Param<Int32>("skip", skip))); }
+            }
+            namespace InstanceChangeRequestsRepository
+            {
+                public enum ChangeKind
+                {
+                    ReportingCurrencyChange = 0,
+                    BaseCurrencyChange = 1,
+                    CurrencyOfDefaultsChange = 2
+                }
+                public enum State
+                {
+                    Draft = 0,
+                    Submitted = 1,
+                    Approved = 2,
+                    PreparationsNeeded = 3,
+                    PreparationsCompleted = 4,
+                    Scheduled = 5,
+                    InProgress = 6,
+                    Paused = 7,
+                    CompletedSuccessfully = 8,
+                    Cancelled = 9,
+                    Failed = 10
                 }
             }
             [Entity(EntitySet = "Systems_Core_Notifications", TableName = "Cmm_Notifications")]
@@ -20387,13 +20660,15 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public DateTime? LastRequestTime { get => GetPropertyValue<DateTime?>("LastRequestTime"); set => SetPropertyValue<DateTime?>("LastRequestTime", value); }
                 [ODataProperty]
+                public String? SessionId { get => GetPropertyValue<String?>("SessionId"); set => SetPropertyValue<String?>("SessionId", value); }
+                [ODataProperty]
                 public DateTime? StartTime { get => GetPropertyValue<DateTime?>("StartTime"); set => SetPropertyValue<DateTime?>("StartTime", value); }
                 [ODataProperty]
                 public Int64? TotalRequestsCount { get => GetPropertyValue<Int64?>("TotalRequestsCount"); set => SetPropertyValue<Int64?>("TotalRequestsCount", value); }
                 [ODataProperty]
                 public Decimal? UploadMB { get => GetPropertyValue<Decimal?>("UploadMB"); set => SetPropertyValue<Decimal?>("UploadMB", value); }
                 [ODataProperty]
-                public String? User { get => GetPropertyValue<String?>("User"); set => SetPropertyValue<String?>("User", value); }
+                public String? UserLogin { get => GetPropertyValue<String?>("UserLogin"); set => SetPropertyValue<String?>("UserLogin", value); }
             }
             [Entity(EntitySet = "Systems_Monitoring_ExecStats")]
             public partial class ExecStatsEntry: EntityResource
@@ -21023,7 +21298,7 @@ namespace ErpNet.Api.Client.DomainApi
                 [ODataProperty]
                 public Boolean? LogUpdate { get => GetPropertyValue<Boolean?>("LogUpdate"); set => SetPropertyValue<Boolean?>("LogUpdate", value); }
                 [ODataProperty]
-                public Core.TrackChangesLevel? TrackChangesLevel { get => GetPropertyValue<Core.TrackChangesLevel?>("TrackChangesLevel"); set => SetPropertyValue<Core.TrackChangesLevel?>("TrackChangesLevel", value); }
+                public DomainApi.Core.TrackChangesLevel? TrackChangesLevel { get => GetPropertyValue<DomainApi.Core.TrackChangesLevel?>("TrackChangesLevel"); set => SetPropertyValue<DomainApi.Core.TrackChangesLevel?>("TrackChangesLevel", value); }
                 [ODataProperty]
                 public Systems.Security.AccessKey? AccessKey { get => GetPropertyValue<Systems.Security.AccessKey>("AccessKey"); set => SetPropertyValue<Systems.Security.AccessKey>("AccessKey", value); }
                 public async System.Threading.Tasks.Task CreateNotificationAsync(DomainApiService service, Systems.Security.User user, String notificationClass, String subject, Systems.Core.NotificationsRepository.Priority priority = Systems.Core.NotificationsRepository.Priority.Normal) { await this.InvokeActionAsync(service, "CreateNotification", new Param<Systems.Security.User>("user", user), new Param<String>("notificationClass", notificationClass), new Param<String>("subject", subject), new Param<Systems.Core.NotificationsRepository.Priority>("priority", priority)); }
