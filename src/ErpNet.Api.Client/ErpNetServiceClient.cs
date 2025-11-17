@@ -2,15 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization.Converters;
-using System.Globalization;
 
 namespace ErpNet.Api.Client
 {
@@ -156,14 +152,15 @@ namespace ErpNet.Api.Client
                 throw new InvalidOperationException($"The ID site for database '{DatabaseUri}' is not started.");
             }
 
-
             var disco = await commonHttpClient.GetDiscoveryDocumentAsync(identityServerUri);
             if (disco.IsError)
                 throw new Exception(disco.Error);
 
-            HashSet<string> scopes = new HashSet<string>();
-            // DomainApi scope is required for old servers - version 20.1.
-            scopes.Add("DomainApi");
+            var scopes = new HashSet<string>()
+            {
+                "read"
+            };
+
             if (clientApplicationScope != null)
                 foreach (var s in clientApplicationScope.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
                     scopes.Add(s);

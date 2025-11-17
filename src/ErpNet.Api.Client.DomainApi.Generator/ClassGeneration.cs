@@ -57,7 +57,7 @@ namespace ErpNet.Api.Client.DomainApi.Generator
                     type.Attributes.Add($"[Entity({args})]");
 
 
-                    if (string.IsNullOrEmpty(type.BaseType))
+                    if (string.IsNullOrEmpty(type.BaseType) || (type.BaseType == "Entity"))
                     {
                         type.BaseType = nameof(EntityResource);
                         type.Members.Add($"public const string EntitySetName = \"{entitySet}\";");
