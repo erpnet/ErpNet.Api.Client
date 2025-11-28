@@ -8,7 +8,7 @@
     <Authors>ERP.net</Authors>
     <Company>ERP.net</Company>
     <Description>Client library for making generic/untyped requests and consuming payloads from ERP.net Table API and Domain API.</Description>
-    <Version>26.1.0</Version>
+    <Version>26.1.1</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/erpnet/ErpNet.Api.Client</PackageProjectUrl>
@@ -16,9 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="*" />
-    <PackageReference Include="IdentityModel" Version="*" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="*" />
+    <PackageReference Include="System.Text.Json" Version="9.0.11" />
+    <PackageReference Include="IdentityModel" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
     <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
