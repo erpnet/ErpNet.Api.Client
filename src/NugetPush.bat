@@ -1,4 +1,4 @@
 
-dotnet nuget push ErpNet.Api.Client\bin\Release\ErpNet.Api.Client.26.2.0.nupkg --api-key %1 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ErpNet.Api.Client\bin\Release\ErpNet.Api.Client.26.2.1.nupkg --api-key %1 --source https://api.nuget.org/v3/index.json
 
-dotnet nuget push ErpNet.Api.Client.DomainApi\bin\Release\ErpNet.Api.Client.DomainApi.26.2.0.nupkg --api-key %1 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ErpNet.Api.Client.DomainApi\bin\Release\ErpNet.Api.Client.DomainApi.26.2.1.nupkg --api-key %1 --source https://api.nuget.org/v3/index.json
